@@ -625,9 +625,9 @@
   {
     "objectID": "instructor.html",
     "href": "instructor.html",
-    "title": "Bioacoustic analysis with R 2024",
+    "title": "Bioacoustic analysis in R 2025",
     "section": "",
-    "text": "Marcelo Araya-Salas\n\n\n\n\n\nI am just another behavioral ecologists that ended up doing a lot of coding just to get data analysis done. So now I’m deeply involved in the development of computational tools for (non-genetic) biological data analysis, mostly related to animal behavior and bioacoustics. I am the developer and maintainer of the R packages warbleR and Rraven that provide functions to streamline high-throughput acoustic analysis of animal sounds, aiming to simplify the use of R for bioacoustic research. More recently I released the R packages baRulho, to quantify acoustic signal transmission and degradation, ohun, to optimize automatic detection and PhenotypeSpace for quantifying multidimensional trait spaces. Also check out the new R package sketchy for organizing research compendiums. New functions as well as other more elaborated analyses are detailed in my blog Bioacoustics in R."
+    "text": "Marcelo Araya-Salas\n\n\n\n\n\nAnother behavioral ecologists that ended up doing a lot of coding just to get data analysis done. I’m deeply involved in the development of computational tools for (non-genetic) biological data analysis, mostly related to animal behavior and bioacoustics. I am the developer and maintainer of the R packages warbleR and Rraven that provide functions to streamline high-throughput acoustic analysis of animal sounds, aiming to simplify the use of R for bioacoustic research. More recently I released the R packages baRulho, to quantify acoustic signal transmission and degradation, ohun, to optimize automatic detection and PhenotypeSpace for quantifying multidimensional trait spaces."
   },
   {
     "objectID": "measure_acoustic_structure.html",
