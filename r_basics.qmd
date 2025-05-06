@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
 # What is R?
 
 -   A free [Domain-Specific Language (DSL)](https://en.wikipedia.org/wiki/Domain-specific_language) for statistics and data analysis
--   A collection of more than 21313 packages (as of 12-sept-2024)
+-   A collection of more than 22396 packages (as of may-2025)
 -   A large and active community in industry and academia
 -   A way to talk “directly” to your computer.
 

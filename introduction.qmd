@@ -6,7 +6,7 @@ format:
   revealjs:
     self-contained: false
     incremental: false
-    footer: "Marcelo Araya-Salas | Bioacoustic data analysis with R 2024"
+    footer: "Marcelo Araya-Salas | Bioacoustic Analysis in R 2025"
     theme: ["custom.scss"]
     slide-number: c/t
     show-slide-number: all

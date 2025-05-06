@@ -3,8 +3,8 @@ project:
   output-dir: docs
   
 website:
-  page-footer: Copyright 2024 | <a href="https://marce10.github.io">Marcelo Araya-Salas</a>
-  title: "Bioacoustic analysis with R 2024"
+  page-footer: Copyright 2025 | <a href="https://marce10.github.io">Marcelo Araya-Salas</a>
+  title: "Bioacoustic analysis in R 2025"
   search: true
   site-url: https://marce10.github.io/OTS_BIR_2025/
   repo-url: https://github.com/maRce10/OTS_BIR_2025/

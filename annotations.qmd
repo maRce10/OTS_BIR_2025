@@ -498,7 +498,7 @@ This new object class allows to share complete data sets, including acoustic dat
 
 ```{r extn.sel_19, eval = T}
 
-URL <- "https://github.com/maRce10/OTS_BIR_2024/raw/master/data/extended.selection.table.araya-salas.et.al.2017.bioacoustics.100.sels.rds"
+URL <- "https://github.com/maRce10/OTS_BIR_2025/raw/master/data/extended.selection.table.araya-salas.et.al.2017.bioacoustics.100.sels.rds"
 
 dat <- readRDS(gzcon(url(URL)))
 
