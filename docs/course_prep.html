@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2025-05-06">
 
-<title>Bioacoustic data analysis with R 2024</title>
+<title>Bioacoustic analysis with R 2024</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -114,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Bioacoustic data analysis with R 2024</span>
+    <span class="navbar-title">Bioacoustic analysis with R 2024</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -196,7 +196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">General</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://colab.research.google.com/drive/1t3Wn9OifcZTvxOMVNmz9dF25vnzU3_Fr?usp=sharing">
+    <a class="dropdown-item" href="https://colab.research.google.com/github/maRce10/dynaSpec/blob/master/dynaSpec.ipynb">
  <span class="dropdown-text">dynaSpec</span></a>
   </li>  
         <li>
@@ -281,10 +281,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <ol start="3" type="1">
 <li><p>Install or update the RStudio interface (<a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a>, choose the free version). Optional but advised.</p></li>
-<li><p>Make a directory called “BIAC04”, this will be your working directory for the course.</p></li>
+<li><p>Make a directory called “BIR2025”, this will be your working directory for the course.</p></li>
 <li><p>Open RStudio and select the tab “Tools” then “Global Options” (last option). Select the “Code” option, then select the box for “Soft-wrap R source files”.</p></li>
 <li><p>Also in Rstudio: Select the “Pane Layout” option and move “Source” to the top left pane and “Console” to the top right pane. For those of you unfamiliar with RStudio, the source is your script, where you save code in a physical file (usually .R script) and the console prints the output of the code you run from the source. You can write code in the console, but it will not be saved in a physical file. This layout allocates more screen space to the most useful panes. Hit “Apply” and “Ok”.</p></li>
-<li><p>Also in Rstudio: Go back up to the “File” tab and select “New Project”, then select the “BIAC04” directory.</p></li>
+<li><p>Also in Rstudio: Go back up to the “File” tab and select “New Project”, then select the “BIR2025” directory.</p></li>
 <li><p>Now in the R console in Rstudio: Run the following code to install the latest developmental versions (from github) of warbleR, Rraven, PhenotypeSpace, ohun, baRulho and dynaSpec (remove the packages first if you have them installed already).</p></li>
 </ol>
 <div class="cell">
@@ -310,27 +310,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">github =</span> <span class="st">"maRce10/suwo"</span>,</span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">github =</span> <span class="st">"maRce10/baRulho"</span>,</span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">github =</span> <span class="st">"maRce10/dynaSpec"</span>,</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">github =</span> <span class="st">"maRce10/PhenotypeSpace"</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a> )</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">github =</span> <span class="st">"maRce10/PhenotypeSpace"</span>,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">github =</span> <span class="st">"hadley/emo"</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a> )</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><em>if you have any issue installing ‘bioacoustics’ take a look at this fix: <a href="https://stackoverflow.com/questions/53092646/unable-to-install-warbler-package-using-mac-os" class="uri">https://stackoverflow.com/questions/53092646/unable-to-install-warbler-package-using-mac-os</a></em></p>
 <ol start="9" type="1">
 <li><p>warbleR depends heavily on the R package seewave. Seewave may require some extra steps to get installed. Take a look at seewave’s website for further help: <a href="http://rug.mnhn.fr/seewave/">http://rug.mnhn.fr/seewave</a> (and then go to “installation” and scroll down)</p></li>
 <li><p>Install Raven lite from <a href="http://ravensoundsoftware.com/raven-pricing/">ttp://ravensoundsoftware.com/raven-pricing/</a>(scroll down to “Raven Lite 2.0” and click on “Order Free Raven Lite 2.0 License”). Ignore if you have any Raven version already installed.</p></li>
-<li><p>Install ffmpeg (only needed for dynaSpec package, not critical):</p></li>
+<li><p>Install ffmpeg (only needed for dynaSpec package, <strong>not critical</strong>):</p></li>
 </ol>
 <p><a href="https://ffmpeg.org/download.html" class="uri">https://ffmpeg.org/download.html</a></p>
 <p>take a look at this link if you have issues installing ffmpeg on windows:</p>
 <p><a href="https://github.com/maRce10/dynaSpec/issues/3" class="uri">https://github.com/maRce10/dynaSpec/issues/3</a></p>
 <ol start="12" type="1">
-<li>Install Audacity (not critical, you can use Adobe Audition instead):</li>
+<li>Install Audacity (<strong>not critical</strong>, you can use Adobe Audition instead):</li>
 </ol>
 <p><a href="https://www.audacityteam.org/download/" class="uri">https://www.audacityteam.org/download/</a></p>
 <ol start="13" type="1">
-<li><p>Install SOX. It can be downloaded from here (not critical but could be useful): <a href="http://sox.sourceforge.net/">http://sox.sourceforge.net</a> (<em>Not critical</em>)</p></li>
-<li><p>Install FLAC. It can be downloaded from here (also not critical): <a href="http://sox.sourceforge.net/">https://xiph.org/flac/download.html</a> (<em>Not critical</em>)</p></li>
-<li><p>Note that you can also run the code using google colab. Take a look at this notebook: <a href="https://colab.research.google.com/drive/1KKmndmWB73ZDLfT0eVBArEZX4eVGsVMc?usp=sharing#scrollTo=05bsvm_f7UNt">https://colab.research.google.com/</a></p></li>
+<li><p>Install SOX. It can be downloaded from here (<strong>not critical</strong> but could be useful): <a href="http://sox.sourceforge.net/">http://sox.sourceforge.net</a></p></li>
+<li><p>Install FLAC. It can be downloaded from here (<strong>not critical</strong>): <a href="http://sox.sourceforge.net/">https://xiph.org/flac/download.html</a></p></li>
+<li><p>Note that you can also run the code using google colab. Take a look at this notebook: <a href="https://colab.research.google.com/drive/1nXzX-SQW8zgKtLS5GvgTObhLYeNPMzVL?usp=sharing">https://colab.research.google.com/</a></p></li>
 </ol>
 <p>&nbsp;</p>
 <div class="alert alert-warning">

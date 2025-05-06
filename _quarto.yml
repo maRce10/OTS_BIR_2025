@@ -50,7 +50,7 @@ website:
           - text: "General"
             href: "https://colab.research.google.com/drive/1KKmndmWB73ZDLfT0eVBArEZX4eVGsVMc?usp=sharing"
           - text: "dynaSpec"
-            href: "https://colab.research.google.com/drive/1t3Wn9OifcZTvxOMVNmz9dF25vnzU3_Fr?usp=sharing"
+            href: "https://colab.research.google.com/github/maRce10/dynaSpec/blob/master/dynaSpec.ipynb"
           - text: "ohun"
             href: "https://colab.research.google.com/drive/115nmxxe1pdSqshTW2ABlBNddhVPpCV6F?usp=sharing"       
       - text: "Course prep"
