@@ -92,7 +92,7 @@ take a look at this link if you have issues installing ffmpeg on windows:
 
 13) Install SOX. It can be downloaded from here (**not critical** but could be useful): [http://sox.sourceforge.net](http://sox.sourceforge.net/)
 
-14) Install FLAC. It can be downloaded from here (**not critical**): [https://xiph.org/flac/download.html](http://sox.sourceforge.net/) 
+14) Install FLAC. It can be downloaded from here (**not critical**): [https://xiph.org/flac/download.html](https://xiph.org/flac/download.html) 
 
 15) Note that you can also run the code using google colab. Take a look at this notebook: [https://colab.research.google.com/](https://colab.research.google.com/drive/1nXzX-SQW8zgKtLS5GvgTObhLYeNPMzVL?usp=sharing)
 

@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.4.551">
 
   <meta name="author" content="Marcelo Araya-Salas">
-  <meta name="dcterms.date" content="2025-05-06">
+  <meta name="dcterms.date" content="2025-05-07">
   <title>Bioacoustic analysis in R 2025</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -328,7 +328,7 @@
 
 
 <section>
-<section class="title-slide slide level1 center" data-background-color="#e0f3a8">
+<section class="title-slide slide level1 center" data-background-color="#A0DFB98">
 <h1><strong>Why animal sounds?</strong> <br> … and why R?</h1>
 <p>&nbsp;</p>
 <center>
@@ -612,6 +612,44 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

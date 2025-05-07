@@ -14,7 +14,14 @@ format:
     preview-links: false
 ---
 
-# **Why animal sounds?** <br> ... and why R? {background-color="#e0f3a8"}
+```{r}
+#| eval: false
+#| echo: false
+
+"#0B040580" "#28192F80" "#3B2F5E80" "#40498E80" "#366A9F80" "#348AA680" "#38AAAC80" "#54C9AD80" "#A0DFB980" "#DEF5E580"
+```
+
+# **Why animal sounds?** <br> ... and why R? {background-color="#A0DFB98"}
 
  
 
