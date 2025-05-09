@@ -94,7 +94,9 @@ take a look at this link if you have issues installing ffmpeg on windows:
 
 14) Install FLAC. It can be downloaded from here (**not critical**): [https://xiph.org/flac/download.html](https://xiph.org/flac/download.html) 
 
-15) Note that you can also run the code using google colab. Take a look at this notebook: [https://colab.research.google.com/](https://colab.research.google.com/drive/1nXzX-SQW8zgKtLS5GvgTObhLYeNPMzVL?usp=sharing)
+  -  take a look [at this video](https://www.youtube.com/watch?v=NFKy_qBFwa0) for details on how to install FLAC on Windows.
+
+15) Note that you can also run all the code in the tutorials using google colab. Take a look at this notebook: [https://colab.research.google.com/](https://colab.research.google.com/drive/1nXzX-SQW8zgKtLS5GvgTObhLYeNPMzVL?usp=sharing)
 
  
 
@@ -106,6 +108,6 @@ take a look at this link if you have issues installing ffmpeg on windows:
 -   Ideally, read the materials ahead of time (I know! it's time comsuming)
 -   Make sure you have anything you need before the start of the class
 -   Be ready a few minutes before the start of the class
--   Try to focus as much as possible in the course, close other programs or unnecessary internet browser tabs (i.e. instagram, twitter, etc). This will also make the computer more efficient (less likely to get slow)
+-   Try to focus as much as possible in the course, close other programs or unnecessary internet browser tabs (i.e. instagram, X, etc). This will also make the computer more efficient (less likely to get slow)
 -   Comment your code
 :::

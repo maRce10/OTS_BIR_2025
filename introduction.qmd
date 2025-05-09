@@ -14,13 +14,6 @@ format:
     preview-links: false
 ---
 
-```{r}
-#| eval: false
-#| echo: false
-
-"#0B040580" "#28192F80" "#3B2F5E80" "#40498E80" "#366A9F80" "#348AA680" "#38AAAC80" "#54C9AD80" "#A0DFB980" "#DEF5E580"
-```
-
 # **Why animal sounds?** <br> ... and why R? 
 
  
@@ -88,7 +81,7 @@ format:
 ::: incremental
 -   Improves reproducibility of research
 
--   Involves a deeper understanding of the structure of our study systems
+-   Requires a deeper understanding of the structure of the signals
 
 -   Allows conducting analyses that better fit our research questions and study systems
 
