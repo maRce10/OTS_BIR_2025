@@ -25,7 +25,7 @@ date: "`r Sys.Date()`"
 
  
 
-## Day 1
+## Day 1 ([Video](https://udecr.zoom.us/rec/share/KYr3l1GlHfxQ3zu791jfKfNas_VUMmfIK__uhr_mF_B32-KYxpE36YbPSQaMjbpc.0Y_xfwv6YwjHU9jd))
 
 ------------------------------------------------------------------------
 
