@@ -123,7 +123,7 @@ par(opar)
 
 ## Sampling frequency
 
-Digitizing implies discretizing, which requires some sort of regular sampling. Sampling frequency refers to how many samples of the pressure level of the environment are taken per second. A 440 Hz sine wave recorded at 44100 Hz would have around 100 samples per cycle. This plot shows 2 cycles of a 440 Hz sine wave sampled (vertical dotted lines) at 4410 Hz (a 1/10 of the recording sampling rate):
+Digitizing implies discretizing, which requires some sort of regular sampling. Sampling frequency refers to how many samples of the pressure level of the environment are taken per second. A 440 Hz sine wave would have around 100 samples per cycle. This plot shows 2 cycles of a 440 Hz sine wave sampled (vertical dotted lines) at 4400 Hz (10 times its frequency):
 
 ```{r, echo = FALSE, out.width="100%", fig.height= 3, warning=FALSE, message=FALSE}
 
@@ -131,7 +131,7 @@ opar <- par()
 
 par(mar = c(4, 4, 1, 1), bg = "#d1e7dd")
 # generate sine wave
-sn.wv <- tuneR::sine(freq = 440, duration = 200, xunit = "samples", samp.rate = 44100)
+sn.wv <- tuneR::sine(freq = 440, duration = 200, xunit = "samples", samp.rate = 44000)
 
 plot(x = seq(0, duration(sn.wv), length.out = length(sn.wv)), y = sn.wv@left, type = "l", yaxt='n', ylim = c(-1, 1), lwd = lwd, col = col, xlab = "Time (s)", ylab = "Amplitude", xaxs='i')
 
@@ -149,14 +149,14 @@ points(y = sn.wv@left[seq(0, length(sn.wv), 10)], x = seq(0, duration(sn.wv), le
 
 ## Nyquist frequency
 
-Sampling should be good enough so the regularity of the sine wave can be reconstructed from the sampled data. Low sampling frequencies of a high frequency sine wave might not be able to provide enough information. For instance, the same 440 Hz sine wave sampled at 22050 Hz looks like this:
+Sampling should be good enough so the regularity of the sine wave can be reconstructed from the sampled data. Low sampling frequencies of a high frequency sine wave might not be able to provide enough information. For instance, the same 440 Hz sine wave sampled at 2200 Hz (5 times its frequency) looks like this:
 
 ```{r, echo = FALSE, out.width="100%", fig.height= 3, warning=FALSE, message=FALSE}
 
 
 par(mar = c(4, 4, 1, 1), bg = "#d1e7dd")
 # generate sine wave
-sn.wv <- tuneR::sine(freq = 440, duration = 50, xunit = "samples", samp.rate = 11025)
+sn.wv <- tuneR::sine(freq = 440, duration = 200, xunit = "samples", samp.rate = 44000)
 
 plot(x = seq(0, duration(sn.wv), length.out = length(sn.wv)), y = sn.wv@left, type = "l", yaxt='n', ylim = c(-1, 1), lwd = lwd, col = col, xlab = "Time (s)", ylab = "Amplitude", xaxs='i')
 abline(h = 0, lty = 2)
@@ -166,7 +166,7 @@ abline(v = seq(0, duration(sn.wv), length.out = length(sn.wv))[seq(0, length(sn.
 rect(xleft=0, xright= duration(sn.wv)/ 2, ybottom=-2, ytop=2, col = adjustcolor("gray", alpha.f = 0.3), border = NA)
 
 
-points(y = sn.wv@left[seq(0, length(sn.wv), 10)], x = seq(0, duration(sn.wv), length.out = length(sn.wv))[seq(0, length(sn.wv), 10)], col = "orange", pch = 20, cex = 2)
+points(y = sn.wv@left[seq(0, length(sn.wv), 20)], x = seq(0, duration(sn.wv), length.out = length(sn.wv))[seq(0, length(sn.wv), 20)], col = "orange", pch = 20, cex = 2)
 
 ```
 
@@ -180,8 +180,8 @@ opar <- par()
 
 par(mar = c(4, 4, 1, 1), bg = "#d1e7dd")
 # generate sine wave
-sn.wv <- tuneR::sine(freq = 400, duration = 200, xunit = "samples", samp.rate = 40000)
-sn.wv2 <- tuneR::sine(freq = 400, duration = 4, xunit = "samples", samp.rate = 800)
+sn.wv <- tuneR::sine(freq = 400, duration = 200, xunit = "samples", samp.rate = 44000)
+sn.wv2 <- tuneR::sine(freq = 400, duration = 4, xunit = "samples", samp.rate = 880)
 
 plot(x = seq(0, duration(sn.wv), length.out = length(sn.wv)), y = sn.wv@left, type = "l", yaxt='n', ylim = c(-1, 1), lwd = lwd, col = col, xlab = "Time (s)", ylab = "Amplitude", xaxs='i')
 

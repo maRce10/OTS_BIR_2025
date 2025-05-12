@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-05-06">
+<meta name="dcterms.date" content="2025-05-12">
 
 <title>Bioacoustic analysis in R 2025 - Sound</title>
 <style>
@@ -302,7 +302,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 6, 2025</p>
+      <p class="date">May 12, 2025</p>
     </div>
   </div>
   
@@ -352,7 +352,7 @@ window.Quarto = {
 <p>&nbsp;</p>
 <section id="sampling-frequency" class="level2" data-number="0.1">
 <h2 data-number="0.1" class="anchored" data-anchor-id="sampling-frequency"><span class="header-section-number">0.1</span> Sampling frequency</h2>
-<p>Digitizing implies discretizing, which requires some sort of regular sampling. Sampling frequency refers to how many samples of the pressure level of the environment are taken per second. A 440 Hz sine wave recorded at 44100 Hz would have around 100 samples per cycle. This plot shows 2 cycles of a 440 Hz sine wave sampled (vertical dotted lines) at 4410 Hz (a 1/10 of the recording sampling rate):</p>
+<p>Digitizing implies discretizing, which requires some sort of regular sampling. Sampling frequency refers to how many samples of the pressure level of the environment are taken per second. A 440 Hz sine wave would have around 100 samples per cycle. This plot shows 2 cycles of a 440 Hz sine wave sampled (vertical dotted lines) at 4400 Hz (10 times its frequency):</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -365,7 +365,7 @@ window.Quarto = {
 </section>
 <section id="nyquist-frequency" class="level2" data-number="0.2">
 <h2 data-number="0.2" class="anchored" data-anchor-id="nyquist-frequency"><span class="header-section-number">0.2</span> Nyquist frequency</h2>
-<p>Sampling should be good enough so the regularity of the sine wave can be reconstructed from the sampled data. Low sampling frequencies of a high frequency sine wave might not be able to provide enough information. For instance, the same 440 Hz sine wave sampled at 22050 Hz looks like this:</p>
+<p>Sampling should be good enough so the regularity of the sine wave can be reconstructed from the sampled data. Low sampling frequencies of a high frequency sine wave might not be able to provide enough information. For instance, the same 440 Hz sine wave sampled at 2200 Hz (5 times its frequency) looks like this:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -592,7 +592,7 @@ window.Quarto = {
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(s4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code> Time-Series [1:4001] from 0 to 0.5: -0.0247 0.9977 0.1769 0.7406 0.0388 ...</code></pre>
+<pre><code> Time-Series [1:4001] from 0 to 0.5: -0.973 -0.182 0.667 -0.936 -0.984 ...</code></pre>
 </div>
 </div>
 <p>&nbsp;</p>
@@ -1118,7 +1118,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] audio_0.1-11       phonTools_0.2-2.2  warbleR_1.1.34     NatureSounds_1.0.5
+[1] audio_0.1-11       phonTools_0.2-2.2  warbleR_1.1.35     NatureSounds_1.0.5
 [5] tuneR_1.4.7        knitr_1.50         seewave_2.2.3     
 
 loaded via a namespace (and not attached):

@@ -10,14 +10,6 @@ date: "`r Sys.Date()`"
 -   Demonstrate how to obtain acoustic data from online repositories
 :::
 
- 
-
-```{r, echo=FALSE}
-
-# source("~/Dropbox/R_package_testing/suwo/R/map_locations.R")
-
-```
-
 
 <font size="4">
 
@@ -59,6 +51,9 @@ download_media(metadata = song_phae_his,
          path = "DIRECTORY WHERE YOU WANT TO SAVE THE FILES")
 
 ```
+
+You can also download recordings from other taxonomic groups. Take a look at [this link](https://xeno-canto.org/explore/taxonomy) for a list of species by taxonomic group.
+ 
 
 ------------------------------------------------------------------------
 
