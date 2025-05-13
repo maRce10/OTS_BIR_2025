@@ -92,7 +92,8 @@ date: "`r Sys.Date()`"
 
  
 
-## Day 2
+## Day 2 ([Video](https://udecr.zoom.us/rec/share/wAwNw4_NpfCe2saHaqLkpq79XrDC8HkptZ4VUR8b1kM-mmVhMhDBDxLa7EvvBgjU.piSvXLNEJmBa97FM?startTime=1747152336000))
+
 
 ---
 
