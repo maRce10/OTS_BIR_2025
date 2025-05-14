@@ -1,5 +1,5 @@
 ---
-title: <font size="7"><b>Building spectrograms</b></font>
+title: <font size="7"><b>Quantifying acoustic spaces</b></font>
 ---
 
  
@@ -7,7 +7,7 @@ title: <font size="7"><b>Building spectrograms</b></font>
 ::: {.alert .alert-info}
 ## **Objetives** {.unnumbered .unlisted}
 
--   Understand how spectrograms are created
+-   Understand how multivariate feature (acoustic) space can be projected in 2D space
 
 -   Learn to create and customize spectrograms in R
 :::
@@ -18,37 +18,6 @@ title: <font size="7"><b>Building spectrograms</b></font>
 library(knitr)
 
 opts_chunk$set(tidy = TRUE, warning = FALSE, message = FALSE)
-
-# custom spectrogram function
-.specPlot <- function(wave, frq.lim, wl, ovlp, wn, main, ...) {
-    fspec <- spectro(wave = clip, wl = wl, ovlp = ovlp, 
-                     wn = wn, plot = FALSE)
-    t.bins <- fspec$time
-    n.t.bins <- length(t.bins)
-    which.t.bins <- 1:n.t.bins
-    which.frq.bins <- which(fspec$freq >= frq.lim[1] & fspec$freq <= 
-                              frq.lim[2])
-    frq.bins <- fspec$freq[which.frq.bins]
-    n.frq.bins <- length(frq.bins)
-    amp <- round(fspec$amp[which.frq.bins, ], 2)
-    # if (consistent) {
-    #   amp[1, 1] <- 0
-    # }
-    t.step <- t.bins[2] - t.bins[1]
-    frq.step <- frq.bins[2] - frq.bins[1]
-      image(x = which.t.bins, y = which.frq.bins, t(amp), 
-            col = spec.col, xlab = "Time", ylab = "Frequency (kHz)", 
-            las = 1, useRaster = TRUE, axes = FALSE, las = 1, 
-            main = NULL)
-      box()
-      frq.bin.ticks <- pretty(frq.bins, n = 5)
-      axis(2, at = frq.bin.ticks/frq.step, labels = frq.bin.ticks, 
-           las = 1)
-     t.bin.ticks <- pretty(seq(par("usr")[1], par("usr")[2], 10), n = 4) 
-      axis(1, at = t.bin.ticks, labels = round(t.bin.ticks * duration(clip) / par("usr")[2], 2))
-
-}
-
 
 ```
 
@@ -87,17 +56,17 @@ w0 <- 2 * pi/pr
 # frec 1
 h1 <- 5 * cos(w0*t)
 
-plot(h1[1:75], type = "l", col = "#38AAACFF", xlab = "Time (samples)", ylab = "Amplitude (no units)")
+plot(h1[1:75], type = "l", col = "blue", xlab = "Time (samples)", ylab = "Amplitude (no units)")
 
 # frec 2
 h2 <- 10 * cos(2 * w0 * t)
 
-plot(h2[1:75], type = "l", col = "#38AAACFF", xlab = "Time (samples)", ylab = "Amplitude (no units)")
+plot(h2[1:75], type = "l", col = "blue", xlab = "Time (samples)", ylab = "Amplitude (no units)")
 
 # frec 3
 h3 <- 15 * sin(3 * w0 * t)
 
-plot(h3[1:75], type = "l", col = "#38AAACFF", xlab = "Time (samples)", ylab = "Amplitude (no units)")
+plot(h3[1:75], type = "l", col = "blue", xlab = "Time (samples)", ylab = "Amplitude (no units)")
 
 ```
 
@@ -106,7 +75,7 @@ This is what the union of the three frequencies looks like:
 ```{r}
 H0 <- 0.5 + h1 + h2 + h3
 
-plot(H0[1:75], type = "l", col = "#38AAACFF", xlab = "Time (samples)", ylab = "Amplitude (no units)")
+plot(H0[1:75], type = "l", col = "blue", xlab = "Time (samples)", ylab = "Amplitude (no units)")
 
 ```
 
@@ -116,7 +85,7 @@ Now we can apply the Fourier transform to this time series and graph the frequen
 
 fspc <- Mod(fft(H0))
 
-plot(fspc, type="h", col="#38AAACFF",
+plot(fspc, type="h", col="blue",
 xlab="Frecuency (Hz)",
 ylab="Amplitude (no units)")
 
@@ -130,7 +99,7 @@ We can make zoom in to frequencies below the Nyquist frequency:
 
 ```{r}
 
-plot(fspc[1:(length(fspc) / 2)], type="h", col="#38AAACFF",
+plot(fspc[1:(length(fspc) / 2)], type="h", col="blue",
 xlab="Frecuency (Hz)",
 ylab="Amplitude (no units)")
 
@@ -153,7 +122,7 @@ The periodogram next to the spectrogram of these simulated sounds looks like thi
 opar <- par()
 
 par(mfrow = c(1, 2), mar =c(4, 4, 1, 0))
-plot(fspc[1:(length(fspc) / 2)], 1:(length(fspc) / 2), type="l", col="#38AAACFF", ylab="Frequency (Hz)",
+plot(fspc[1:(length(fspc) / 2)], 1:(length(fspc) / 2), type="l", col="blue", ylab="Frequency (Hz)",
 xlab="Amplitude (no units)", ylim = c(110, 2890), lwd = 3, xlim = c(10000, 90000))
 
 par(mar = c(4, 0, 1, 1))
@@ -177,7 +146,7 @@ s <- synth2(env=norm, ifreq=500+(norm/max(norm))*1000, f=8000, plot=FALSE, osc=T
 
 s.wav <- tuneR::Wave(left = s, samp.rate = 8000, bit = 16)
 
-monitoR::viewSpec(clip = s.wav,  ovlp = 95, main = NA, frq.lim = c(0, 3))
+monitoR::viewSpec(s.wav,  ovlp = 95, main = NA, frq.lim = c(0, 3))
 
 ```
 
@@ -210,27 +179,21 @@ saveGIF(
   
   par(mfrow = c(1, 2), mar =c(4, 4, 1, 0), xaxt = "n", yaxt = "n")
   
-  plot(fspc1[1:(length(fspc1) / 2)], 1:(length(fspc1) / 2), type="l", col="#38AAACFF", ylab="Frequency (Hz)", xlab="Intensity", lwd = 3, ylim = c(20, 220))
+  plot(fspc1[1:(length(fspc1) / 2)], 1:(length(fspc1) / 2), type="l", col="blue", ylab="Frequency (Hz)", xlab="Intensity", lwd = 3, ylim = c(20, 220))#, xlim = c(100, max(fspc)))
 
   usr <- par("usr")
   
   axis(side = 2, at = seq(usr[3], usr[4], length.out = 4), labels = seq(0, 3, length.out = 4))
   
   par(mar = c(4, 0, 1, 1))
-  # spectro(s, palette = reverse.gray.colors.1, scale = FALSE, grid = FALSE, f = f, flim = c(0.2, 3),  flab = NULL, collevels = seq(-100, 0 , 5), wl = 250)
-  
-  .specPlot(s, wl = 800, ovlp = 0, wn = "hanning", frq.lim = c(0, 3))
-  
-    usr <- par("usr")
-  sq.spc <- seq(usr[1], usr[2], length.out = num.segmts + 1)
-
+  spectro(s, palette = reverse.gray.colors.1, scale = FALSE, grid = FALSE, f = f, flim = c(0.2, 3),  flab = NULL, collevels = seq(-100, 0 , 5), wl = 250)
   
   for (e in 2:length(sq))
-  rect(xleft = sq.spc[e - 1], xright = sq.spc[e], ytop = 400, ybottom = 0, col = adjustcolor("white", 0), border = "gray")
+  rect(xleft = sq.spc[e - 1], xright = sq.spc[e], ytop = 4, ybottom = 0, col = adjustcolor("white", 0), border = "gray")
     
-  rect(xleft = sq.spc[x - 1], xright = sq.spc[x], ytop = 400, ybottom = 0, col = adjustcolor("#38AAACFF", 0.1), border = NA)
+  rect(xleft = sq.spc[x - 1], xright = sq.spc[x], ytop = 4, ybottom = 0, col = adjustcolor("blue", 0.1), border = NA)
   
-  text(x = mean(sq.spc[x - 1], sq.spc[x]), y = 250, labels = (1:num.segmts)[x - 1], cex = 3, pos = 4)
+  text(x = mean(sq.spc[x - 1], sq.spc[x]), y = 2.5, labels = (1:num.segmts)[x - 1], cex = 3, pos = 4)
   
   },
 movie.name =  "periodogram_spectro.gif", interval = 0.5, ani.width = 480 * 1.5)
@@ -245,12 +208,12 @@ norm <- dnorm(-4000:3999, sd=1000)
 
 s <- synth2(env=norm, ifreq=500+(norm/max(norm))*1000, f=8000, plot=FALSE, osc=TRUE, ovlp=0)
 
-# plot(s[1:1000], type = "l", col = "#38AAACFF", xlab = "Time (samples)", ylab = "Amplitude (no units)")
+# plot(s[1:1000], type = "l", col = "blue", xlab = "Time (samples)", ylab = "Amplitude (no units)")
 # 
-# plot(s[7000:8000], type = "l", col = "#38AAACFF", xlab = "Time (samples)", ylab = "Amplitude (no units)")
+# plot(s[7000:8000], type = "l", col = "blue", xlab = "Time (samples)", ylab = "Amplitude (no units)")
 # 
 # 
-# plot(s, type = "l", col = "#38AAACFF", xlab = "Time (samples)", ylab = "Amplitude (no units)")
+# plot(s, type = "l", col = "blue", xlab = "Time (samples)", ylab = "Amplitude (no units)")
 
 library("animation")
 
@@ -263,7 +226,7 @@ saveGIF(
   # modulus fft 
   fspc <- Mod(fft(s[sq[(x-1)]:sq[x]]))
   
-  plot(fspc, type="h", col="#38AAACFF",
+  plot(fspc, type="h", col="blue",
   xlab="Frecuency (Hz)",
   ylab="Amplitude (no units)",
   xlim = c(0, 400),
@@ -307,7 +270,7 @@ usr <- par("usr")
 sq.spc <- seq(usr[1], usr[2], length.out = num.segmts + 1)
 
 for(x in 2:length(sq.spc))
-  rect(xleft = sq.spc[x - 1], xright = sq.spc[x], ytop = (usr[4] - usr[1]) / 2, ybottom = usr[3], col = adjustcolor("#38AAACFF", 0.1), border = "#38AAACFF")
+  rect(xleft = sq.spc[x - 1], xright = sq.spc[x], ytop = (usr[4] - usr[1]) / 2, ybottom = usr[3], col = adjustcolor("blue", 0.1), border = "blue")
   
 ```
 
@@ -324,13 +287,13 @@ usr <- par("usr")
 sq.spc <- seq(usr[1], usr[2], length.out = num.segmts + 1)
 
 for(x in 2:length(sq.spc))
-  rect(xleft = sq.spc[x - 1], xright = sq.spc[x], ytop = (usr[4] - usr[1]) / 2, ybottom = usr[3], col = adjustcolor("#38AAACFF", 0.1), border = "#38AAACFF")
+  rect(xleft = sq.spc[x - 1], xright = sq.spc[x], ytop = (usr[4] - usr[1]) / 2, ybottom = usr[3], col = adjustcolor("blue", 0.1), border = "blue")
   
 
 sq.spc <- sq.spc + sq.spc[1]
 
 for(x in 2:(length(sq.spc) - 1))
-  rect(xleft = sq.spc[x - 1], xright = sq.spc[x], ybottom = (usr[4] - usr[1]) / 3, ytop = (usr[4] - usr[1]) / 8 * 7, col = adjustcolor("#38AAACFF", 0.1), border = "#38AAACFF")
+  rect(xleft = sq.spc[x - 1], xright = sq.spc[x], ybottom = (usr[4] - usr[1]) / 3, ytop = (usr[4] - usr[1]) / 8 * 7, col = adjustcolor("blue", 0.1), border = "blue")
   
 ```
 
@@ -347,7 +310,7 @@ usr <- par("usr")
 sq.spc <- seq(usr[1], usr[2], length.out = num.segmts + 1)
 
 for(x in 2:length(sq.spc))
-  rect(xleft = sq.spc[x - 1], xright = sq.spc[x], ytop = usr[4], ybottom = usr[3], col = adjustcolor("#38AAACFF", 0.1), border = "#38AAACFF")
+  rect(xleft = sq.spc[x - 1], xright = sq.spc[x], ytop = usr[4], ybottom = usr[3], col = adjustcolor("blue", 0.1), border = "blue")
 
 
 ```
@@ -373,7 +336,7 @@ saveGIF(for(i in c(seq(0, 99, by = 5), rep(99, 15)))
   sq.spc <- seq(usr[1], usr[2], length.out = num.segmts + 1)
   
   for(x in 2:length(sq.spc))
-    rect(xleft = sq.spc[x - 1], xright = sq.spc[x], ytop = usr[4], ybottom = usr[4] * 3/4, col = adjustcolor("#38AAACFF", 0.1), border = adjustcolor("#38AAACFF", 1 - (i / 100)))
+    rect(xleft = sq.spc[x - 1], xright = sq.spc[x], ytop = usr[4], ybottom = usr[4] * 3/4, col = adjustcolor("blue", 0.1), border = adjustcolor("blue", 1 - (i / 100)))
   
   },movie.name =  "spectro.overlap.gif", interval = 0.2, ani.width = 480 * 1.5)
 
@@ -498,7 +461,7 @@ res <- do.call(rbind, out)
 
 par( mar =c(4, 4, 1, 1))
 
-plot(res$res.t, res$res.f, type =  "l", col = "#38AAACFF", lwd = 4, xlab = "Time window size (s)", ylab = "Frequency bin size (Hz)")
+plot(res$res.t, res$res.f, type =  "l", col = "blue", lwd = 4, xlab = "Time window size (s)", ylab = "Frequency bin size (Hz)")
 
 ```
 
@@ -638,7 +601,7 @@ The package [dynaSpec](https://marce10.github.io/dynaSpec) allows to create stat
 library(warbleR)
 ngh_wren <- read_sound_file("https://www.xeno-canto.org/518334/download")
 
-custom_pal <- colorRampPalette( c("#366A9FFF", "#366A9FFF", viridis::mako(10)[5:10]))
+custom_pal <- colorRampPalette( c("#2d2d86", "#2d2d86", reverse.terrain.colors(10)[5:10]))
 
 library(dynaSpec)
 

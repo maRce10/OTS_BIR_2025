@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-05-06">
+<meta name="dcterms.date" content="2025-05-14">
 
 <title>Bioacoustic analysis in R 2025 - Seewave</title>
 <style>
@@ -266,7 +266,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 6, 2025</p>
+      <p class="date">May 14, 2025</p>
     </div>
   </div>
   
@@ -444,15 +444,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>&nbsp;</p>
 <p>Sliding windows allow you to smooth out the contours of a time series by calculating an average value around the “neighborhood” of values for a given value. In the case of amplitude envelope the size of the “neighborhood” is given by the length of the window (“wl”). The larger the window length, the greater the smoothing of the curve:</p>
 <p>&nbsp;</p>
-<p><img src="images/env_sliding_window_ENG_v2.gif" alt="Sliding window"></p>
+<p><img src="images/env_sliding_window_ENG_v2.gif" style="width: 100%; height: auto; display: block;" alt="Sliding window"></p>
 <p>&nbsp;</p>
 <p>This animation shows how the amplitude envelope of the “tico” object is smoothed with a 512-point window:</p>
 <p>&nbsp;</p>
-<p><img src="images/env_sliding_window_scheme_ENG_v2_512.gif" alt="Sliding window"></p>
+<p><img src="images/env_sliding_window_scheme_ENG_v2_512.gif" style="width: 100%; height: auto; display: block;" alt="Sliding window"></p>
 <p>&nbsp;</p>
 <p>… or a 1024 point window:</p>
 <p>&nbsp;</p>
-<p><img src="images/env_sliding_window_scheme_ENG_v2_1024.gif" alt="Sliding window"></p>
+<p><img src="images/env_sliding_window_scheme_ENG_v2_1024.gif" style="width: 100%; height: auto; display: block;" alt="Sliding window"></p>
 <p>&nbsp;</p>
 </div>
 <p>&nbsp;</p>
@@ -705,7 +705,9 @@ $first
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filtered</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">spectro</span>(<span class="fu">ffilter</span>(tico, <span class="at">from =</span> <span class="dv">4000</span>, <span class="at">to =</span> <span class="dv">6500</span>, <span class="at">output =</span> <span class="st">"Wave"</span>), <span class="at">scale =</span> <span class="cn">FALSE</span>, <span class="at">grid =</span> <span class="cn">FALSE</span>, <span class="at">flim =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>f_tico <span class="ot">&lt;-</span> <span class="fu">ffilter</span>(tico, <span class="at">from =</span> <span class="dv">4000</span>, <span class="at">to =</span> <span class="dv">6500</span>, <span class="at">output =</span> <span class="st">"Wave"</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">spectro</span>(f_tico, <span class="at">scale =</span> <span class="cn">FALSE</span>, <span class="at">grid =</span> <span class="cn">FALSE</span>, <span class="at">flim =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">6</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>

@@ -162,7 +162,7 @@ movie.name =  "env_sliding_window_ENG_v2.gif", interval = 0.5, ani.height = 480 
 
 
 
-wl <- 512
+wl <- 1024
 
 # run from here
 envlp <-env(tico, ssmooth = wl, plot = FALSE)
@@ -201,7 +201,7 @@ Sliding windows allow you to smooth out the contours of a time series by calcula
 
  
 
-<img src="images/env_sliding_window_ENG_v2.gif" alt="Sliding window"/>
+<img src="images/env_sliding_window_ENG_v2.gif" style="width: 100%; height: auto; display: block;" alt="Sliding window"/>
 
  
 
@@ -209,7 +209,7 @@ This animation shows how the amplitude envelope of the "tico" object is smoothed
 
  
 
-<img src="images/env_sliding_window_scheme_ENG_v2_512.gif" alt="Sliding window"/>
+<img src="images/env_sliding_window_scheme_ENG_v2_512.gif" style="width: 100%; height: auto; display: block;" alt="Sliding window"/>
 
  
 
@@ -217,7 +217,7 @@ This animation shows how the amplitude envelope of the "tico" object is smoothed
 
  
 
-<img src="images/env_sliding_window_scheme_ENG_v2_1024.gif" alt="Sliding window"/>
+<img src="images/env_sliding_window_scheme_ENG_v2_1024.gif" style="width: 100%; height: auto; display: block;" alt="Sliding window"/>
 
  
 :::
@@ -363,7 +363,9 @@ Filter out frequency bands:
 spectro(tico, scale = FALSE, grid = FALSE, flim = c(2, 6))
 
 # filtered
-spectro(ffilter(tico, from = 4000, to = 6500, output = "Wave"), scale = FALSE, grid = FALSE, flim = c(2, 6))
+f_tico <- ffilter(tico, from = 4000, to = 6500, output = "Wave")
+
+spectro(f_tico, scale = FALSE, grid = FALSE, flim = c(2, 6))
 
 ```
 
