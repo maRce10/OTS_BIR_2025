@@ -135,7 +135,7 @@ date: "`r Sys.Date()`"
 
  
 
-## Day 3
+## Day 3 ([Video](https://udecr.zoom.us/rec/share/LkAmlALctf84Vv0ul4vYop17ociVyiTNekQcRlDQ7x2nHawfXuaar69WvdX_gedx.KKc-Yf_vVY5ax3EX))
 
 ---
 
