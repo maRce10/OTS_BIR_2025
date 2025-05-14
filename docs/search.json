@@ -753,7 +753,7 @@
     "href": "spectrograms.html#dynamic-spectrograms",
     "title": "Building spectrograms",
     "section": "6 Dynamic spectrograms",
-    "text": "6 Dynamic spectrograms\nThe package dynaSpec allows to create static and dynamic visualizations of sounds, ready for publication or presentation. These dynamic spectrograms are produced natively with base graphics, and are save as an .mp4 video in the working directory:\n\n\nCode\nngh_wren &lt;- read_sound_file(\"https://www.xeno-canto.org/518334/download\")\n\ncustom_pal &lt;- colorRampPalette(c(\"#2d2d86\", \"#2d2d86\", reverse.terrain.colors(10)[5:10]))\n\nlibrary(dynaSpec)\n\nscrolling_spectro(wave = ngh_wren, wl = 600, t.display = 3, ovlp = 95, pal = custom_pal,\n    grid = FALSE, flim = c(2, 8), width = 700, height = 250, res = 100, collevels = seq(-40,\n        0, 5), file.name = \"../nightingale_wren.mp4\", colbg = \"#2d2d86\", lcol = \"#FFFFFFE6\")"
+    "text": "6 Dynamic spectrograms\nThe package dynaSpec allows to create static and dynamic visualizations of sounds, ready for publication or presentation. These dynamic spectrograms are produced natively with base graphics, and are save as an .mp4 video in the working directory:\n\n\nCode\nlibrary(warbleR)\nngh_wren &lt;- read_sound_file(\"https://www.xeno-canto.org/518334/download\")\n\ncustom_pal &lt;- colorRampPalette(c(\"#2d2d86\", \"#2d2d86\", reverse.terrain.colors(10)[5:10]))\n\nlibrary(dynaSpec)\n\nscrolling_spectro(wave = ngh_wren, wl = 600, t.display = 3, ovlp = 95, pal = custom_pal,\n    grid = FALSE, flim = c(1, 8), width = 700, height = 3500, res = 100, collevels = seq(-40,\n        0, 5), file.name = \"nightingale_wren.mp4\", colbg = \"#2d2d86\", lcol = \"#FFFFFFE6\")"
   },
   {
     "objectID": "spectrograms.html#references",
@@ -775,5 +775,12 @@
     "title": "Bioacoustic analysis in R 2025",
     "section": "2 Day 2 (Video)",
     "text": "2 Day 2 (Video)\n\n\n2.1 Additional resources\n\n2.1.1 Raven tutorials\n\nIntroduction to the Raven Pro Interface\nIntroduction to selections and measurements\nSaving, retrieving, and exporting selection tables\nUsing annotations\n\n\n\nBuilding spectrograms Building spectrograms\n\nFourier transform\nBuilding a spectrogram\nCharacteristics and limitations\nSpectrograms in R\n\nPackage seewave seewave\n\nExplore, modify and measure ‘wave’ objects\nSpectrograms and oscillograms\nFiltering and re-sampling\nAcoustic measurements\n\n \n\n2.2 Homework\n\nUse Raven Pro to annotate some of the signals found in the xeno-canto recordings you downloaded previously"
+  },
+  {
+    "objectID": "spectrograms.html#from-fourier-transforms-to-spectrograms",
+    "href": "spectrograms.html#from-fourier-transforms-to-spectrograms",
+    "title": "Building spectrograms",
+    "section": "2 From Fourier transforms to spectrograms",
+    "text": "2 From Fourier transforms to spectrograms\nThe spectrograms are constructed of the spectral decomposition of discrete time segments of amplitude values. Each segment (or window) of time is a column of spectral density values in a frequency range. Take for example this simple modulated sound, which goes up and down in frequency:\n\n\n\n\n\n\n\n\n\n \nIf we divide the sound into 10 segments and make periodograms for each of them we can see this pattern in the frequencies:\n\nThis animation shows in a very simple way the logic behind the spectrograms: if we calculate Fourier transforms for short segments of time through a sound (e.g. amplitude changes in time) and concatenate them, we can visualize the variation in frequencies over time."
   }
 ]

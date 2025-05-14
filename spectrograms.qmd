@@ -134,7 +134,7 @@ par(opar)
 
  
 
-## From the Fourier transform to the spectrogram
+## From Fourier transforms to spectrograms
 
 The spectrograms are constructed of the spectral decomposition of discrete time segments of amplitude values. Each segment (or window) of time is a column of spectral density values in a frequency range. Take for example this simple modulated sound, which goes up and down in frequency:
 
@@ -179,22 +179,24 @@ saveGIF(
   
   par(mfrow = c(1, 2), mar =c(4, 4, 1, 0), xaxt = "n", yaxt = "n")
   
-  plot(fspc1[1:(length(fspc1) / 2)], 1:(length(fspc1) / 2), type="l", col="blue", ylab="Frecuency (Hz)", xlab="Amplitude (no units)", lwd = 3, ylim = c(20, 220))#, xlim = c(100, max(fspc)))
+  plot(fspc1[1:(length(fspc1) / 2)], 1:(length(fspc1) / 2), type="l", col="blue", ylab="Frequency (Hz)", xlab="Intensity", lwd = 3, ylim = c(20, 220))#, xlim = c(100, max(fspc)))
 
   usr <- par("usr")
   
   axis(side = 2, at = seq(usr[3], usr[4], length.out = 4), labels = seq(0, 3, length.out = 4))
   
-  
   par(mar = c(4, 0, 1, 1))
-  spectro(s, palette = reverse.gray.colors.1, scale = FALSE, grid = FALSE, f = f, flim = c(0.2, 3),  flab = NULL, axisY = FALSE, collevels = seq(-100, 0 , 5), wl = 250)
-
+  spectro(s, palette = reverse.gray.colors.1, scale = FALSE, grid = FALSE, f = f, flim = c(0.2, 3),  flab = NULL, collevels = seq(-100, 0 , 5), wl = 250)
+  
+  for (e in 2:length(sq))
+  rect(xleft = sq.spc[e - 1], xright = sq.spc[e], ytop = 4, ybottom = 0, col = adjustcolor("white", 0), border = "gray")
+    
   rect(xleft = sq.spc[x - 1], xright = sq.spc[x], ytop = 4, ybottom = 0, col = adjustcolor("blue", 0.1), border = NA)
   
   text(x = mean(sq.spc[x - 1], sq.spc[x]), y = 2.5, labels = (1:num.segmts)[x - 1], cex = 3, pos = 4)
   
   },
-movie.name =  "periodogram_spectro.gif", interval = 0.7, ani.width = 480 * 1.5)
+movie.name =  "periodogram_spectro.gif", interval = 0.5, ani.width = 480 * 1.5)
 
 
 ```
@@ -596,21 +598,32 @@ The package [dynaSpec](https://marce10.github.io/dynaSpec) allows to create stat
 
 ```{r, eval = FALSE}
 
-
+library(warbleR)
 ngh_wren <- read_sound_file("https://www.xeno-canto.org/518334/download")
 
 custom_pal <- colorRampPalette( c("#2d2d86", "#2d2d86", reverse.terrain.colors(10)[5:10]))
 
 library(dynaSpec)
 
-scrolling_spectro(wave = ngh_wren, wl = 600, 
-    t.display = 3, ovlp = 95, pal = custom_pal, 
-    grid = FALSE, flim = c(2, 8), width = 700, 
-    height = 250, res = 100, collevels = seq(-40, 0, 5),
-    file.name = "../nightingale_wren.mp4", colbg = "#2d2d86", lcol = "#FFFFFFE6")
+scrolling_spectro(
+  wave = ngh_wren,
+  wl = 600,
+  t.display = 3,
+  ovlp = 95,
+  pal = custom_pal,
+  grid = FALSE,
+  flim = c(1, 8),
+  width = 700,
+  height = 3500,
+  res = 100,
+  collevels = seq(-40, 0, 5),
+  file.name = "nightingale_wren.mp4",
+  colbg = "#2d2d86",
+  lcol = "#FFFFFFE6"
+)
 ```
 
-<iframe width="100%" height="297" src="images/nightingale_wren.mp4" allowtransparency="true" style="background: #FFFFFF;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+<iframe width="100%" src="images/nightingale_wren.mp4" allowtransparency="false" style="background: #FFFFFF;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 
 </iframe>
 

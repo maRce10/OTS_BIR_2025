@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-05-06">
+<meta name="dcterms.date" content="2025-05-14">
 
 <title>Bioacoustic analysis in R 2025 - Building spectrograms</title>
 <style>
@@ -240,7 +240,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul class="collapse">
   <li><a href="#fourier-transform" id="toc-fourier-transform" class="nav-link active" data-scroll-target="#fourier-transform"><span class="header-section-number">1</span> Fourier transform</a></li>
-  <li><a href="#from-the-fourier-transform-to-the-spectrogram" id="toc-from-the-fourier-transform-to-the-spectrogram" class="nav-link" data-scroll-target="#from-the-fourier-transform-to-the-spectrogram"><span class="header-section-number">2</span> From the Fourier transform to the spectrogram</a></li>
+  <li><a href="#from-fourier-transforms-to-spectrograms" id="toc-from-fourier-transforms-to-spectrograms" class="nav-link" data-scroll-target="#from-fourier-transforms-to-spectrograms"><span class="header-section-number">2</span> From Fourier transforms to spectrograms</a></li>
   <li><a href="#overlap" id="toc-overlap" class="nav-link" data-scroll-target="#overlap"><span class="header-section-number">3</span> Overlap</a></li>
   <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations"><span class="header-section-number">4</span> Limitations</a></li>
   <li><a href="#creating-spectrograms-in-r" id="toc-creating-spectrograms-in-r" class="nav-link" data-scroll-target="#creating-spectrograms-in-r"><span class="header-section-number">5</span> Creating spectrograms in R</a></li>
@@ -269,7 +269,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 6, 2025</p>
+      <p class="date">May 14, 2025</p>
     </div>
   </div>
   
@@ -435,8 +435,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>&nbsp;</p>
 </section>
-<section id="from-the-fourier-transform-to-the-spectrogram" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="from-the-fourier-transform-to-the-spectrogram"><span class="header-section-number">2</span> From the Fourier transform to the spectrogram</h2>
+<section id="from-fourier-transforms-to-spectrograms" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="from-fourier-transforms-to-spectrograms"><span class="header-section-number">2</span> From Fourier transforms to spectrograms</h2>
 <p>The spectrograms are constructed of the spectral decomposition of discrete time segments of amplitude values. Each segment (or window) of time is a column of spectral density values in a frequency range. Take for example this simple modulated sound, which goes up and down in frequency:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -675,18 +675,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ngh_wren <span class="ot">&lt;-</span> <span class="fu">read_sound_file</span>(<span class="st">"https://www.xeno-canto.org/518334/download"</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>custom_pal <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">"#2d2d86"</span>, <span class="st">"#2d2d86"</span>, <span class="fu">reverse.terrain.colors</span>(<span class="dv">10</span>)[<span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>]))</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dynaSpec)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">scrolling_spectro</span>(<span class="at">wave =</span> ngh_wren, <span class="at">wl =</span> <span class="dv">600</span>, <span class="at">t.display =</span> <span class="dv">3</span>, <span class="at">ovlp =</span> <span class="dv">95</span>, <span class="at">pal =</span> custom_pal,</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">grid =</span> <span class="cn">FALSE</span>, <span class="at">flim =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">8</span>), <span class="at">width =</span> <span class="dv">700</span>, <span class="at">height =</span> <span class="dv">250</span>, <span class="at">res =</span> <span class="dv">100</span>, <span class="at">collevels =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">40</span>,</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        <span class="dv">0</span>, <span class="dv">5</span>), <span class="at">file.name =</span> <span class="st">"../nightingale_wren.mp4"</span>, <span class="at">colbg =</span> <span class="st">"#2d2d86"</span>, <span class="at">lcol =</span> <span class="st">"#FFFFFFE6"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(warbleR)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>ngh_wren <span class="ot">&lt;-</span> <span class="fu">read_sound_file</span>(<span class="st">"https://www.xeno-canto.org/518334/download"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>custom_pal <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">"#2d2d86"</span>, <span class="st">"#2d2d86"</span>, <span class="fu">reverse.terrain.colors</span>(<span class="dv">10</span>)[<span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>]))</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dynaSpec)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">scrolling_spectro</span>(<span class="at">wave =</span> ngh_wren, <span class="at">wl =</span> <span class="dv">600</span>, <span class="at">t.display =</span> <span class="dv">3</span>, <span class="at">ovlp =</span> <span class="dv">95</span>, <span class="at">pal =</span> custom_pal,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">grid =</span> <span class="cn">FALSE</span>, <span class="at">flim =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">8</span>), <span class="at">width =</span> <span class="dv">700</span>, <span class="at">height =</span> <span class="dv">3500</span>, <span class="at">res =</span> <span class="dv">100</span>, <span class="at">collevels =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">40</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        <span class="dv">0</span>, <span class="dv">5</span>), <span class="at">file.name =</span> <span class="st">"nightingale_wren.mp4"</span>, <span class="at">colbg =</span> <span class="st">"#2d2d86"</span>, <span class="at">lcol =</span> <span class="st">"#FFFFFFE6"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<iframe width="100%" height="297" src="images/nightingale_wren.mp4" allowtransparency="true" style="background: #FFFFFF;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+<iframe width="100%" src="images/nightingale_wren.mp4" allowtransparency="false" style="background: #FFFFFF;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
 </iframe>
 <p>&nbsp;</p>
 <hr>
