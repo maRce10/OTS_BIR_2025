@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-05-14">
+<meta name="dcterms.date" content="2025-05-16">
 
 <title>Bioacoustic analysis in R 2025</title>
 <style>
@@ -208,7 +208,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#day-1-video" id="toc-day-1-video" class="nav-link active" data-scroll-target="#day-1-video"><span class="header-section-number">1</span> Day 1 (Video)</a></li>
   <li><a href="#day-2-video" id="toc-day-2-video" class="nav-link" data-scroll-target="#day-2-video"><span class="header-section-number">2</span> Day 2 (Video)</a></li>
   <li><a href="#day-3-video" id="toc-day-3-video" class="nav-link" data-scroll-target="#day-3-video"><span class="header-section-number">3</span> Day 3 (Video)</a></li>
-  <li><a href="#day-4" id="toc-day-4" class="nav-link" data-scroll-target="#day-4"><span class="header-section-number">4</span> Day 4</a></li>
+  <li><a href="#day-4-video" id="toc-day-4-video" class="nav-link" data-scroll-target="#day-4-video"><span class="header-section-number">4</span> Day 4 (Video)</a></li>
   <li><a href="#day-5" id="toc-day-5" class="nav-link" data-scroll-target="#day-5"><span class="header-section-number">5</span> Day 5</a></li>
   </ul>
 </nav>
@@ -232,7 +232,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 14, 2025</p>
+      <p class="date">May 16, 2025</p>
     </div>
   </div>
   
@@ -410,8 +410,8 @@ ul.task-list li input[type="checkbox"] {
 <hr>
 <p>&nbsp;</p>
 </section>
-<section id="day-4" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="day-4"><span class="header-section-number">4</span> Day 4</h2>
+<section id="day-4-video" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="day-4-video"><span class="header-section-number">4</span> Day 4 (<a href="https://udecr.zoom.us/rec/share/zeyjFHFwdxbdk_wDFQBqMbCNrjgeyOnDkmRq1FdriwkmHl_BQZ0ae9ceNSt045no.pz5jIz5-5mRO4hwu">Video</a>)</h2>
 <hr>
 <section id="additional-resources-2" class="level3 alert alert-warning" data-number="4.1">
 <h3 data-number="4.1" class="anchored" data-anchor-id="additional-resources-2"><span class="header-section-number">4.1</span> Additional resources</h3>
@@ -566,11 +566,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
           // target, if specified
           link.setAttribute("target", "_blank");
           if (link.getAttribute("rel") === null) {
@@ -612,11 +607,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
