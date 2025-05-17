@@ -4448,18 +4448,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>&nbsp;</p>
 </section>
-<section id="calculates-features-at-higher-levels-of-organization" class="level3" data-number="5.3">
-<h3 data-number="5.3" class="anchored" data-anchor-id="calculates-features-at-higher-levels-of-organization"><span class="header-section-number">5.3</span> Calculates features at higher levels of organization</h3>
-<p>Vocalizations can be organized above the basic signal units like in long repertoire songs or multi-syllable calls. We can calculate average or extreme values of acoustic features of the sub-units for these higher levels of organization using the function <code>song_analysis()</code>:</p>
+<section id="features-at-higher-levels-of-organization" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="features-at-higher-levels-of-organization"><span class="header-section-number">5.3</span> Features at higher levels of organization</h3>
+<p>Vocalizations can be organized above the basic signal units like in long repertoire songs or multi-syllable calls. For instance, the song of the scale-throated hermit (<em>Phaethornis eurynome</em>) its composed of two elements:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="measure_acoustic_structure_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="1400"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In cases like this we often want to describe the structure at the song level, rather than at the element level. We can do this using the function <code>song_analysis()</code>. By the default the function computes several metrics characterizing the structure of this higher levels of organization:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add a 'song' column</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>lbh_selec_table<span class="sc">$</span>song <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">each =</span> <span class="dv">3</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>]</span>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read extended selection table</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>sth_est <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="st">"./examples/pha_eur_est.RDS"</span>)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># measure default features</span></span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">song_analysis</span>(</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> lbh_selec_table,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> sth_est,</span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">song_colm =</span> <span class="st">"song"</span>,</span>
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">parallel =</span> <span class="dv">1</span>,</span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">pb =</span> <span class="cn">TRUE</span></span>
@@ -4479,6 +4489,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th style="text-align: center;" data-quarto-table-cell-role="th">top.freq</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">bottom.freq</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">song</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Channel</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">num.elms</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">elm.duration</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">freq.range</th>
@@ -4489,94 +4500,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">Phae.long1.wav</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav-song_1</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.3433366</td>
-<td style="text-align: center;">2.3214565</td>
-<td style="text-align: center;">8.807053</td>
-<td style="text-align: center;">2.169437</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.478118</td>
+<td style="text-align: center;">9.15075</td>
+<td style="text-align: center;">2.97675</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">0.1703334</td>
-<td style="text-align: center;">6.637617</td>
-<td style="text-align: center;">1.9781199</td>
-<td style="text-align: center;">1.6528271</td>
-<td style="text-align: center;">0.7335599</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0.176644</td>
+<td style="text-align: center;">6.17400</td>
+<td style="text-align: center;">0.378118</td>
+<td style="text-align: center;">9.86135</td>
+<td style="text-align: center;">0.024830</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Phae.long2.wav</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav-song_2</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.1595983</td>
-<td style="text-align: center;">1.5832087</td>
-<td style="text-align: center;">8.888027</td>
-<td style="text-align: center;">2.284006</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.476894</td>
+<td style="text-align: center;">10.00000</td>
+<td style="text-align: center;">2.97675</td>
 <td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">0.1293606</td>
-<td style="text-align: center;">6.604022</td>
-<td style="text-align: center;">1.4236104</td>
-<td style="text-align: center;">1.5414731</td>
-<td style="text-align: center;">1.1648893</td>
+<td style="text-align: center;">0.176055</td>
+<td style="text-align: center;">7.02325</td>
+<td style="text-align: center;">0.376894</td>
+<td style="text-align: center;">9.95148</td>
+<td style="text-align: center;">0.024785</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Phae.long3.wav</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav-song_3</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.6265520</td>
-<td style="text-align: center;">0.7577715</td>
-<td style="text-align: center;">8.822316</td>
-<td style="text-align: center;">3.006834</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">0.1312195</td>
-<td style="text-align: center;">5.815482</td>
-<td style="text-align: center;">0.1312195</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Phae.long3.wav</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">0.1233643</td>
-<td style="text-align: center;">2.1043921</td>
-<td style="text-align: center;">9.315153</td>
-<td style="text-align: center;">2.316862</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">0.1306979</td>
-<td style="text-align: center;">6.998291</td>
-<td style="text-align: center;">1.9810279</td>
-<td style="text-align: center;">1.0805852</td>
-<td style="text-align: center;">1.7196320</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Phae.long4.wav</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">1.5168116</td>
-<td style="text-align: center;">1.6622365</td>
-<td style="text-align: center;">9.216586</td>
-<td style="text-align: center;">2.513997</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.471089</td>
+<td style="text-align: center;">10.00000</td>
+<td style="text-align: center;">3.19725</td>
 <td style="text-align: center;">3</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.1454249</td>
-<td style="text-align: center;">6.702589</td>
-<td style="text-align: center;">0.1454249</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0.176157</td>
+<td style="text-align: center;">6.80275</td>
+<td style="text-align: center;">0.371089</td>
+<td style="text-align: center;">10.01134</td>
+<td style="text-align: center;">0.018776</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Phae.long4.wav</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav-song_4</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.1453977</td>
-<td style="text-align: center;">3.0768784</td>
-<td style="text-align: center;">10.235116</td>
-<td style="text-align: center;">2.579708</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.478322</td>
+<td style="text-align: center;">9.81225</td>
+<td style="text-align: center;">3.19725</td>
 <td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">0.1446427</td>
-<td style="text-align: center;">7.655408</td>
-<td style="text-align: center;">2.9314808</td>
-<td style="text-align: center;">0.7175417</td>
-<td style="text-align: center;">2.6421954</td>
+<td style="text-align: center;">0.182903</td>
+<td style="text-align: center;">6.61500</td>
+<td style="text-align: center;">0.378322</td>
+<td style="text-align: center;">10.66376</td>
+<td style="text-align: center;">0.012517</td>
 </tr>
 </tbody>
 </table>
@@ -4585,14 +4570,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-<p>This can also be done on features extracted from other functions:</p>
+<p>We can also compute average or extreme values of acoustic features. This can be done on element-level features extracted with other functions:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># measure acoustic features</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">spectro_analysis</span>(lbh_selec_table[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>, ], <span class="at">bp =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">11</span>), <span class="dv">300</span>, <span class="at">fast =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">spectro_analysis</span>(sth_est, <span class="at">bp =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">11</span>), <span class="dv">300</span>, <span class="at">fast =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">merge</span>(sp, lbh_selec_table[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>, ], <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"sound.files"</span>, <span class="st">"selec"</span>))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">merge</span>(sp, sth_est, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"sound.files"</span>, <span class="st">"selec"</span>))</span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># caculate song-level features for all numeric features</span></span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">song_analysis</span>(</span>
@@ -4644,6 +4629,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th style="text-align: center;" data-quarto-table-cell-role="th">enddom</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">dfslope</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">meanpeakf</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Channel</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">num.elms</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">elm.duration</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">freq.range</th>
@@ -4654,172 +4640,176 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">Phae.long1.wav</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav-song_1</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.3433366</td>
-<td style="text-align: center;">2.3214565</td>
-<td style="text-align: center;">8.807053</td>
-<td style="text-align: center;">2.169437</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.478118</td>
+<td style="text-align: center;">9.15075</td>
+<td style="text-align: center;">2.97675</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.1703334</td>
-<td style="text-align: center;">6.214573</td>
-<td style="text-align: center;">1.886934</td>
-<td style="text-align: center;">6.398906</td>
-<td style="text-align: center;">5.279726</td>
-<td style="text-align: center;">7.088539</td>
-<td style="text-align: center;">1.808814</td>
-<td style="text-align: center;">0.0812936</td>
-<td style="text-align: center;">0.0493581</td>
-<td style="text-align: center;">0.1209826</td>
-<td style="text-align: center;">0.0716246</td>
-<td style="text-align: center;">0.0841200</td>
-<td style="text-align: center;">2.641668</td>
-<td style="text-align: center;">11.645191</td>
-<td style="text-align: center;">0.9311848</td>
-<td style="text-align: center;">0.8946313</td>
-<td style="text-align: center;">0.8330688</td>
-<td style="text-align: center;">0.5799687</td>
-<td style="text-align: center;">6.717429</td>
-<td style="text-align: center;">4.2125</td>
-<td style="text-align: center;">8.4875</td>
-<td style="text-align: center;">4.2750</td>
-<td style="text-align: center;">4.743245</td>
-<td style="text-align: center;">7.0625</td>
-<td style="text-align: center;">7.2125</td>
-<td style="text-align: center;">0.8991633</td>
-<td style="text-align: center;">6.958953</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">0.1703334</td>
-<td style="text-align: center;">6.637617</td>
-<td style="text-align: center;">1.9781199</td>
-<td style="text-align: center;">1.652827</td>
-<td style="text-align: center;">0.7335599</td>
+<td style="text-align: center;">0.176644</td>
+<td style="text-align: center;">6.26096</td>
+<td style="text-align: center;">1.68862</td>
+<td style="text-align: center;">5.92027</td>
+<td style="text-align: center;">5.13720</td>
+<td style="text-align: center;">7.14686</td>
+<td style="text-align: center;">2.00966</td>
+<td style="text-align: center;">0.088325</td>
+<td style="text-align: center;">0.050015</td>
+<td style="text-align: center;">0.118474</td>
+<td style="text-align: center;">0.068459</td>
+<td style="text-align: center;">0.111375</td>
+<td style="text-align: center;">2.78389</td>
+<td style="text-align: center;">14.03501</td>
+<td style="text-align: center;">0.888248</td>
+<td style="text-align: center;">0.886249</td>
+<td style="text-align: center;">0.787229</td>
+<td style="text-align: center;">0.303150</td>
+<td style="text-align: center;">5.89941</td>
+<td style="text-align: center;">1.617</td>
+<td style="text-align: center;">8.8200</td>
+<td style="text-align: center;">7.2030</td>
+<td style="text-align: center;">5.75042</td>
+<td style="text-align: center;">3.8955</td>
+<td style="text-align: center;">5.8800</td>
+<td style="text-align: center;">11.421040</td>
+<td style="text-align: center;">6.3945</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0.176644</td>
+<td style="text-align: center;">6.17400</td>
+<td style="text-align: center;">0.378118</td>
+<td style="text-align: center;">9.86135</td>
+<td style="text-align: center;">0.024830</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Phae.long2.wav</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav-song_2</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.1595983</td>
-<td style="text-align: center;">1.5832087</td>
-<td style="text-align: center;">8.888027</td>
-<td style="text-align: center;">2.284006</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.476894</td>
+<td style="text-align: center;">10.00000</td>
+<td style="text-align: center;">2.97675</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">0.1293606</td>
-<td style="text-align: center;">6.587160</td>
-<td style="text-align: center;">1.811403</td>
-<td style="text-align: center;">6.713650</td>
-<td style="text-align: center;">5.632792</td>
-<td style="text-align: center;">7.562909</td>
-<td style="text-align: center;">1.930116</td>
-<td style="text-align: center;">0.0777719</td>
-<td style="text-align: center;">0.0538421</td>
-<td style="text-align: center;">0.1016897</td>
-<td style="text-align: center;">0.0478477</td>
-<td style="text-align: center;">0.0785585</td>
-<td style="text-align: center;">2.543173</td>
-<td style="text-align: center;">11.544951</td>
-<td style="text-align: center;">0.9264893</td>
-<td style="text-align: center;">0.9119612</td>
-<td style="text-align: center;">0.8449154</td>
-<td style="text-align: center;">0.5528136</td>
-<td style="text-align: center;">6.397644</td>
-<td style="text-align: center;">4.0125</td>
-<td style="text-align: center;">7.7250</td>
-<td style="text-align: center;">3.7125</td>
-<td style="text-align: center;">5.151639</td>
-<td style="text-align: center;">6.0000</td>
-<td style="text-align: center;">6.4125</td>
-<td style="text-align: center;">3.4570754</td>
-<td style="text-align: center;">7.059628</td>
+<td style="text-align: center;">0.176055</td>
+<td style="text-align: center;">6.34424</td>
+<td style="text-align: center;">1.73260</td>
+<td style="text-align: center;">6.00156</td>
+<td style="text-align: center;">5.15780</td>
+<td style="text-align: center;">7.33125</td>
+<td style="text-align: center;">2.17345</td>
+<td style="text-align: center;">0.087856</td>
+<td style="text-align: center;">0.049598</td>
+<td style="text-align: center;">0.120447</td>
+<td style="text-align: center;">0.070849</td>
+<td style="text-align: center;">0.062043</td>
+<td style="text-align: center;">2.70287</td>
+<td style="text-align: center;">13.59398</td>
+<td style="text-align: center;">0.892654</td>
+<td style="text-align: center;">0.886421</td>
+<td style="text-align: center;">0.791280</td>
+<td style="text-align: center;">0.325522</td>
+<td style="text-align: center;">6.12504</td>
+<td style="text-align: center;">3.969</td>
+<td style="text-align: center;">8.9670</td>
+<td style="text-align: center;">4.9980</td>
+<td style="text-align: center;">9.48831</td>
+<td style="text-align: center;">5.1450</td>
+<td style="text-align: center;">5.1450</td>
+<td style="text-align: center;">0.004517</td>
+<td style="text-align: center;">5.7330</td>
+<td style="text-align: center;">1</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">0.1293606</td>
-<td style="text-align: center;">6.604022</td>
-<td style="text-align: center;">1.4236104</td>
-<td style="text-align: center;">1.541473</td>
-<td style="text-align: center;">1.1648893</td>
+<td style="text-align: center;">0.176055</td>
+<td style="text-align: center;">7.02325</td>
+<td style="text-align: center;">0.376894</td>
+<td style="text-align: center;">9.95148</td>
+<td style="text-align: center;">0.024785</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Phae.long3.wav</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav-song_3</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.6265520</td>
-<td style="text-align: center;">0.7577715</td>
-<td style="text-align: center;">8.822316</td>
-<td style="text-align: center;">3.006834</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.471089</td>
+<td style="text-align: center;">10.00000</td>
+<td style="text-align: center;">3.19725</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">0.176157</td>
+<td style="text-align: center;">6.38094</td>
+<td style="text-align: center;">1.70429</td>
+<td style="text-align: center;">6.11488</td>
+<td style="text-align: center;">5.20910</td>
+<td style="text-align: center;">7.37644</td>
+<td style="text-align: center;">2.16734</td>
+<td style="text-align: center;">0.090052</td>
+<td style="text-align: center;">0.053541</td>
+<td style="text-align: center;">0.118759</td>
+<td style="text-align: center;">0.065218</td>
+<td style="text-align: center;">0.092544</td>
+<td style="text-align: center;">2.45565</td>
+<td style="text-align: center;">10.27109</td>
+<td style="text-align: center;">0.889185</td>
+<td style="text-align: center;">0.886213</td>
+<td style="text-align: center;">0.788051</td>
+<td style="text-align: center;">0.313459</td>
+<td style="text-align: center;">5.93620</td>
+<td style="text-align: center;">2.793</td>
+<td style="text-align: center;">9.3345</td>
+<td style="text-align: center;">6.5415</td>
+<td style="text-align: center;">11.07233</td>
+<td style="text-align: center;">5.0715</td>
+<td style="text-align: center;">5.9535</td>
+<td style="text-align: center;">4.827083</td>
+<td style="text-align: center;">7.0560</td>
+<td style="text-align: center;">1</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">0.1312195</td>
-<td style="text-align: center;">6.737204</td>
-<td style="text-align: center;">1.649035</td>
-<td style="text-align: center;">6.724085</td>
-<td style="text-align: center;">6.053354</td>
-<td style="text-align: center;">7.585366</td>
-<td style="text-align: center;">1.532012</td>
-<td style="text-align: center;">0.0626394</td>
-<td style="text-align: center;">0.0402682</td>
-<td style="text-align: center;">0.0894848</td>
-<td style="text-align: center;">0.0492167</td>
-<td style="text-align: center;">0.0521995</td>
-<td style="text-align: center;">2.502406</td>
-<td style="text-align: center;">10.411846</td>
-<td style="text-align: center;">0.9105878</td>
-<td style="text-align: center;">0.9112879</td>
-<td style="text-align: center;">0.8298076</td>
-<td style="text-align: center;">0.4934158</td>
-<td style="text-align: center;">6.622331</td>
-<td style="text-align: center;">4.8375</td>
-<td style="text-align: center;">8.0625</td>
-<td style="text-align: center;">3.2250</td>
-<td style="text-align: center;">3.674419</td>
-<td style="text-align: center;">7.0125</td>
-<td style="text-align: center;">8.0625</td>
-<td style="text-align: center;">8.0018575</td>
-<td style="text-align: center;">6.757601</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">0.1312195</td>
-<td style="text-align: center;">5.815482</td>
-<td style="text-align: center;">0.1312195</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
+<td style="text-align: center;">0.176157</td>
+<td style="text-align: center;">6.80275</td>
+<td style="text-align: center;">0.371089</td>
+<td style="text-align: center;">10.01134</td>
+<td style="text-align: center;">0.018776</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Phae.long3.wav</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav-song_4</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.1233643</td>
-<td style="text-align: center;">2.1043921</td>
-<td style="text-align: center;">9.315153</td>
-<td style="text-align: center;">2.316862</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">0.1306979</td>
-<td style="text-align: center;">6.713171</td>
-<td style="text-align: center;">1.644077</td>
-<td style="text-align: center;">6.711681</td>
-<td style="text-align: center;">6.046112</td>
-<td style="text-align: center;">7.591542</td>
-<td style="text-align: center;">1.545430</td>
-<td style="text-align: center;">0.0664694</td>
-<td style="text-align: center;">0.0410781</td>
-<td style="text-align: center;">0.0940970</td>
-<td style="text-align: center;">0.0530189</td>
-<td style="text-align: center;">0.0485407</td>
-<td style="text-align: center;">2.280022</td>
-<td style="text-align: center;">8.186695</td>
-<td style="text-align: center;">0.9069198</td>
-<td style="text-align: center;">0.9123649</td>
-<td style="text-align: center;">0.8274417</td>
-<td style="text-align: center;">0.4830629</td>
-<td style="text-align: center;">6.315848</td>
-<td style="text-align: center;">4.6500</td>
-<td style="text-align: center;">7.2750</td>
-<td style="text-align: center;">2.6250</td>
-<td style="text-align: center;">4.211745</td>
-<td style="text-align: center;">5.7000</td>
-<td style="text-align: center;">6.8250</td>
-<td style="text-align: center;">8.5827023</td>
-<td style="text-align: center;">6.719848</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.478322</td>
+<td style="text-align: center;">9.81225</td>
+<td style="text-align: center;">3.19725</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">0.182903</td>
+<td style="text-align: center;">6.43292</td>
+<td style="text-align: center;">1.68863</td>
+<td style="text-align: center;">6.45064</td>
+<td style="text-align: center;">5.17807</td>
+<td style="text-align: center;">7.32800</td>
+<td style="text-align: center;">2.14993</td>
+<td style="text-align: center;">0.089847</td>
+<td style="text-align: center;">0.048813</td>
+<td style="text-align: center;">0.122748</td>
+<td style="text-align: center;">0.073935</td>
+<td style="text-align: center;">0.090210</td>
+<td style="text-align: center;">2.29066</td>
+<td style="text-align: center;">9.58674</td>
+<td style="text-align: center;">0.880072</td>
+<td style="text-align: center;">0.885443</td>
+<td style="text-align: center;">0.779209</td>
+<td style="text-align: center;">0.301317</td>
+<td style="text-align: center;">6.05304</td>
+<td style="text-align: center;">4.263</td>
+<td style="text-align: center;">8.9670</td>
+<td style="text-align: center;">4.7040</td>
+<td style="text-align: center;">5.45294</td>
+<td style="text-align: center;">6.6150</td>
+<td style="text-align: center;">5.1450</td>
+<td style="text-align: center;">-7.878768</td>
+<td style="text-align: center;">6.4680</td>
+<td style="text-align: center;">1</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">0.1306979</td>
-<td style="text-align: center;">6.998291</td>
-<td style="text-align: center;">1.9810279</td>
-<td style="text-align: center;">1.080585</td>
-<td style="text-align: center;">1.7196320</td>
+<td style="text-align: center;">0.182903</td>
+<td style="text-align: center;">6.61500</td>
+<td style="text-align: center;">0.378322</td>
+<td style="text-align: center;">10.66376</td>
+<td style="text-align: center;">0.012517</td>
 </tr>
 </tbody>
 </table>
@@ -4829,7 +4819,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>&nbsp;</p>
-<p>Calculate song-level features selecting features with ‘mean_colm’:</p>
+<p>We can also compute song-level features selecting features with ‘mean_colm’:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -4869,72 +4859,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">Phae.long1.wav</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav-song_1</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.3433366</td>
-<td style="text-align: center;">2.3214565</td>
-<td style="text-align: center;">8.807053</td>
-<td style="text-align: center;">2.169437</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.478118</td>
+<td style="text-align: center;">9.15075</td>
+<td style="text-align: center;">2.97675</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">4.2750</td>
-<td style="text-align: center;">0.1703334</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">0.1703334</td>
-<td style="text-align: center;">6.637617</td>
-<td style="text-align: center;">1.9781199</td>
-<td style="text-align: center;">1.652827</td>
-<td style="text-align: center;">0.7335599</td>
+<td style="text-align: center;">7.2030</td>
+<td style="text-align: center;">0.176644</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0.176644</td>
+<td style="text-align: center;">6.17400</td>
+<td style="text-align: center;">0.378118</td>
+<td style="text-align: center;">9.86135</td>
+<td style="text-align: center;">0.024830</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Phae.long2.wav</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav-song_2</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.1595983</td>
-<td style="text-align: center;">1.5832087</td>
-<td style="text-align: center;">8.888027</td>
-<td style="text-align: center;">2.284006</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.476894</td>
+<td style="text-align: center;">10.00000</td>
+<td style="text-align: center;">2.97675</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">3.7125</td>
-<td style="text-align: center;">0.1293606</td>
+<td style="text-align: center;">4.9980</td>
+<td style="text-align: center;">0.176055</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">0.1293606</td>
-<td style="text-align: center;">6.604022</td>
-<td style="text-align: center;">1.4236104</td>
-<td style="text-align: center;">1.541473</td>
-<td style="text-align: center;">1.1648893</td>
+<td style="text-align: center;">0.176055</td>
+<td style="text-align: center;">7.02325</td>
+<td style="text-align: center;">0.376894</td>
+<td style="text-align: center;">9.95148</td>
+<td style="text-align: center;">0.024785</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Phae.long3.wav</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav-song_3</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.6265520</td>
-<td style="text-align: center;">0.7577715</td>
-<td style="text-align: center;">8.822316</td>
-<td style="text-align: center;">3.006834</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.471089</td>
+<td style="text-align: center;">10.00000</td>
+<td style="text-align: center;">3.19725</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">6.5415</td>
+<td style="text-align: center;">0.176157</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">3.2250</td>
-<td style="text-align: center;">0.1312195</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">0.1312195</td>
-<td style="text-align: center;">5.815482</td>
-<td style="text-align: center;">0.1312195</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
+<td style="text-align: center;">0.176157</td>
+<td style="text-align: center;">6.80275</td>
+<td style="text-align: center;">0.371089</td>
+<td style="text-align: center;">10.01134</td>
+<td style="text-align: center;">0.018776</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Phae.long3.wav</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav-song_4</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.1233643</td>
-<td style="text-align: center;">2.1043921</td>
-<td style="text-align: center;">9.315153</td>
-<td style="text-align: center;">2.316862</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">2.6250</td>
-<td style="text-align: center;">0.1306979</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.478322</td>
+<td style="text-align: center;">9.81225</td>
+<td style="text-align: center;">3.19725</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">4.7040</td>
+<td style="text-align: center;">0.182903</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">0.1306979</td>
-<td style="text-align: center;">6.998291</td>
-<td style="text-align: center;">1.9810279</td>
-<td style="text-align: center;">1.080585</td>
-<td style="text-align: center;">1.7196320</td>
+<td style="text-align: center;">0.182903</td>
+<td style="text-align: center;">6.61500</td>
+<td style="text-align: center;">0.378322</td>
+<td style="text-align: center;">10.66376</td>
+<td style="text-align: center;">0.012517</td>
 </tr>
 </tbody>
 </table>
@@ -4944,7 +4934,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>&nbsp;</p>
-<p>Calculate song-level features for selecting features with ‘mean_colm’, ‘max_colm’ and ‘min_colm’ and weighted by duration:</p>
+<p>.. and compute song-level features for selecting features with ‘mean_colm’, ‘max_colm’ and ‘min_colm’ and weighted by duration:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -4988,80 +4978,80 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">Phae.long1.wav</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav-song_1</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.3433366</td>
-<td style="text-align: center;">2.3214565</td>
-<td style="text-align: center;">8.807053</td>
-<td style="text-align: center;">2.169437</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.478118</td>
+<td style="text-align: center;">9.15075</td>
+<td style="text-align: center;">2.97675</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">4.281334</td>
-<td style="text-align: center;">0.1704927</td>
-<td style="text-align: center;">3.8625</td>
-<td style="text-align: center;">8.6625</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">0.1703334</td>
-<td style="text-align: center;">6.637617</td>
-<td style="text-align: center;">1.9781199</td>
-<td style="text-align: center;">1.652827</td>
-<td style="text-align: center;">0.7335599</td>
+<td style="text-align: center;">7.19966</td>
+<td style="text-align: center;">0.176654</td>
+<td style="text-align: center;">1.1025</td>
+<td style="text-align: center;">8.8935</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0.176644</td>
+<td style="text-align: center;">6.17400</td>
+<td style="text-align: center;">0.378118</td>
+<td style="text-align: center;">9.86135</td>
+<td style="text-align: center;">0.024830</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Phae.long2.wav</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav-song_2</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.1595983</td>
-<td style="text-align: center;">1.5832087</td>
-<td style="text-align: center;">8.888027</td>
-<td style="text-align: center;">2.284006</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.476894</td>
+<td style="text-align: center;">10.00000</td>
+<td style="text-align: center;">2.97675</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">3.691095</td>
-<td style="text-align: center;">0.1294402</td>
-<td style="text-align: center;">3.0375</td>
-<td style="text-align: center;">7.8375</td>
+<td style="text-align: center;">4.99789</td>
+<td style="text-align: center;">0.176055</td>
+<td style="text-align: center;">3.7485</td>
+<td style="text-align: center;">9.0405</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">0.1293606</td>
-<td style="text-align: center;">6.604022</td>
-<td style="text-align: center;">1.4236104</td>
-<td style="text-align: center;">1.541473</td>
-<td style="text-align: center;">1.1648893</td>
+<td style="text-align: center;">0.176055</td>
+<td style="text-align: center;">7.02325</td>
+<td style="text-align: center;">0.376894</td>
+<td style="text-align: center;">9.95148</td>
+<td style="text-align: center;">0.024785</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">Phae.long3.wav</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav-song_3</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.6265520</td>
-<td style="text-align: center;">0.7577715</td>
-<td style="text-align: center;">8.822316</td>
-<td style="text-align: center;">3.006834</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.471089</td>
+<td style="text-align: center;">10.00000</td>
+<td style="text-align: center;">3.19725</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">6.57584</td>
+<td style="text-align: center;">0.176290</td>
+<td style="text-align: center;">2.1315</td>
+<td style="text-align: center;">9.9225</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">3.225000</td>
-<td style="text-align: center;">0.1312195</td>
-<td style="text-align: center;">4.8375</td>
-<td style="text-align: center;">8.0625</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">0.1312195</td>
-<td style="text-align: center;">5.815482</td>
-<td style="text-align: center;">0.1312195</td>
-<td style="text-align: center;">NA</td>
-<td style="text-align: center;">NA</td>
+<td style="text-align: center;">0.176157</td>
+<td style="text-align: center;">6.80275</td>
+<td style="text-align: center;">0.371089</td>
+<td style="text-align: center;">10.01134</td>
+<td style="text-align: center;">0.018776</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">Phae.long3.wav</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav-song_4</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">0.1233643</td>
-<td style="text-align: center;">2.1043921</td>
-<td style="text-align: center;">9.315153</td>
-<td style="text-align: center;">2.316862</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">2.623809</td>
-<td style="text-align: center;">0.1307000</td>
-<td style="text-align: center;">4.6125</td>
-<td style="text-align: center;">7.5375</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.478322</td>
+<td style="text-align: center;">9.81225</td>
+<td style="text-align: center;">3.19725</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">4.71665</td>
+<td style="text-align: center;">0.183241</td>
+<td style="text-align: center;">3.8955</td>
+<td style="text-align: center;">9.0405</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">0.1306979</td>
-<td style="text-align: center;">6.998291</td>
-<td style="text-align: center;">1.9810279</td>
-<td style="text-align: center;">1.080585</td>
-<td style="text-align: center;">1.7196320</td>
+<td style="text-align: center;">0.182903</td>
+<td style="text-align: center;">6.61500</td>
+<td style="text-align: center;">0.378322</td>
+<td style="text-align: center;">10.66376</td>
+<td style="text-align: center;">0.012517</td>
 </tr>
 </tbody>
 </table>
@@ -5135,10 +5125,10 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] PhenotypeSpace_0.1.0 ggalign_0.0.4        ggplot2_3.5.1       
- [4] viridis_0.6.5        viridisLite_0.4.2    kableExtra_1.4.0    
- [7] warbleR_1.1.34       NatureSounds_1.0.5   knitr_1.50          
-[10] seewave_2.2.3        tuneR_1.4.7         
+ [1] Rraven_1.0.14        PhenotypeSpace_0.1.0 ggalign_0.0.4       
+ [4] ggplot2_3.5.1        viridis_0.6.5        viridisLite_0.4.2   
+ [7] kableExtra_1.4.0     warbleR_1.1.34       NatureSounds_1.0.5  
+[10] knitr_1.50           seewave_2.2.3        tuneR_1.4.7         
 
 loaded via a namespace (and not attached):
  [1] DBI_1.2.3              bitops_1.0-9           deldir_2.0-4          
@@ -5146,7 +5136,7 @@ loaded via a namespace (and not attached):
  [7] testthat_3.2.3         rlang_1.1.5            magrittr_2.0.3        
 [10] e1071_1.7-16           compiler_4.3.2         spatstat.geom_3.3-3   
 [13] mgcv_1.8-39            systemfonts_1.1.0      vctrs_0.6.5           
-[16] soundgen_2.6.2         Sim.DiffProc_4.9       stringr_1.5.1         
+[16] Sim.DiffProc_4.9       soundgen_2.6.2         stringr_1.5.1         
 [19] pkgconfig_2.0.3        fastmap_1.2.0          labeling_0.4.3        
 [22] rmarkdown_2.28         xfun_0.51              jsonlite_2.0.0        
 [25] goftest_1.2-3          spatstat.utils_3.1-0   Deriv_4.1.6           

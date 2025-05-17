@@ -17,6 +17,8 @@ library(viridis)
 library(ggplot2)
 library(ggalign)
 library(PhenotypeSpace)
+library(Rraven)
+
 ```
 
 
@@ -732,31 +734,86 @@ kable_styling(kbl, bootstrap_options = c("striped", "hover", "condensed", "respo
 
  
 
-### Calculates features at higher levels of organization
+### Features at higher levels of organization
 
-Vocalizations can be organized above the basic signal units like in long repertoire songs or multi-syllable calls. We can calculate average or extreme values of acoustic features of the sub-units for these higher levels of organization using the function `song_analysis()`:
+Vocalizations can be organized above the basic signal units like in long repertoire songs or multi-syllable calls. For instance, the song of the scale-throated hermit (*Phaethornis eurynome*) its composed of two elements:
 
+```{r, eval= TRUE, echo=FALSE, warning=FALSE, message=FALSE}
+
+## import Phaethornis-eurynome data
+# annotations
+
+pha_eur_anns <- imp_raven(
+  files = "Phaethornis-eurynome-15607.Table.1.selections.txt",
+  path = "./examples",
+  warbler.format = TRUE,
+  all.data = TRUE
+)
+
+# acoustic data
+pha_eur_wav <- read_sound_file("Phaethornis-eurynome-15607.wav", path = "./examples", from = 4.1, to = 6.4)
+
+spectro(pha_eur_wav, scale = FALSE, flim = c(1, 13), collevels = seq(-120, 0, 1), wl = 200, ovlp = 0, palette = mako, grid = FALSE)
+
+sub_anns <- pha_eur_anns[5:10, ]
+
+sub_anns$start <- sub_anns$start - 4.1
+sub_anns$end <- sub_anns$end - 4.1
+
+song_anns <- song_analysis(sub_anns, song_colm = "song")
+
+sub_anns$start <- sub_anns$start + 0.03
+sub_anns$end <- sub_anns$end - 0.03
+
+
+for (i in seq_len(nrow(sub_anns))) {
+      lines(x = (sub_anns[i, c("start", "end")]), y = rep(2, 2), col = "#CF4446FF", lwd = 10, lend = 2)
+text(x = (sub_anns[i, "start"] + sub_anns[i, "end"]) / 2, y = 2.2, labels = sub_anns[i, "elm"], col = "black", cex = 1)
+      }
+
+for (i in seq_len(nrow(song_anns))) {
+      lines(x = (song_anns[i, c("start", "end")]), y = rep(12, 2), col = "#F7D03CFF", lwd = 10, lend = 2)
+  text(x = (song_anns[i, "start"] + song_anns[i, "end"]) / 2, y = 12, labels = paste("song", song_anns[i, "song"] - 2), col = "black", cex = 1)
+
+    }
+
+# pha_eur_est <- selection_table(pha_eur_anns,
+#                                extended = TRUE,
+#                                path = "./examples",
+#                                by.song = "song")
+# 
+# saveRDS(file = "./examples/pha_eur_est.RDS", object = pha_eur_est)
+
+```
+
+
+In cases like this we often want to describe the structure at the song level, rather than at the element level. We can do this using the function `song_analysis()`. By the default the function computes several metrics characterizing the structure of this higher levels of organization: 
 ```{r, eval = FALSE}
 
-# add a 'song' column
-lbh_selec_table$song <- rep(1:4, each = 3)[1:11]
+# read extended selection table
+sth_est <- readRDS(file = "./examples/pha_eur_est.RDS")
 
 # measure default features
 song_analysis(
-  X = lbh_selec_table,
+  X = sth_est,
   song_colm = "song",
   parallel = 1,
   pb = TRUE
 )
 ```
 
-```{r, eval= TRUE, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, eval= TRUE, echo=FALSE, warning=FALSE, message=FALSE, fig.height= 2}
 
-# add a 'song' column
-lbh_selec_table$song <- rep(1:4, each = 3)[1:11]
+# read  the first 8 rows of the extended selection table
+sth_est <- readRDS(file = "./examples/pha_eur_est.RDS")[1:8, ]
 
 # measure default features
-W <- song_analysis(X = lbh_selec_table, song_colm = "song", parallel = 1, pb = TRUE)
+W <- song_analysis(
+  X = sth_est,
+  song_colm = "song",
+  parallel = 1,
+  pb = TRUE
+)
 
 kbl <- kable(W, align = "c", row.names = F,  format = "html")
 
@@ -764,14 +821,14 @@ kable_styling(kbl, bootstrap_options = c("striped", "hover", "condensed", "respo
 
 ```
 
-This can also be done on features extracted from other functions:
+We can also compute average or extreme values of acoustic features. This can be done on element-level features extracted with other functions:
 
 ```{r eval = FALSE}
 
 # measure acoustic features
-sp <- spectro_analysis(lbh_selec_table[1:8, ], bp = c(1, 11), 300, fast = TRUE)
+sp <- spectro_analysis(sth_est, bp = c(1, 11), 300, fast = TRUE)
 
-sp <- merge(sp, lbh_selec_table[1:8, ], by = c("sound.files", "selec"))
+sp <- merge(sp, sth_est, by = c("sound.files", "selec"))
 
 # caculate song-level features for all numeric features
 song_analysis(
@@ -781,20 +838,15 @@ song_analysis(
   pb = TRUE
 )
 
-
 ```
 
 ```{r, eval= TRUE, echo=FALSE, warning=FALSE, message=FALSE}
 
 warbleR_options(wav.path = "./examples")
 
-# add a 'song' column
-lbh_selec_table$song <- rep(1:4, each = 3)[1:11]
+sp <- spectro_analysis(sth_est, bp = c(1, 11), 300, fast = TRUE)
 
-# measure acoustic features
-sp <- spectro_analysis(lbh_selec_table[1:8, ], bp = c(1, 11), 300, fast = TRUE)
-
-sp <- merge(sp, lbh_selec_table[1:8, ], by = c("sound.files", "selec"))
+sp <- merge(sp, sth_est, by = c("sound.files", "selec"))
 
 # caculate song-level features for all numeric features
 W <- song_analysis(X = sp, song_colm = "song", parallel = 1, pb = TRUE)
@@ -811,7 +863,7 @@ box_css = "border: 1px solid #ddd; padding: 5px; ", extra_css = NULL)
 
  
 
-Calculate song-level features selecting features with 'mean_colm':
+We can also compute song-level features selecting features with 'mean_colm':
 
 ```{r, eval = FALSE}
 
@@ -843,7 +895,7 @@ box_css = "border: 1px solid #ddd; padding: 5px; ", extra_css = NULL)
 
  
 
-Calculate song-level features for selecting features with 'mean_colm', 'max_colm' and 'min_colm' and weighted by duration:
+.. and compute song-level features for selecting features with 'mean_colm', 'max_colm' and 'min_colm' and weighted by duration:
 
 ```{r, eval = FALSE}
 
