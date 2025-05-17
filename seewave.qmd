@@ -5,7 +5,7 @@ title: Seewave
  
 
 ::: {.alert .alert-info}
-## **Objetives** {.unnumbered .unlisted}
+## **Objectives** {.unnumbered .unlisted}
 
 -   Understand the most common metrics of acoustic structure
 

@@ -5,7 +5,7 @@ title: <font size="7"><b>Quality checks for recordings and annotations</b></font
  
 
 ::: {.alert .alert-info}
-## **Objetive** {.unnumbered .unlisted}
+## **Objective** {.unnumbered .unlisted}
 
 -   Provide tools for double-checking the quality of the acoustic data and derived analyses along the acoustic analysis workflow
 :::

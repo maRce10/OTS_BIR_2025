@@ -5,7 +5,7 @@ title: <font size="7"><b>Import annotations into R</b></font>
  
 
 ::: {.alert .alert-info}
-## **Objetives** {.unnumbered .unlisted}
+## **Objectives** {.unnumbered .unlisted}
 
 -   Learn various methods to import and export annotations in R
 

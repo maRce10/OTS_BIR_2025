@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-05-06">
+<meta name="dcterms.date" content="2025-05-17">
 
 <title>Bioacoustic analysis in R 2025 - Measures of acoustic structure</title>
 <style>
@@ -241,13 +241,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Contents</h2>
    
   <ul class="collapse">
-  <li><a href="#example-data" id="toc-example-data" class="nav-link active" data-scroll-target="#example-data"><span class="header-section-number">1</span> Example data</a></li>
-  <li><a href="#spectrographic-parameters" id="toc-spectrographic-parameters" class="nav-link" data-scroll-target="#spectrographic-parameters"><span class="header-section-number">2</span> Spectrographic parameters</a></li>
-  <li><a href="#statistical-descriptors-of-cepstral-coefficients" id="toc-statistical-descriptors-of-cepstral-coefficients" class="nav-link" data-scroll-target="#statistical-descriptors-of-cepstral-coefficients"><span class="header-section-number">3</span> Statistical descriptors of cepstral coefficients</a></li>
-  <li><a href="#spectrographic-cross-correlation" id="toc-spectrographic-cross-correlation" class="nav-link" data-scroll-target="#spectrographic-cross-correlation"><span class="header-section-number">4</span> (Spectrographic) cross correlation</a></li>
-  <li><a href="#dynamic-time-warping" id="toc-dynamic-time-warping" class="nav-link" data-scroll-target="#dynamic-time-warping"><span class="header-section-number">5</span> Dynamic time warping</a></li>
-  <li><a href="#additional-measures" id="toc-additional-measures" class="nav-link" data-scroll-target="#additional-measures"><span class="header-section-number">6</span> Additional measures</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">7</span> References</a></li>
+  <li><a href="#example-data" id="toc-example-data" class="nav-link active" data-scroll-target="#example-data">Example data</a></li>
+  <li><a href="#spectrographic-features" id="toc-spectrographic-features" class="nav-link" data-scroll-target="#spectrographic-features"><span class="header-section-number">1</span> Spectrographic features</a></li>
+  <li><a href="#statistical-descriptors-of-cepstral-coefficients" id="toc-statistical-descriptors-of-cepstral-coefficients" class="nav-link" data-scroll-target="#statistical-descriptors-of-cepstral-coefficients"><span class="header-section-number">2</span> Statistical descriptors of cepstral coefficients</a></li>
+  <li><a href="#spectrographic-cross-correlation" id="toc-spectrographic-cross-correlation" class="nav-link" data-scroll-target="#spectrographic-cross-correlation"><span class="header-section-number">3</span> (Spectrographic) cross correlation</a></li>
+  <li><a href="#dynamic-time-warping" id="toc-dynamic-time-warping" class="nav-link" data-scroll-target="#dynamic-time-warping"><span class="header-section-number">4</span> Dynamic time warping</a></li>
+  <li><a href="#additional-measures" id="toc-additional-measures" class="nav-link" data-scroll-target="#additional-measures"><span class="header-section-number">5</span> Additional measures</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">6</span> References</a></li>
   </ul>
 </nav>
 </nav>
@@ -271,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 6, 2025</p>
+      <p class="date">May 17, 2025</p>
     </div>
   </div>
   
@@ -283,8 +283,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="objetives" class="level2 unnumbered unlisted alert alert-info">
-<h2 class="unnumbered unlisted anchored" data-anchor-id="objetives"><strong>Objetives</strong></h2>
+<section id="objectives" class="level2 unnumbered unlisted alert alert-info">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="objectives"><strong>Objectives</strong></h2>
 <ul>
 <li><p>Learn the different methods available to quantify acoustic structure</p></li>
 <li><p>Understand their pros and cons</p></li>
@@ -292,10 +292,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 <p>&nbsp;</p>
-<p>Acoustic signals are multidimensional traits; they vary complexly in time, frequency, amplitude and combinations of these dimensions. Generally, in biology we want to measure aspects of acoustic signals that vary in response to the factors predicted by our hypotheses. In some cases we even lack predictions for specific acoustic parameters and we need to evaluate the relative similarity between the variants of a signal in a population. These analyses require a diversity of tools for quantifying the multiple dimensions in which we can decompose the signals.</p>
+<p>Acoustic signals are multidimensional traits; they vary complexly in time, frequency, amplitude and combinations of these dimensions. Generally, in biology we want to measure aspects of acoustic signals that vary in response to the factors predicted by our hypotheses. In some cases we even lack predictions for specific acoustic features and we need to evaluate the relative similarity between the variants of a signal in a population. These analyses require a diversity of tools for quantifying the multiple dimensions in which we can decompose the signals.</p>
 <p>The <strong>warbleR</strong> package is designed to quantify the acoustic structure of a population of signals using 4 main methods of analysis. 2 of them are absolute measures of the structure:</p>
 <ul>
-<li>Spectrographic parameters</li>
+<li>Spectrographic features</li>
 <li>Statistical descriptors of cepstral coefficients</li>
 </ul>
 <p>The other 2 provide a relative similarity value between signals:</p>
@@ -303,8 +303,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Spectrographic cross-correlation</li>
 <li>Dynamic time warping</li>
 </ul>
-<section id="example-data" class="level2 alert alert-warning" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="example-data"><span class="header-section-number">1</span> Example data</h2>
+<section id="example-data" class="level2 unnumbered alert alert-warning">
+<h2 class="unnumbered anchored" data-anchor-id="example-data">Example data</h2>
 <p>We will use the example data <code>lbh_selec_table</code> that comes with the package. This data frame contains the selection table of 11 long-billed hermit (<em>Phaethornis longirostris</em>) songs. The selection table is a data frame with the following columns:</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -315,16 +315,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggalign)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(PhenotypeSpace)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">warbleR_options</span>(<span class="at">wav.path =</span> <span class="st">"./examples/"</span>, <span class="at">flim =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>), <span class="at">wl =</span> <span class="dv">200</span>, <span class="at">ovlp =</span> <span class="dv">90</span>, <span class="at">pb =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(lbh_selec_table)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>lbh_selec_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">warbleR_options</span>(</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">wav.path =</span> <span class="st">"./examples/"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">flim =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">wl =</span> <span class="dv">200</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">ovlp =</span> <span class="dv">90</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">pb =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(lbh_selec_table)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>lbh_selec_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:808px; ">
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
@@ -446,7 +451,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-</div>
 <p>This is a catalog (made with the <code>catalog()</code> function) with the spectrograms of all sounds referenced in the selection table (<em>the function saves the image file(s) in the folder in which the sound files are found</em>):</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -492,13 +496,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>It is clear that each sound file contains a different variant of the song. We will use these data to illustrate the different methods of acoustic structure analysis available in <strong>warbleR</strong>.</p>
 </section>
-<section id="spectrographic-parameters" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="spectrographic-parameters"><span class="header-section-number">2</span> Spectrographic parameters</h2>
-<p>The <code>spectro_analysis()</code> function measures the following spectrographic parameters related to amplitude distributions in time and frequency, descriptors of the fundamental and dominant frequency contours and descriptors of harmonic content:</p>
+<section id="spectrographic-features" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="spectrographic-features"><span class="header-section-number">1</span> Spectrographic features</h2>
+<p>The <code>spectro_analysis()</code> function measures the following spectrographic features related to amplitude distributions in time and frequency, descriptors of the fundamental and dominant frequency contours and descriptors of harmonic content:</p>
 <p>&nbsp;</p>
 <div class="alert alert-success">
-<section id="time-and-frequency-measured-on-the-spectrogram" class="level4" data-number="2.0.1">
-<h4 data-number="2.0.1" class="anchored" data-anchor-id="time-and-frequency-measured-on-the-spectrogram"><span class="header-section-number">2.0.1</span> Time and frequency (measured on the spectrogram)</h4>
+<section id="time-and-frequency-measured-on-the-spectrogram" class="level4" data-number="1.0.1">
+<h4 data-number="1.0.1" class="anchored" data-anchor-id="time-and-frequency-measured-on-the-spectrogram"><span class="header-section-number">1.0.1</span> Time and frequency (measured on the spectrogram)</h4>
 <ul>
 <li><p>duration: signal length (in s)</p></li>
 <li><p>meanfreq: medium frequency. Weighted average frequency by amplitude (in kHz)</p></li>
@@ -506,8 +510,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>&nbsp;</p>
 </section>
-<section id="energy-distribution-across-frequencies-measured-on-the-power-spetrum" class="level4" data-number="2.0.2">
-<h4 data-number="2.0.2" class="anchored" data-anchor-id="energy-distribution-across-frequencies-measured-on-the-power-spetrum"><span class="header-section-number">2.0.2</span> Energy distribution across frequencies (measured on the power spetrum)</h4>
+<section id="energy-distribution-across-frequencies-measured-on-the-power-spetrum" class="level4" data-number="1.0.2">
+<h4 data-number="1.0.2" class="anchored" data-anchor-id="energy-distribution-across-frequencies-measured-on-the-power-spetrum"><span class="header-section-number">1.0.2</span> Energy distribution across frequencies (measured on the power spetrum)</h4>
 <ul>
 <li><p>freq.median: medium frequency. The frequency at which the signal is divided into two frequency intervals of equal energy (in kHz)</p></li>
 <li><p>freq.Q25: first frequency quartile. The frequency at which the signal is divided into two frequency ranges of 25% and 75% energy respectively (in kHz)</p></li>
@@ -519,8 +523,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>&nbsp;</p>
 </section>
-<section id="energy-distribution-across-time-measured-on-the-amplitude-envelope" class="level4" data-number="2.0.3">
-<h4 data-number="2.0.3" class="anchored" data-anchor-id="energy-distribution-across-time-measured-on-the-amplitude-envelope"><span class="header-section-number">2.0.3</span> Energy distribution across time (measured on the amplitude envelope)</h4>
+<section id="energy-distribution-across-time-measured-on-the-amplitude-envelope" class="level4" data-number="1.0.3">
+<h4 data-number="1.0.3" class="anchored" data-anchor-id="energy-distribution-across-time-measured-on-the-amplitude-envelope"><span class="header-section-number">1.0.3</span> Energy distribution across time (measured on the amplitude envelope)</h4>
 <ul>
 <li><p>time.median: average time. The time at which the signal is divided into two time intervals of equal energy (in s)</p></li>
 <li><p>time.Q25: first quartile. The time in which the signal is divided into two time intervals of 25% and 75% energy respectively (in s)</p></li>
@@ -531,20 +535,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>time.ent: temporary entropy. Energy distribution in the time envelope. Pure tone ~ 0; loud ~ 1</p></li>
 <li><p>entropy: Product of the spectral and temporal entropy: <code>sp.ent * time.ent</code></p></li>
 <li><p>sfm: spectral flatness. Similar to sp.ent (pure tone ~ 0; loud ~ 1)</p></li>
+<li><p>peakt: peak time. Time at which the maximum amplitude is found in the amplitude vector (in s)</p></li>
 </ul>
-<p>&nbsp;</p>
 </section>
-<section id="fundamental-frequency-contour-descriptors-measured-on-the-spectrogram" class="level4" data-number="2.0.4">
-<h4 data-number="2.0.4" class="anchored" data-anchor-id="fundamental-frequency-contour-descriptors-measured-on-the-spectrogram"><span class="header-section-number">2.0.4</span> Fundamental frequency contour descriptors (measured on the spectrogram)</h4>
-<ul>
-<li><p>meanfun: average of the fundamental frequency measured through the signal</p></li>
-<li><p>minfun: minimum fundamental frequency measured through the signal</p></li>
-<li><p>maxfun: maximum fundamental frequency measured through the signal</p></li>
-</ul>
-<p>&nbsp;</p>
-</section>
-<section id="dominant-frequency-contour-descriptors-measured-on-the-spectrogram" class="level4" data-number="2.0.5">
-<h4 data-number="2.0.5" class="anchored" data-anchor-id="dominant-frequency-contour-descriptors-measured-on-the-spectrogram"><span class="header-section-number">2.0.5</span> Dominant frequency contour descriptors (measured on the spectrogram)</h4>
+<section id="dominant-frequency-contour-descriptors-measured-on-the-spectrogram" class="level4" data-number="1.0.4">
+<h4 data-number="1.0.4" class="anchored" data-anchor-id="dominant-frequency-contour-descriptors-measured-on-the-spectrogram"><span class="header-section-number">1.0.4</span> Dominant frequency contour descriptors (measured on the spectrogram)</h4>
 <ul>
 <li><p>meandom: average of the dominant frequency measured through the signal</p></li>
 <li><p>mindom: minimum dominant frequency measured through the signal</p></li>
@@ -557,14 +552,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>&nbsp;</p>
 </section>
-<section id="harmonic-content-descriptors-measured-on-the-spectrogram" class="level4" data-number="2.0.6">
-<h4 data-number="2.0.6" class="anchored" data-anchor-id="harmonic-content-descriptors-measured-on-the-spectrogram"><span class="header-section-number">2.0.6</span> Harmonic content descriptors (measured on the spectrogram)</h4>
+<section id="optional-features-if-harmonicity-true" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="optional-features-if-harmonicity-true"><span class="header-section-number">1.1</span> Optional features (if <code>harmonicity = TRUE</code>)</h3>
+<section id="fundamental-frequency-contour-descriptors-measured-on-the-spectrogram" class="level4" data-number="1.1.1">
+<h4 data-number="1.1.1" class="anchored" data-anchor-id="fundamental-frequency-contour-descriptors-measured-on-the-spectrogram"><span class="header-section-number">1.1.1</span> Fundamental frequency contour descriptors (measured on the spectrogram)</h4>
+<ul>
+<li><p>meanfun: average of the fundamental frequency measured through the signal</p></li>
+<li><p>minfun: minimum fundamental frequency measured through the signal</p></li>
+<li><p>maxfun: maximum fundamental frequency measured through the signal</p></li>
+</ul>
+</section>
+<section id="harmonic-content-descriptors-measured-on-the-spectrogram" class="level4" data-number="1.1.2">
+<h4 data-number="1.1.2" class="anchored" data-anchor-id="harmonic-content-descriptors-measured-on-the-spectrogram"><span class="header-section-number">1.1.2</span> Harmonic content descriptors (measured on the spectrogram)</h4>
 <ul>
 <li><p>hn_freq: average frequency of the upper ‘n’ harmonics (kHz) The number of harmonics is defined with the argument ‘nharmonics’</p></li>
 <li><p>hn_width: average bandwidth of the upper ‘n’ harmonics (kHz) (see analysis). The number of harmonics is defined with the argument ‘nharmonics’</p></li>
 <li><p>harmonics: the amount of energy in higher harmonics. The number of harmonics is defined with the argument ‘nharmonics’</p></li>
 <li><p>HNR: relationship between harmonics and noise (dB). A measure of harmonic content</p></li>
 </ul>
+</section>
 </section>
 </div>
 <p>&nbsp;</p>
@@ -582,7 +588,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:808px; ">
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
@@ -968,7 +973,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-</div>
 <p>We can reduce the dimensionality using Principal component analysis (PCA):</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -984,7 +988,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:808px; ">
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
@@ -1070,7 +1073,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-</div>
 <p>The acoustic space described by this data can be easily visualized with a scatterplot:</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -1101,17 +1103,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="alert alert-info">
 <p><font size="5">Exercise</font></p>
 <ul>
-<li><p>The parameters related to harmonic content were not calculated. How can we do that?</p></li>
+<li><p>The features related to harmonic content were not calculated. How can we do that?</p></li>
 <li><p>How does measuring harmonic content affect performance?</p></li>
 <li><p>What does the argument ‘threshold’ do?</p></li>
 </ul>
 </div>
 <p>&nbsp;</p>
 </section>
-<section id="statistical-descriptors-of-cepstral-coefficients" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="statistical-descriptors-of-cepstral-coefficients"><span class="header-section-number">3</span> Statistical descriptors of cepstral coefficients</h2>
+<section id="statistical-descriptors-of-cepstral-coefficients" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="statistical-descriptors-of-cepstral-coefficients"><span class="header-section-number">2</span> Statistical descriptors of cepstral coefficients</h2>
 <p>These coefficients were designed to decompose the sounds in a similar way than the human auditory system in order to facilitate speech recognition. The central idea is to compress the acoustic data maintaining only relevant information for the detection of phonetic differences. The principle refers to human hearing using the Mel logarithmic scale whose definition is based on how the human ear perceives frequency and loudness (Sueur 2018). Cepstral coefficients are literally defined as “the result of a cosine transformation of the real logarithm of short-term energy spectra expressed on a Mel frequency scale”.</p>
-<p>The descriptive statistics that are extracted from the cepstral coefficients are: minimum, maximum, average, median, asymmetry, kurtosis and variance. It also returns the mean and variance for the first and second derivatives of the coefficients. These parameters are commonly used in the processing and detection of acoustic signals (e.g.&nbsp;Salamon et al 2014). They have been widely used for human voice analysis and its use has extended to mammalian bioacoustics, although they also appear to be useful for quantifying the structure of acoustic signals in other groups.</p>
+<p>The descriptive statistics that are extracted from the cepstral coefficients are: minimum, maximum, average, median, asymmetry, kurtosis and variance. It also returns the mean and variance for the first and second derivatives of the coefficients. These features are commonly used in the processing and detection of acoustic signals (e.g.&nbsp;Salamon et al 2014). They have been widely used for human voice analysis and its use has extended to mammalian bioacoustics, although they also appear to be useful for quantifying the structure of acoustic signals in other groups.</p>
 <p>In <strong>warbleR</strong> we can calculate statistical descriptors of cepstral coefficients with the <code>mfcc_stats()</code> function:</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -1123,7 +1125,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:808px; ">
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
@@ -3333,8 +3334,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-</div>
-<p>Similarly to the spectrographic parameters, we can reduce the dimensionality of the cepstral coefficients using PCA:</p>
+<p>Similarly to the spectrographic features, we can reduce the dimensionality of the cepstral coefficients using PCA:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
@@ -3349,7 +3349,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:808px; ">
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
@@ -3435,7 +3434,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-</div>
 <p>Again, this simplified acoustic space can be easily visualized with a scatterplot:</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -3464,8 +3462,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="spectrographic-cross-correlation" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="spectrographic-cross-correlation"><span class="header-section-number">4</span> (Spectrographic) cross correlation</h2>
+<section id="spectrographic-cross-correlation" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="spectrographic-cross-correlation"><span class="header-section-number">3</span> (Spectrographic) cross correlation</h2>
 <p>This analysis correlates the amplitude values in the frequency and time space pairwise for all signals in a selection table. The correlation represents a measure of spectrographic similarity of the signals:</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -3477,7 +3475,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:808px; ">
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
@@ -3659,7 +3656,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-</div>
 <p>The similarity matrix returned by the function can be visualized as a heatmap:</p>
 <div class="cell">
 <details open="" class="code-fold">
@@ -3674,9 +3670,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>→ heatmap built with `geom_tile()`</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -3689,22 +3682,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert into distances</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>xcor_dist <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> xcor</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># multidimensional scaling</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>mds <span class="ot">&lt;-</span> <span class="fu">cmdscale</span>(xcor_dist, <span class="at">k =</span> <span class="dv">2</span>)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># extract first 2 vectors</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>xcor_mds <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(lbh_selec_table[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">mds =</span> mds[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># print</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>xcor_mds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert into distances</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>xcor_dist <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> xcor</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># multidimensional scaling</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>mds <span class="ot">&lt;-</span> <span class="fu">cmdscale</span>(xcor_dist, <span class="at">k =</span> <span class="dv">2</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># extract first 2 vectors</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>xcor_mds <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(lbh_selec_table[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">mds =</span> mds[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># print</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>xcor_mds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:808px; ">
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
@@ -3790,25 +3782,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-</div>
 <p>Note that the correlations are converted into distance by subtracting them from 1. This simplified acoustic space can also be easily visualized with a scatterplot:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(xcor_mds,</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> mds<span class="fl">.1</span>,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> mds<span class="fl">.2</span>,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> sound.files,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">shape =</span>  sound.files</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>       )) <span class="sc">+</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">option =</span> <span class="st">"G"</span>,</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">end =</span> <span class="fl">0.9</span>,</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                        <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"MDS1"</span>, <span class="at">y =</span> <span class="st">"MDS2"</span>) <span class="sc">+</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(xcor_mds,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> mds<span class="fl">.1</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> mds<span class="fl">.2</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> sound.files,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">shape =</span>  sound.files</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>       )) <span class="sc">+</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">option =</span> <span class="st">"G"</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">end =</span> <span class="fl">0.9</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                        <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"MDS1"</span>, <span class="at">y =</span> <span class="st">"MDS2"</span>) <span class="sc">+</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -3826,20 +3817,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </section>
-<section id="dynamic-time-warping" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="dynamic-time-warping"><span class="header-section-number">5</span> Dynamic time warping</h2>
+<section id="dynamic-time-warping" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="dynamic-time-warping"><span class="header-section-number">4</span> Dynamic time warping</h2>
 <p>In time series analysis, time dynamics distortion (DTW) is one of the algorithms to measure the similarity between two time sequences, which may vary in their ‘speed’. The sequences are nonlinearly ‘warped’ in the temporal dimension to determine a measure of their similarity independent of certain nonlinear variations in the temporal dimension.</p>
-<p><img src="images/dtw.jpg" alt="viewSpec" width="640"></p>
+<p><img src="images/DTW.png" alt="viewSpec" width="100%"></p>
 <p>The <code>freq_DTW()</code> function extracts the dominant frequency values as a time series and then calculates the acoustic dissimilarity using dynamic time warping. The function uses the <code>approx()</code> function to interpolate values between the dominant frequency measurements:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dtw_dist <span class="ot">&lt;-</span> <span class="fu">freq_DTW</span>(lbh_selec_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dtw_dist <span class="ot">&lt;-</span> <span class="fu">freq_DTW</span>(lbh_selec_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:808px; ">
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
@@ -4021,35 +4011,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-</div>
 <p>The function returns a matrix with paired dissimilarity values.</p>
 <p>If <code>img = TRUE</code>, the function also produces image files with the spectrograms of the signals listed in the input data frame that shows the location of the dominant frequencies.</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">freq_DTW</span>(lbh_selec_table, <span class="at">img =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">line =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">freq_DTW</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  lbh_selec_table,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">img =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"red"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">21</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">line =</span> <span class="cn">FALSE</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>&nbsp;</p>
-<p><img src="images/Phae.long1.wav-1-dfDTW.jpeg" alt="dfdtw" width="480"></p>
+<p><img src="images/Phae.long1.wav-1-dfDTW.jpeg" alt="dfdtw" width="80%"></p>
 <p>Frequency contours can be calculated independently using the <code>freq_ts()</code> function. These contours can be adjusted manually with the <code>tailor_sels()</code> function.</p>
 <p>The DTW distance matrix returned by the function can also be visualized as a heatmap:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># present xcor as a heatmap using ggplot2</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggheatmap</span>(dtw_dist) <span class="sc">+</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> <span class="st">"G"</span>,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>,</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">begin =</span> <span class="fl">0.1</span>,</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">end =</span> <span class="fl">0.8</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># present xcor as a heatmap using ggplot2</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggheatmap</span>(dtw_dist) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> <span class="st">"G"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">begin =</span> <span class="fl">0.1</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">end =</span> <span class="fl">0.8</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>→ heatmap built with `geom_tile()`</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -4062,19 +4054,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># multidimensional scaling</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>mds <span class="ot">&lt;-</span> <span class="fu">cmdscale</span>(dtw_dist, <span class="at">k =</span> <span class="dv">2</span>)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># extract first 2 vectors</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>dtw_mds <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(lbh_selec_table[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">mds =</span> mds[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>dtw_mds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># multidimensional scaling</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>mds <span class="ot">&lt;-</span> <span class="fu">cmdscale</span>(dtw_dist, <span class="at">k =</span> <span class="dv">2</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># extract first 2 vectors</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>dtw_mds <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(lbh_selec_table[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">mds =</span> mds[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>dtw_mds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:808px; ">
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
@@ -4160,25 +4151,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-</div>
 <p>And again, this simplified acoustic space can be easily visualized with a scatterplot:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dtw_mds,</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> mds<span class="fl">.1</span>,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> mds<span class="fl">.2</span>,</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> sound.files,</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">shape =</span>  sound.files</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>       )) <span class="sc">+</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">option =</span> <span class="st">"G"</span>,</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">end =</span> <span class="fl">0.9</span>,</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>                        <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"MDS1"</span>, <span class="at">y =</span> <span class="st">"MDS2"</span>) <span class="sc">+</span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dtw_mds,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> mds<span class="fl">.1</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> mds<span class="fl">.2</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> sound.files,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">shape =</span>  sound.files</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>       )) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">option =</span> <span class="st">"G"</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">end =</span> <span class="fl">0.9</span>,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>                        <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"MDS1"</span>, <span class="at">y =</span> <span class="st">"MDS2"</span>) <span class="sc">+</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -4198,10 +4188,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="at">url =</span> <span class="st">"https://ndownloader.figshare.com/files/21167052"</span>, </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a> <span class="at">destfile =</span> <span class="st">"./examples/iniquiry_calls.RDS"</span>)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>iniquiry_calls <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./examples/iniquiry_calls.RDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="at">url =</span> <span class="st">"https://ndownloader.figshare.com/files/21167052"</span>, </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a> <span class="at">destfile =</span> <span class="st">"./examples/iniquiry_calls.RDS"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>iniquiry_calls <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./examples/iniquiry_calls.RDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ul>
@@ -4210,7 +4200,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>bi_mat <span class="ot">&lt;-</span> <span class="fu">binary_triangular_matrix</span>(iniquiry_calls<span class="sc">$</span>indiv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>bi_mat <span class="ot">&lt;-</span> <span class="fu">binary_triangular_matrix</span>(iniquiry_calls<span class="sc">$</span>indiv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Compare dissimilarity from cross-correlation (1 - correlation matrix) with individual call membership matrix using Mantel test (you can use <code>vegan::mantel()</code>)</p>
@@ -4222,22 +4212,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>&nbsp;</p>
 </section>
-<section id="additional-measures" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="additional-measures"><span class="header-section-number">6</span> Additional measures</h2>
-<section id="signal-to-noise-ratio" class="level3" data-number="6.1">
-<h3 data-number="6.1" class="anchored" data-anchor-id="signal-to-noise-ratio"><span class="header-section-number">6.1</span> Signal-to-noise ratio</h3>
+<section id="additional-measures" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="additional-measures"><span class="header-section-number">5</span> Additional measures</h2>
+<section id="signal-to-noise-ratio" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="signal-to-noise-ratio"><span class="header-section-number">5.1</span> Signal-to-noise ratio</h3>
 <p><code>sig2noise()</code> measures this parameter. The duration of the margin in which to measure the background noise must be provided (<code>mar</code> argument):</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>snr <span class="ot">&lt;-</span> <span class="fu">sig2noise</span>(<span class="at">X =</span> lbh_selec_table, <span class="at">mar =</span> <span class="fl">0.06</span>)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>snr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>snr <span class="ot">&lt;-</span> <span class="fu">sig2noise</span>(<span class="at">X =</span> lbh_selec_table, <span class="at">mar =</span> <span class="fl">0.06</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>snr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
 <thead>
@@ -4370,23 +4359,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-</div>
 <p>&nbsp;</p>
 </section>
-<section id="inflections" class="level3" data-number="6.2">
-<h3 data-number="6.2" class="anchored" data-anchor-id="inflections"><span class="header-section-number">6.2</span> Inflections</h3>
+<section id="inflections" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="inflections"><span class="header-section-number">5.2</span> Inflections</h3>
 <p>Inflections in this case are defined as changes in the slope of a frequency contour. They can be used as a measure of frequency modulation. They can be calculated using the <code>inflections()</code> function on previously measured frequency contours:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>cntrs <span class="ot">&lt;-</span> <span class="fu">freq_ts</span>(<span class="at">X =</span> lbh_selec_table)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>inflcts <span class="ot">&lt;-</span> <span class="fu">inflections</span>(cntrs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>cntrs <span class="ot">&lt;-</span> <span class="fu">freq_ts</span>(<span class="at">X =</span> lbh_selec_table)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>inflcts <span class="ot">&lt;-</span> <span class="fu">inflections</span>(cntrs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
 <thead>
@@ -4459,25 +4446,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-</div>
 <p>&nbsp;</p>
 </section>
-<section id="calculates-parameters-at-higher-levels-of-organization" class="level3" data-number="6.3">
-<h3 data-number="6.3" class="anchored" data-anchor-id="calculates-parameters-at-higher-levels-of-organization"><span class="header-section-number">6.3</span> Calculates parameters at higher levels of organization</h3>
-<p>Vocalizations can be organized above the basic signal units like in long repertoire songs or multi-syllable calls. We can calculate average or extreme values of acoustic parameters of the sub-units for these higher levels of organization using the function <code>song_analysis()</code>:</p>
+<section id="calculates-features-at-higher-levels-of-organization" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="calculates-features-at-higher-levels-of-organization"><span class="header-section-number">5.3</span> Calculates features at higher levels of organization</h3>
+<p>Vocalizations can be organized above the basic signal units like in long repertoire songs or multi-syllable calls. We can calculate average or extreme values of acoustic features of the sub-units for these higher levels of organization using the function <code>song_analysis()</code>:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add a 'song' column</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>lbh_selec_table<span class="sc">$</span>song <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">each =</span> <span class="dv">3</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>]</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># measure default parameters</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">song_analysis</span>(<span class="at">X =</span> lbh_selec_table, <span class="at">song_colm =</span> <span class="st">"song"</span>, <span class="at">parallel =</span> <span class="dv">1</span>, <span class="at">pb =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add a 'song' column</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>lbh_selec_table<span class="sc">$</span>song <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">each =</span> <span class="dv">3</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>]</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># measure default features</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">song_analysis</span>(</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> lbh_selec_table,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">song_colm =</span> <span class="st">"song"</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">parallel =</span> <span class="dv">1</span>,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">pb =</span> <span class="cn">TRUE</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
 <thead>
@@ -4595,23 +4585,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-</div>
-<p>This can also be done on parameters extracted from other functions:</p>
+<p>This can also be done on features extracted from other functions:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># measure acoustic parameters</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">spectro_analysis</span>(lbh_selec_table[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>, ], <span class="at">bp =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">11</span>), <span class="dv">300</span>, <span class="at">fast =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">merge</span>(sp, lbh_selec_table[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>, ], <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"sound.files"</span>, <span class="st">"selec"</span>))</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co"># caculate song-level parameters for all numeric parameters</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">song_analysis</span>(<span class="at">X =</span> sp, <span class="at">song_colm =</span> <span class="st">"song"</span>, <span class="at">parallel =</span> <span class="dv">1</span>, <span class="at">pb =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># measure acoustic features</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">spectro_analysis</span>(lbh_selec_table[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>, ], <span class="at">bp =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">11</span>), <span class="dv">300</span>, <span class="at">fast =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>sp <span class="ot">&lt;-</span> <span class="fu">merge</span>(sp, lbh_selec_table[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>, ], <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"sound.files"</span>, <span class="st">"selec"</span>))</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># caculate song-level features for all numeric features</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="fu">song_analysis</span>(</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> sp,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">song_colm =</span> <span class="st">"song"</span>,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">parallel =</span> <span class="dv">1</span>,</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">pb =</span> <span class="cn">TRUE</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:808px; ">
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
@@ -4835,19 +4828,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-</div>
 <p>&nbsp;</p>
-<p>Calculate song-level parameters selecting parameters with ‘mean_colm’:</p>
+<p>Calculate song-level features selecting features with ‘mean_colm’:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># caculate song-level parameters selecting parameters with mean_colm</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">song_analysis</span>(<span class="at">X =</span> sp, <span class="at">song_colm =</span> <span class="st">"song"</span>,<span class="at">mean_colm =</span> <span class="fu">c</span>(<span class="st">"dfrange"</span>, <span class="st">"duration"</span>), <span class="at">parallel =</span> <span class="dv">1</span>, <span class="at">pb =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># caculate song-level features selecting features with mean_colm</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">song_analysis</span>(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> sp,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">song_colm =</span> <span class="st">"song"</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_colm =</span> <span class="fu">c</span>(<span class="st">"dfrange"</span>, <span class="st">"duration"</span>),</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">parallel =</span> <span class="dv">1</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pb =</span> <span class="cn">TRUE</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:808px; ">
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
@@ -4946,20 +4943,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-</div>
 <p>&nbsp;</p>
-<p>Calculate song-level parameters for selecting parameters with ‘mean_colm’, ‘max_colm’ and ‘min_colm’ and weighted by duration:</p>
+<p>Calculate song-level features for selecting features with ‘mean_colm’, ‘max_colm’ and ‘min_colm’ and weighted by duration:</p>
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">song_analysis</span>(<span class="at">X =</span> sp, <span class="at">weight =</span> <span class="st">"duration"</span>, <span class="at">song_colm =</span> <span class="st">"song"</span>,</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="at">mean_colm =</span>  <span class="fu">c</span>(<span class="st">"dfrange"</span>, <span class="st">"duration"</span>), <span class="at">min_colm =</span>  <span class="st">"mindom"</span>, <span class="at">max_colm =</span> <span class="st">"maxdom"</span>, </span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">parallel =</span> <span class="dv">1</span>, <span class="at">pb =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">song_analysis</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> sp,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">weight =</span> <span class="st">"duration"</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">song_colm =</span> <span class="st">"song"</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_colm =</span>  <span class="fu">c</span>(<span class="st">"dfrange"</span>, <span class="st">"duration"</span>),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_colm =</span>  <span class="st">"mindom"</span>,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_colm =</span> <span class="st">"maxdom"</span>,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">parallel =</span> <span class="dv">1</span>,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">pb =</span> <span class="cn">TRUE</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:808px; ">
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
@@ -5068,7 +5070,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-</div>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <div class="alert alert-info">
@@ -5084,24 +5085,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details open="" class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="at">url =</span> <span class="st">"https://github.com/maRce10/OTS_BIR_2025/raw/master/examples/response_calls.RDS"</span>, </span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a> <span class="at">destfile =</span> <span class="st">"./examples/response_calls.RDS"</span>)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>response_calls <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./examples/response_calls.RDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="at">url =</span> <span class="st">"https://github.com/maRce10/OTS_BIR_2025/raw/master/examples/response_calls.RDS"</span>, </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a> <span class="at">destfile =</span> <span class="st">"./examples/response_calls.RDS"</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>response_calls <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./examples/response_calls.RDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>&nbsp;</p>
 <ul>
-<li><p>Calculate spectrographic parameters (<code>spectro_analysis()</code>) for the Spix’s disc-winged bat response calls.</p></li>
-<li><p>Summarize parameters by call (<code>song_analysis()</code>). To do that you should add the column ‘start’, ‘end’ and ‘call’ to the output of <code>spectro_analysis()</code></p></li>
+<li><p>Calculate spectrographic features (<code>spectro_analysis()</code>) for the Spix’s disc-winged bat response calls.</p></li>
+<li><p>Summarize features by call (<code>song_analysis()</code>). To do that you should add the column ‘start’, ‘end’ and ‘call’ to the output of <code>spectro_analysis()</code></p></li>
 </ul>
 </div>
 <p>&nbsp;</p>
 <hr>
 </section>
 </section>
-<section id="references" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="references"><span class="header-section-number">7</span> References</h2>
+<section id="references" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="references"><span class="header-section-number">6</span> References</h2>
 <ol type="1">
 <li><p>Araya-Salas M, A Hernández-Pinsón N Rojas, G Chaverri. (2020). <a href="https://marce10.github.io/uploads/m-araya-salas-2020.pdf">Ontogeny of an interactive call-and-response system in Spix’s disc-winged bats. Animal Behaviour.</a></p></li>
 <li><p>Araya-Salas M, Smith-Vidaurre G (2017) <a href="https://marce10.github.io/uploads/araya-salas-2017-f.pdf">warbleR: An R package to streamline analysis of animal acoustic signals. Methods Ecol Evol 8:184–191.</a></p></li>
@@ -5111,21 +5112,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><font size="4">Session information</font></p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.5.0 (2025-04-11)
-Platform: x86_64-pc-linux-gnu
-Running under: Ubuntu 22.04.5 LTS
+<pre><code>R version 4.3.2 (2023-10-31)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 22.04.2 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
 
 locale:
  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
- [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=en_US.UTF-8    
- [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=en_US.UTF-8   
- [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-[11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
 time zone: America/Costa_Rica
 tzcode source: system (glibc)
@@ -5134,42 +5135,43 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] PhenotypeSpace_0.1.0 ggalign_1.0.1        ggplot2_3.5.2       
+ [1] PhenotypeSpace_0.1.0 ggalign_0.0.4        ggplot2_3.5.1       
  [4] viridis_0.6.5        viridisLite_0.4.2    kableExtra_1.4.0    
  [7] warbleR_1.1.34       NatureSounds_1.0.5   knitr_1.50          
 [10] seewave_2.2.3        tuneR_1.4.7         
 
 loaded via a namespace (and not attached):
- [1] tidyselect_1.2.1       dplyr_1.1.4            farver_2.1.2          
- [4] bitops_1.0-9           fastmap_1.2.0          RCurl_1.98-1.17       
- [7] spatstat.geom_3.3-6    spatstat.explore_3.4-2 digest_0.6.37         
-[10] lifecycle_1.0.4        Deriv_4.1.6            cluster_2.1.8.1       
-[13] sf_1.0-20              spatstat.data_3.1-6    terra_1.8-42          
-[16] magrittr_2.0.3         compiler_4.5.0         rlang_1.1.6           
-[19] tools_4.5.0            yaml_2.3.10            labeling_0.4.3        
-[22] htmlwidgets_1.5.4      sp_2.2-0               classInt_0.4-11       
-[25] curl_6.2.2             xml2_1.3.8             RColorBrewer_1.1-3    
-[28] abind_1.4-8            KernSmooth_2.23-26     withr_3.0.2           
-[31] grid_4.5.0             polyclip_1.10-7        e1071_1.7-16          
-[34] iterators_1.0.14       scales_1.4.0           MASS_7.3-65           
-[37] spatstat.utils_3.1-3   signal_1.8-1           cli_3.6.5             
-[40] vegan_2.6-10           rmarkdown_2.29         generics_0.1.3        
-[43] rstudioapi_0.17.1      httr_1.4.7             rjson_0.2.23          
-[46] DBI_1.2.3              pbapply_1.7-2          proxy_0.4-27          
-[49] stringr_1.5.1          splines_4.5.0          fftw_1.0-9            
-[52] parallel_4.5.0         Sim.DiffProc_4.9       vctrs_0.6.5           
-[55] Matrix_1.7-3           jsonlite_2.0.0         tensor_1.5            
-[58] systemfonts_1.2.3      foreach_1.5.2          testthat_3.2.3        
-[61] spatstat.univar_3.1-2  shinyBS_0.61.1         units_0.8-7           
-[64] goftest_1.2-3          glue_1.8.0             spatstat.random_3.3-3 
-[67] dtw_1.23-1             codetools_0.2-20       stringi_1.8.7         
-[70] gtable_0.3.6           deldir_2.0-4           raster_3.6-32         
-[73] tibble_3.2.1           soundgen_2.7.2         pillar_1.10.2         
-[76] htmltools_0.5.8.1      brio_1.1.5             R6_2.6.1              
-[79] evaluate_1.0.3         lattice_0.22-7         class_7.3-23          
-[82] Rcpp_1.0.14            permute_0.9-7          svglite_2.1.3         
-[85] gridExtra_2.3          nlme_3.1-168           spatstat.sparse_3.1-0 
-[88] mgcv_1.9-3             xfun_0.52              pkgconfig_2.0.3       </code></pre>
+ [1] DBI_1.2.3              bitops_1.0-9           deldir_2.0-4          
+ [4] pbapply_1.7-2          gridExtra_2.3          permute_0.9-7         
+ [7] testthat_3.2.3         rlang_1.1.5            magrittr_2.0.3        
+[10] e1071_1.7-16           compiler_4.3.2         spatstat.geom_3.3-3   
+[13] mgcv_1.8-39            systemfonts_1.1.0      vctrs_0.6.5           
+[16] soundgen_2.6.2         Sim.DiffProc_4.9       stringr_1.5.1         
+[19] pkgconfig_2.0.3        fastmap_1.2.0          labeling_0.4.3        
+[22] rmarkdown_2.28         xfun_0.51              jsonlite_2.0.0        
+[25] goftest_1.2-3          spatstat.utils_3.1-0   Deriv_4.1.6           
+[28] terra_1.7-78           parallel_4.3.2         cluster_2.1.2         
+[31] R6_2.6.1               stringi_1.8.7          spatstat.data_3.1-2   
+[34] spatstat.univar_3.0-1  brio_1.1.5             Rcpp_1.0.14           
+[37] iterators_1.0.14       tensor_1.5             Matrix_1.6-5          
+[40] splines_4.3.2          tidyselect_1.2.1       rstudioapi_0.16.0     
+[43] abind_1.4-8            yaml_2.3.10            vegan_2.6-8           
+[46] codetools_0.2-18       dtw_1.23-1             spatstat.random_3.3-2 
+[49] spatstat.explore_3.3-2 curl_6.2.2             lattice_0.20-45       
+[52] tibble_3.2.1           withr_3.0.2            evaluate_1.0.3        
+[55] signal_1.8-1           sf_1.0-20              units_0.8-7           
+[58] proxy_0.4-27           polyclip_1.10-7        xml2_1.3.6            
+[61] pillar_1.10.1          KernSmooth_2.23-20     foreach_1.5.2         
+[64] generics_0.1.3         sp_2.1-4               RCurl_1.98-1.17       
+[67] munsell_0.5.1          scales_1.3.0           class_7.3-20          
+[70] glue_1.8.0             tools_4.3.2            data.table_1.14.10    
+[73] grid_4.3.2             shinyBS_0.61.1         colorspace_2.1-1      
+[76] nlme_3.1-155           raster_3.6-30          cli_3.6.4             
+[79] spatstat.sparse_3.1-0  svglite_2.1.3          dplyr_1.1.4           
+[82] gtable_0.3.6           fftw_1.0-9             digest_0.6.37         
+[85] classInt_0.4-11        rjson_0.2.23           htmlwidgets_1.6.4     
+[88] farver_2.1.2           htmltools_0.5.8.1      lifecycle_1.0.4       
+[91] httr_1.4.7             MASS_7.3-55           </code></pre>
 </div>
 </div>
 
@@ -5267,11 +5269,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
           // target, if specified
           link.setAttribute("target", "_blank");
           if (link.getAttribute("rel") === null) {
@@ -5313,11 +5310,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');

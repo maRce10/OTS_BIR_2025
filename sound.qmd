@@ -7,7 +7,7 @@ editor_options:
  
 
 ::: {.alert .alert-info}
-## **Objetives** {.unnumbered .unlisted}
+## **Objectives** {.unnumbered .unlisted}
 
 -   Learn the basic aspects of sound as a physical phenomenom
 

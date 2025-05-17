@@ -14,7 +14,7 @@ format:
 ---
 
 ::: {.alert .alert-info}
-## **Objetive** {.unnumbered .unlisted}
+## **Objective** {.unnumbered .unlisted}
 
 -   Demonstrate how to articulate functions used during the course to obtain, explore and quantify acoustic data
 :::

@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
  
 
 ::: {.alert .alert-info}
-## **Objetive** {.unnumbered .unlisted}
+## **Objective** {.unnumbered .unlisted}
 
 -   Demonstrate how to obtain acoustic data from online repositories
 :::

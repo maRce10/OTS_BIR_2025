@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-05-12">
+<meta name="dcterms.date" content="2025-05-17">
 
 <title>Bioacoustic analysis in R 2025</title>
 <style>
@@ -101,7 +101,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
 <script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
@@ -109,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
-<script src="site_libs/leaflet-binding-2.2.2/leaflet.js"></script>
+<script src="site_libs/leaflet-binding-2.2.1/leaflet.js"></script>
 <link href="site_libs/leaflet-awesomemarkers-2.0.3/leaflet.awesome-markers.css" rel="stylesheet">
 <script src="site_libs/leaflet-awesomemarkers-2.0.3/leaflet.awesome-markers.min.js"></script>
 <link href="site_libs/ionicons-2.0.1/ionicons.min.css" rel="stylesheet">
@@ -281,7 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 12, 2025</p>
+      <p class="date">May 17, 2025</p>
     </div>
   </div>
   
@@ -294,8 +295,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>&nbsp;</p>
-<section id="objetive" class="level2 unnumbered unlisted alert alert-info">
-<h2 class="unnumbered unlisted anchored" data-anchor-id="objetive"><strong>Objetive</strong></h2>
+<section id="objective" class="level2 unnumbered unlisted alert alert-info">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="objective"><strong>Objective</strong></h2>
 <ul>
 <li>Demonstrate how to obtain acoustic data from online repositories</li>
 </ul>
@@ -327,8 +328,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_locations</span>(song_phae_his)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="htmlwidget-60309c2419d423a8c1e7" style="width:100%;height:325px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-60309c2419d423a8c1e7">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addAwesomeMarkers","args":[[-8.751200000000001,-3.6,-3.2653,-12.8659,-11.476,-0.4714,-11.476,-10.53816667,-11.8667,-11.8667,-11.8667,-9.640000000000001,-3.4501],[-68.99379999999999,-73.15000000000001,-72.9295,-71.367,-69.51900000000001,-76.4603,-69.51900000000001,-65.59283333,-71.36669999999999,-71.36669999999999,-71.36669999999999,-55.94,-72.8801],{"icon":"ios-close","markerColor":["#440154FF","#440154FF","#440154FF","#440154FF","#440154FF","#440154FF","#440154FF","#440154FF","#440154FF","#440154FF","#440154FF","#440154FF","#440154FF"],"iconColor":"black","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","prefix":"ion"},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b><a href='https://www.xeno-canto.org/'>metadataC<\/a><\/b><br/><i><\/i><br/> Subspecies: <br/> Country: <br/> Locality: <br/> Voc.type: <br/> Recordist: <b><a href='https://www.xeno-canto.org//download'><br/>listen<\/a>",null,null,null,["Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMiniMap","args":[null,null,"bottomright",150,150,19,19,-5,false,false,false,false,false,false,{"color":"#ff7800","weight":1,"clickable":false},{"color":"#000000","weight":1,"clickable":false,"opacity":0,"fillOpacity":0},{"hideText":"Hide MiniMap","showText":"Show MiniMap"},[]]},{"method":"addEasyButton","args":[{"icon":"fa-globe","title":"Zoom to full view","onClick":"function(btn, map){ map.setZoom(1); }","position":"topleft"}]}],"limits":{"lat":[-12.8659,-0.4714],"lng":[-76.4603,-55.94]}},"evals":["calls.3.args.0.onClick"],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-dfca8ae4d9353484f26c" style="width:100%;height:325px;"></div>
+<script type="application/json" data-for="htmlwidget-dfca8ae4d9353484f26c">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addAwesomeMarkers","args":[[-8.751200000000001,-3.6,-3.2653,-12.8659,-11.476,-0.4714,-11.476,-10.53816667,-11.8667,-11.8667,-11.8667,-9.640000000000001,-3.4501],[-68.99379999999999,-73.15000000000001,-72.9295,-71.367,-69.51900000000001,-76.4603,-69.51900000000001,-65.59283333,-71.36669999999999,-71.36669999999999,-71.36669999999999,-55.94,-72.8801],{"icon":"ios-close","markerColor":["#440154FF","#440154FF","#440154FF","#440154FF","#440154FF","#440154FF","#440154FF","#440154FF","#440154FF","#440154FF","#440154FF","#440154FF","#440154FF"],"iconColor":"black","spin":false,"squareMarker":false,"iconRotate":0,"font":"monospace","prefix":"ion"},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"<b><a href='https://www.xeno-canto.org/'>metadataC<\/a><\/b><br/><i><\/i><br/> Subspecies: <br/> Country: <br/> Locality: <br/> Voc.type: <br/> Recordist: <b><a href='https://www.xeno-canto.org//download'><br/>listen<\/a>",null,null,null,["Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus","Phaethornis_hispidus"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addMiniMap","args":[null,null,"bottomright",150,150,19,19,-5,false,false,false,false,false,false,{"color":"#ff7800","weight":1,"clickable":false},{"color":"#000000","weight":1,"clickable":false,"opacity":0,"fillOpacity":0},{"hideText":"Hide MiniMap","showText":"Show MiniMap"},[]]},{"method":"addEasyButton","args":[{"icon":"fa-globe","title":"Zoom to full view","onClick":"function(btn, map){ map.setZoom(1); }","position":"topleft"}]}],"limits":{"lat":[-12.8659,-0.4714],"lng":[-76.4603,-55.94]}},"evals":["calls.3.args.0.onClick"],"jsHooks":[]}</script>
 </div>
 </div>
 <p>Once you feel fine with the subset of data you can go ahead and download it as follows:</p>
@@ -344,21 +345,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><font size="4">Session information</font></p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.5.0 (2025-04-11)
-Platform: x86_64-pc-linux-gnu
-Running under: Ubuntu 22.04.5 LTS
+<pre><code>R version 4.3.2 (2023-10-31)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 22.04.2 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
 
 locale:
  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
- [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=en_US.UTF-8    
- [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=en_US.UTF-8   
- [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-[11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
 time zone: America/Costa_Rica
 tzcode source: system (glibc)
@@ -367,21 +368,21 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] suwo_0.1.0
+[1] suwo_0.1.0      jsonlite_2.0.0  RCurl_1.98-1.17
 
 loaded via a namespace (and not attached):
- [1] gtable_0.3.6       jsonlite_2.0.0     rjson_0.2.23       dplyr_1.1.4       
- [5] compiler_4.5.0     tidyselect_1.2.1   bitops_1.0-9       leaflet_2.2.2     
- [9] parallel_4.5.0     gridExtra_2.3      jquerylib_0.1.4    scales_1.4.0      
-[13] yaml_2.3.10        fastmap_1.2.0      ggplot2_3.5.2      R6_2.6.1          
-[17] generics_0.1.3     curl_6.2.2         knitr_1.50         htmlwidgets_1.5.4 
-[21] viridis_0.6.5      backports_1.5.0    checkmate_2.3.2    tibble_3.2.1      
-[25] pillar_1.10.2      RColorBrewer_1.1-3 rlang_1.1.6        xfun_0.52         
-[29] viridisLite_0.4.2  cli_3.6.5          magrittr_2.0.3     crosstalk_1.2.1   
-[33] digest_0.6.37      grid_4.5.0         pbapply_1.7-2      rstudioapi_0.17.1 
-[37] lifecycle_1.0.4    vctrs_0.6.5        evaluate_1.0.3     glue_1.8.0        
-[41] farver_2.1.2       RCurl_1.98-1.17    rmarkdown_2.29     httr_1.4.7        
-[45] tools_4.5.0        pkgconfig_2.0.3    htmltools_0.5.8.1 </code></pre>
+ [1] gtable_0.3.6      rjson_0.2.23      dplyr_1.1.4       compiler_4.3.2   
+ [5] tidyselect_1.2.1  bitops_1.0-9      leaflet_2.2.1     parallel_4.3.2   
+ [9] gridExtra_2.3     jquerylib_0.1.4   scales_1.3.0      yaml_2.3.10      
+[13] fastmap_1.2.0     ggplot2_3.5.1     R6_2.6.1          generics_0.1.3   
+[17] curl_6.2.2        knitr_1.50        htmlwidgets_1.6.4 viridis_0.6.5    
+[21] backports_1.5.0   checkmate_2.3.2   tibble_3.2.1      munsell_0.5.1    
+[25] pillar_1.10.1     rlang_1.1.5       xfun_0.51         viridisLite_0.4.2
+[29] cli_3.6.4         magrittr_2.0.3    crosstalk_1.2.1   digest_0.6.37    
+[33] grid_4.3.2        rstudioapi_0.16.0 pbapply_1.7-2     lifecycle_1.0.4  
+[37] vctrs_0.6.5       evaluate_1.0.3    glue_1.8.0        colorspace_2.1-1 
+[41] rmarkdown_2.28    httr_1.4.7        tools_4.3.2       pkgconfig_2.0.3  
+[45] htmltools_0.5.8.1</code></pre>
 </div>
 </div>
 
@@ -479,11 +480,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
           // target, if specified
           link.setAttribute("target", "_blank");
           if (link.getAttribute("rel") === null) {
@@ -525,11 +521,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');

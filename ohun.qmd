@@ -3,7 +3,7 @@ title: <font size="7"><b><i>ohun</i>&#x3A; optimizing acoustic signal detection<
 ---
 
 ::: {.alert .alert-info}
-## **Objetive** {.unnumbered .unlisted}
+## **Objective** {.unnumbered .unlisted}
 
 -   Get familiar with concepts and data formatting practices related to automatic acoustic signals detection
 
@@ -87,7 +87,7 @@ Finding the position of sound events in a sound file is a challenging task. [ohu
 
 <figure>
 
-<center><img src="images/analysis_workflow.png" alt="automated signal detection diagram" width="500" height="450"/></center>
+<center><img src="images/analysis_workflow.png" alt="automated signal detection diagram" width="100%" height="450"/></center>
 
 <figcaption><i>Diagram depicting how target sound event features can be used to tell the most adequate sound event detection approach. Steps in which 'ohun' can be helpful are shown in color. (SNR = signal-to-noise ratio) </i></figcaption>
 
@@ -165,7 +165,7 @@ lbh1_reference <-
 
 # diagnose
 diagnose_detection(reference = lbh1_reference, 
-                   detection = lbh1_reference)[, c(1:4, 8:10)]
+                   detection = lbh1_reference)
 
 ```
 
@@ -190,7 +190,7 @@ label_spectro(
 
 # diagnose
 diagnose_detection(reference = lbh1_reference, 
-                   detection = lbh1_detection)[, c(1:4, 8:10)]
+                   detection = lbh1_detection)
 
 ```
 
@@ -198,8 +198,6 @@ diagnose_detection(reference = lbh1_reference,
 Having some additional sound events not in reference will do the opposite, reducing precision but not recall. We can do this simply by switching the tables:
 
 ```{r, }
-
-
 
 # print spectrogram
 label_spectro(
@@ -213,7 +211,7 @@ label_spectro(
 
 # diagnose
 diagnose_detection(reference = lbh1_detection, 
-                   detection = lbh1_reference)[, c(1:4, 8:10)]
+                   detection = lbh1_reference)
 
 ```
 
@@ -259,7 +257,11 @@ In addition, the following diagnostics related to the duration of the sound even
 ```{r}
 
 # diagnose with time diagnostics
-diagnose_detection(reference = lbh1_reference[-1, ], detection = lbh1_detection[-10, ], time.diagnostics = TRUE)
+diagnose_detection(
+  reference = lbh1_reference[-1, ],
+  detection = lbh1_detection[-10, ],
+  time.diagnostics = TRUE
+)
 
 ```
 
@@ -412,7 +414,8 @@ detection <-
   )
 
 # plot spectrogram
-label_spectro(wave = simulated_1, detection = detection)
+label_spectro(wave = simulated_1, 
+              detection = detection)
 
 ```
 
@@ -432,7 +435,8 @@ detection <-
   )
 
 # plot spectrogram
-label_spectro(wave = simulated_1,  detection = detection)
+label_spectro(wave = simulated_1, 
+              detection = detection)
 
 ```
 
@@ -452,7 +456,8 @@ detection <-
   )
 
 # plot spectrogram
-label_spectro(wave = simulated_1,  detection = detection)
+label_spectro(wave = simulated_1, 
+              detection = detection)
 
 ```
 
@@ -476,7 +481,8 @@ detection <-
   )
 
 # plot spectrogram
-label_spectro(wave = simulated_1,  detection = detection)
+label_spectro(wave = simulated_1, 
+              detection = detection)
 
 ```
 :::
@@ -516,7 +522,8 @@ simulated_2 <- sim_2$wave
 sim2_sel_table <- sim_2$selec.table
 
 # plot spectrogram
-label_spectro(wave = simulated_2, envelope = TRUE)
+label_spectro(wave = simulated_2, 
+              envelope = TRUE)
 
 ```
 
@@ -596,13 +603,13 @@ optim_detection <-
   optimize_energy_detector(
     reference = sim2_sel_table,
     files = "simulated_2.wav",
-    threshold = 50,
+    threshold = c(50, 60),
     min.duration = 1,
     path = tempdir(),
     smooth = c(100, 250, 350)
   )
 
-optim_detection[, c(1, 2:5, 7:12, 17:18)]
+optim_detection
 
 ```
 
@@ -612,7 +619,8 @@ In addition, there are two complementary functions for optimizing energy-based d
 
 ```{r}
 
-feature_reference(reference = lbh_reference, path = tempdir())
+feature_reference(reference = lbh_reference, 
+                  path = tempdir())
 
 ```
 
@@ -635,7 +643,8 @@ The function `get_templates()` can help you find a template closer to the averag
 
 # get mean structure template
 template <-
-  get_templates(reference = lbh1_reference, path = tempdir())
+  get_templates(reference = lbh1_reference, 
+                path = tempdir())
 
 ```
 
@@ -656,7 +665,8 @@ The graph above shows the overall acoustic spaces, in which the sound closest to
 
 # get 3 templates
 get_templates(reference = lbh_reference, 
-                          n.sub.spaces = 3, path = tempdir())
+              n.sub.spaces = 3, 
+              path = tempdir())
 
 ```
 
@@ -702,7 +712,9 @@ This object can then be used to detect sound events using `template_detector()`:
 
 # run detection
 detection <-
-  template_detector(template.correlations = correlations, threshold = 0.4)
+  template_detector(
+    template.correlations = correlations, 
+    threshold = 0.4)
 
 detection
 ```
@@ -720,7 +732,8 @@ label_spectro(
   template.correlation = correlations[[1]],
   flim = c(0, 10),
   threshold = 0.4,
-  hop.size = 10, ovlp = 50)
+  hop.size = 10, 
+  ovlp = 50)
 
 ```
 
@@ -731,7 +744,8 @@ The performance can be evaluated using `diagnose_detection()`:
 ```{r}
 
 #diagnose
-diagnose_detection(reference = lbh1_reference, detection = detection)
+diagnose_detection(reference = lbh1_reference, 
+                   detection = detection)
 
 ```
 
@@ -793,7 +807,9 @@ correlations <-
 
 # run detection
 detection <-
-  template_detector(template.correlations = correlations, threshold = 0.5)
+  template_detector(
+    template.correlations = correlations, 
+    threshold = 0.5)
 
 correlations <-
   template_correlator(
@@ -811,7 +827,8 @@ Note that in these cases we can get the same sound event detected several times 
 ```{r}
 
 #diagnose
-diagnose_detection(reference = lbh_reference, detection = detection)
+diagnose_detection(reference = lbh_reference, 
+                   detection = detection)
 
 ```
 
@@ -823,7 +840,8 @@ Duplicates are shown as split positives. Fortunately, we can leave a single dete
 
 # labeling detection
 labeled <-
-  label_detection(reference = lbh_reference, detection = detection)
+  label_detection(reference = lbh_reference, 
+                  detection = detection)
 
 ```
 
@@ -842,10 +860,12 @@ Now we can filter out duplicates and diagnose the detection again, telling the f
 ```{r}
 
 # filter
-filtered <- filter_detection(detection = labeled, by = "scores")
+filtered <- filter_detection(detection = labeled, 
+                             by = "scores")
 
 # diagnose
-diagnose_detection(reference = lbh_reference, detection = filtered)
+diagnose_detection(reference = lbh_reference, 
+                   detection = filtered)
 ```
 
  

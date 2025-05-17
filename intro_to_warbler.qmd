@@ -5,7 +5,7 @@ title: <font size="7"><b>Introduction to warbleR</b></font>
  
 
 ::: {.alert .alert-info}
-## **Objetive** {.unnumbered .unlisted}
+## **Objective** {.unnumbered .unlisted}
 
 -   Provide and overview of the must relevant tools in the package warbleR
 :::

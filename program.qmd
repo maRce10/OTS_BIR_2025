@@ -230,7 +230,7 @@ date: "`r Sys.Date()`"
 
  
 
-## Day 5
+## Day 5 ([Video](https://udecr.zoom.us/rec/share/yDPRNxxUglTgj8kJjnGzD9j6AZJyWddUC9xUdiHjYmM6T8Y-NtTYNKNgqNQe7o4q.NHTjgj4GQlH-0zs4))
 
 ---
 

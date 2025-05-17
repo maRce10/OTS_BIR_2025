@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-05-14">
+<meta name="dcterms.date" content="2025-05-17">
 
 <title>Bioacoustic analysis in R 2025 - Quantifying acoustic spaces</title>
 <style>
@@ -269,7 +269,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 14, 2025</p>
+      <p class="date">May 17, 2025</p>
     </div>
   </div>
   
@@ -282,8 +282,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>&nbsp;</p>
-<section id="objetives" class="level2 unnumbered unlisted alert alert-info">
-<h2 class="unnumbered unlisted anchored" data-anchor-id="objetives"><strong>Objetives</strong></h2>
+<section id="objectives" class="level2 unnumbered unlisted alert alert-info">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="objectives"><strong>Objectives</strong></h2>
 <ul>
 <li><p>Understand how multivariate feature (acoustic) space can be projected in 2D space</p></li>
 <li><p>Learn to create and customize spectrograms in R</p></li>
@@ -704,21 +704,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><font size="4">Session information</font></p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.5.0 (2025-04-11)
-Platform: x86_64-pc-linux-gnu
-Running under: Ubuntu 22.04.5 LTS
+<pre><code>R version 4.3.2 (2023-10-31)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 22.04.2 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
 
 locale:
  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
- [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=en_US.UTF-8    
- [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=en_US.UTF-8   
- [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-[11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
 time zone: America/Costa_Rica
 tzcode source: system (glibc)
@@ -730,11 +730,11 @@ other attached packages:
 [1] seewave_2.2.3 knitr_1.50   
 
 loaded via a namespace (and not attached):
- [1] digest_0.6.37     signal_1.8-1      fastmap_1.2.0     xfun_0.52        
- [5] monitoR_1.2       htmltools_0.5.8.1 rmarkdown_2.29    tuneR_1.4.7      
- [9] cli_3.6.5         compiler_4.5.0    rstudioapi_0.17.1 tools_4.5.0      
-[13] evaluate_1.0.3    yaml_2.3.10       formatR_1.14      rlang_1.1.6      
-[17] jsonlite_2.0.0    htmlwidgets_1.5.4 MASS_7.3-65      </code></pre>
+ [1] digest_0.6.37     signal_1.8-1      fastmap_1.2.0     xfun_0.51        
+ [5] monitoR_1.0.7     htmltools_0.5.8.1 rmarkdown_2.28    tuneR_1.4.7      
+ [9] cli_3.6.4         compiler_4.3.2    rstudioapi_0.16.0 tools_4.3.2      
+[13] evaluate_1.0.3    yaml_2.3.10       formatR_1.14      rlang_1.1.5      
+[17] jsonlite_2.0.0    htmlwidgets_1.6.4 MASS_7.3-55      </code></pre>
 </div>
 </div>
 
@@ -832,11 +832,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
           // target, if specified
           link.setAttribute("target", "_blank");
           if (link.getAttribute("rel") === null) {
@@ -878,11 +873,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');

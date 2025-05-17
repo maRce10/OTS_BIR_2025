@@ -21,7 +21,7 @@ library(PhenotypeSpace)
 
 
 ::: {.alert .alert-info}
-## **Objetives** {.unnumbered .unlisted}
+## **Objectives** {.unnumbered .unlisted}
 
 -   Learn the different methods available to quantify acoustic structure
 
@@ -32,11 +32,11 @@ library(PhenotypeSpace)
 
  
 
-Acoustic signals are multidimensional traits; they vary complexly in time, frequency, amplitude and combinations of these dimensions. Generally, in biology we want to measure aspects of acoustic signals that vary in response to the factors predicted by our hypotheses. In some cases we even lack predictions for specific acoustic parameters and we need to evaluate the relative similarity between the variants of a signal in a population. These analyses require a diversity of tools for quantifying the multiple dimensions in which we can decompose the signals.
+Acoustic signals are multidimensional traits; they vary complexly in time, frequency, amplitude and combinations of these dimensions. Generally, in biology we want to measure aspects of acoustic signals that vary in response to the factors predicted by our hypotheses. In some cases we even lack predictions for specific acoustic features and we need to evaluate the relative similarity between the variants of a signal in a population. These analyses require a diversity of tools for quantifying the multiple dimensions in which we can decompose the signals.
 
 The **warbleR** package is designed to quantify the acoustic structure of a population of signals using 4 main methods of analysis. 2 of them are absolute measures of the structure:
 
--   Spectrographic parameters
+-   Spectrographic features
 -   Statistical descriptors of cepstral coefficients
 
 The other 2 provide a relative similarity value between signals:
@@ -46,7 +46,7 @@ The other 2 provide a relative similarity value between signals:
 
 
 ::: {.alert .alert-warning}
-## Example data
+## Example data {.unnumbered}
 
 We will use the example data `lbh_selec_table` that comes with the package. This data frame contains the selection table of 11 long-billed hermit (*Phaethornis longirostris*) songs. The selection table is a data frame with the following columns:
 
@@ -59,7 +59,13 @@ library(ggplot2)
 library(ggalign)
 library(PhenotypeSpace)
 
-warbleR_options(wav.path = "./examples/", flim = c(1, 10), wl = 200, ovlp = 90, pb = FALSE)
+warbleR_options(
+  wav.path = "./examples/",
+  flim = c(1, 10),
+  wl = 200,
+  ovlp = 90,
+  pb = FALSE
+)
 
 data(lbh_selec_table)
 
@@ -132,9 +138,9 @@ knitr::include_graphics("./images/Catalog_p1.jpeg")
 
 :::
 
-## Spectrographic parameters
+## Spectrographic features
 
-The `spectro_analysis()` function measures the following spectrographic parameters related to amplitude distributions in time and frequency, descriptors of the fundamental and dominant frequency contours and descriptors of harmonic content:
+The `spectro_analysis()` function measures the following spectrographic features related to amplitude distributions in time and frequency, descriptors of the fundamental and dominant frequency contours and descriptors of harmonic content:
 
  
 
@@ -187,17 +193,7 @@ The `spectro_analysis()` function measures the following spectrographic paramete
 
 -   sfm: spectral flatness. Similar to sp.ent (pure tone \~ 0; loud \~ 1)
 
- 
-
-#### Fundamental frequency contour descriptors (measured on the spectrogram)
-
--   meanfun: average of the fundamental frequency measured through the signal
-
--   minfun: minimum fundamental frequency measured through the signal
-
--   maxfun: maximum fundamental frequency measured through the signal
-
- 
+-   peakt: peak time. Time at which the maximum amplitude is found in the amplitude vector (in s)
 
 #### Dominant frequency contour descriptors (measured on the spectrogram)
 
@@ -218,6 +214,18 @@ The `spectro_analysis()` function measures the following spectrographic paramete
 -   dfslope: pending change in the dominant frequency over time (`(enddom-startdom)/duration`). The units are kHz/s
 
  
+
+### Optional features (if `harmonicity = TRUE`)
+
+#### Fundamental frequency contour descriptors (measured on the spectrogram)
+
+-   meanfun: average of the fundamental frequency measured through the signal
+
+-   minfun: minimum fundamental frequency measured through the signal
+
+-   maxfun: maximum fundamental frequency measured through the signal
+
+
 
 #### Harmonic content descriptors (measured on the spectrogram)
 
@@ -315,7 +323,7 @@ ggplot(sp_pcs,
 <font size="5">Exercise</font>
 
 
--   The parameters related to harmonic content were not calculated. How can we do that?
+-   The features related to harmonic content were not calculated. How can we do that?
 
 -   How does measuring harmonic content affect performance?
 
@@ -328,7 +336,7 @@ ggplot(sp_pcs,
 
 These coefficients were designed to decompose the sounds in a similar way than the human auditory system in order to facilitate speech recognition. The central idea is to compress the acoustic data maintaining only relevant information for the detection of phonetic differences. The principle refers to human hearing using the Mel logarithmic scale whose definition is based on how the human ear perceives frequency and loudness (Sueur 2018). Cepstral coefficients are literally defined as "the result of a cosine transformation of the real logarithm of short-term energy spectra expressed on a Mel frequency scale".
 
-The descriptive statistics that are extracted from the cepstral coefficients are: minimum, maximum, average, median, asymmetry, kurtosis and variance. It also returns the mean and variance for the first and second derivatives of the coefficients. These parameters are commonly used in the processing and detection of acoustic signals (e.g. Salamon et al 2014). They have been widely used for human voice analysis and its use has extended to mammalian bioacoustics, although they also appear to be useful for quantifying the structure of acoustic signals in other groups.
+The descriptive statistics that are extracted from the cepstral coefficients are: minimum, maximum, average, median, asymmetry, kurtosis and variance. It also returns the mean and variance for the first and second derivatives of the coefficients. These features are commonly used in the processing and detection of acoustic signals (e.g. Salamon et al 2014). They have been widely used for human voice analysis and its use has extended to mammalian bioacoustics, although they also appear to be useful for quantifying the structure of acoustic signals in other groups.
 
 In **warbleR** we can calculate statistical descriptors of cepstral coefficients with the `mfcc_stats()` function:
 
@@ -353,7 +361,7 @@ box_css = "border: 1px solid #ddd; padding: 5px; ", extra_css = NULL)
 
 ```
 
-Similarly to the spectrographic parameters, we can reduce the dimensionality of the cepstral coefficients using PCA:
+Similarly to the spectrographic features, we can reduce the dimensionality of the cepstral coefficients using PCA:
 
 ```{r}
 #| eval: false
@@ -515,7 +523,7 @@ ggplot(xcor_mds,
 
 In time series analysis, time dynamics distortion (DTW) is one of the algorithms to measure the similarity between two time sequences, which may vary in their 'speed'. The sequences are nonlinearly 'warped' in the temporal dimension to determine a measure of their similarity independent of certain nonlinear variations in the temporal dimension.
 
-<img src="images/dtw.jpg" alt="viewSpec" width="640"/>
+<img src="images/DTW.png" alt="viewSpec" width="100%"/>
 
 
 The `freq_DTW()` function extracts the dominant frequency values as a time series and then calculates the acoustic dissimilarity using dynamic time warping. The function uses the `approx()` function to interpolate values between the dominant frequency measurements:
@@ -546,13 +554,19 @@ If `img = TRUE`, the function also produces image files with the spectrograms of
 
 ```{r measure 3, eval = FALSE}
 
-freq_DTW(lbh_selec_table, img = TRUE, col = "red", pch = 21, line = FALSE)
+freq_DTW(
+  lbh_selec_table,
+  img = TRUE,
+  col = "red",
+  pch = 21,
+  line = FALSE
+)
 
 ```
 
  
 
-<img src="images/Phae.long1.wav-1-dfDTW.jpeg" alt="dfdtw" width="480"/>
+<img src="images/Phae.long1.wav-1-dfDTW.jpeg" alt="dfdtw" width="80%"/>
 
 Frequency contours can be calculated independently using the `freq_ts()` function. These contours can be adjusted manually with the `tailor_sels()` function.
 
@@ -585,6 +599,7 @@ dtw_mds <- data.frame(lbh_selec_table[, 1:2], mds = mds[, 1:2])
 
 # print
 dtw_mds
+
 ```
 
 ```{r}
@@ -717,26 +732,30 @@ kable_styling(kbl, bootstrap_options = c("striped", "hover", "condensed", "respo
 
  
 
-### Calculates parameters at higher levels of organization
+### Calculates features at higher levels of organization
 
-Vocalizations can be organized above the basic signal units like in long repertoire songs or multi-syllable calls. We can calculate average or extreme values of acoustic parameters of the sub-units for these higher levels of organization using the function `song_analysis()`:
+Vocalizations can be organized above the basic signal units like in long repertoire songs or multi-syllable calls. We can calculate average or extreme values of acoustic features of the sub-units for these higher levels of organization using the function `song_analysis()`:
 
 ```{r, eval = FALSE}
 
 # add a 'song' column
 lbh_selec_table$song <- rep(1:4, each = 3)[1:11]
 
-# measure default parameters
-song_analysis(X = lbh_selec_table, song_colm = "song", parallel = 1, pb = TRUE)
+# measure default features
+song_analysis(
+  X = lbh_selec_table,
+  song_colm = "song",
+  parallel = 1,
+  pb = TRUE
+)
 ```
 
 ```{r, eval= TRUE, echo=FALSE, warning=FALSE, message=FALSE}
 
-
 # add a 'song' column
 lbh_selec_table$song <- rep(1:4, each = 3)[1:11]
 
-# measure default parameters
+# measure default features
 W <- song_analysis(X = lbh_selec_table, song_colm = "song", parallel = 1, pb = TRUE)
 
 kbl <- kable(W, align = "c", row.names = F,  format = "html")
@@ -745,17 +764,22 @@ kable_styling(kbl, bootstrap_options = c("striped", "hover", "condensed", "respo
 
 ```
 
-This can also be done on parameters extracted from other functions:
+This can also be done on features extracted from other functions:
 
 ```{r eval = FALSE}
 
-# measure acoustic parameters
+# measure acoustic features
 sp <- spectro_analysis(lbh_selec_table[1:8, ], bp = c(1, 11), 300, fast = TRUE)
 
 sp <- merge(sp, lbh_selec_table[1:8, ], by = c("sound.files", "selec"))
 
-# caculate song-level parameters for all numeric parameters
-song_analysis(X = sp, song_colm = "song", parallel = 1, pb = TRUE)
+# caculate song-level features for all numeric features
+song_analysis(
+  X = sp,
+  song_colm = "song",
+  parallel = 1,
+  pb = TRUE
+)
 
 
 ```
@@ -767,12 +791,12 @@ warbleR_options(wav.path = "./examples")
 # add a 'song' column
 lbh_selec_table$song <- rep(1:4, each = 3)[1:11]
 
-# measure acoustic parameters
+# measure acoustic features
 sp <- spectro_analysis(lbh_selec_table[1:8, ], bp = c(1, 11), 300, fast = TRUE)
 
 sp <- merge(sp, lbh_selec_table[1:8, ], by = c("sound.files", "selec"))
 
-# caculate song-level parameters for all numeric parameters
+# caculate song-level features for all numeric features
 W <- song_analysis(X = sp, song_colm = "song", parallel = 1, pb = TRUE)
 
 kbl <- kable(W, align = "c", row.names = F,  format = "html")
@@ -787,12 +811,18 @@ box_css = "border: 1px solid #ddd; padding: 5px; ", extra_css = NULL)
 
  
 
-Calculate song-level parameters selecting parameters with 'mean_colm':
+Calculate song-level features selecting features with 'mean_colm':
 
 ```{r, eval = FALSE}
 
-# caculate song-level parameters selecting parameters with mean_colm
-song_analysis(X = sp, song_colm = "song",mean_colm = c("dfrange", "duration"), parallel = 1, pb = TRUE)
+# caculate song-level features selecting features with mean_colm
+song_analysis(
+  X = sp,
+  song_colm = "song",
+  mean_colm = c("dfrange", "duration"),
+  parallel = 1,
+  pb = TRUE
+)
 
 ```
 
@@ -813,14 +843,20 @@ box_css = "border: 1px solid #ddd; padding: 5px; ", extra_css = NULL)
 
  
 
-Calculate song-level parameters for selecting parameters with 'mean_colm', 'max_colm' and 'min_colm' and weighted by duration:
+Calculate song-level features for selecting features with 'mean_colm', 'max_colm' and 'min_colm' and weighted by duration:
 
 ```{r, eval = FALSE}
 
-song_analysis(X = sp, weight = "duration", song_colm = "song",
-mean_colm =  c("dfrange", "duration"), min_colm =  "mindom", max_colm = "maxdom", 
-  parallel = 1, pb = TRUE)
-
+song_analysis(
+  X = sp,
+  weight = "duration",
+  song_colm = "song",
+  mean_colm =  c("dfrange", "duration"),
+  min_colm =  "mindom",
+  max_colm = "maxdom",
+  parallel = 1,
+  pb = TRUE
+)
 
 ```
 
@@ -870,7 +906,6 @@ sp_resp <- spectro_analysis(response_calls)
 
 response_calls <- cbind(response_calls, sp_resp[, -c(1, 2)])
 
-
 sp_resp_by_call <- song_analysis(response_calls, song_colm = "call")
 
 ```
@@ -882,14 +917,13 @@ download.file(url = "https://github.com/maRce10/OTS_BIR_2025/raw/master/examples
 
 response_calls <- readRDS("./examples/response_calls.RDS")
 
-
 ```
 
  
 
--   Calculate spectrographic parameters (`spectro_analysis()`) for the Spix's disc-winged bat response calls.
+-   Calculate spectrographic features (`spectro_analysis()`) for the Spix's disc-winged bat response calls.
 
--   Summarize parameters by call (`song_analysis()`). To do that you should add the column 'start', 'end' and 'call' to the output of `spectro_analysis()`
+-   Summarize features by call (`song_analysis()`). To do that you should add the column 'start', 'end' and 'call' to the output of `spectro_analysis()`
 :::
 
  

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -232,8 +232,8 @@ ul.task-list li input[type="checkbox"] {
 </center>
 <p>The study of animal acoustic signals plays a vital role in behavior, ecology, evolution, and biodiversity monitoring. With the increasing accessibility of recording equipment and open-access acoustic libraries, researchers now have unprecedented opportunities to analyze animal sounds across vast temporal, geographic, and taxonomic scales. Yet, the complexity of these signals—coupled with the diversity of analytical methods—poses significant challenges in extracting biologically meaningful insights.</p>
 <p>This course introduces students to the most relevant acoustic analysis tools in R, empowering researchers to overcome these challenges. You’ll learn how to efficiently gather, organize, and analyze large acoustic datasets while applying advanced methods tailored to your research questions. Through a combination of foundational theory and hands-on practice, you’ll gain the skills to quantify fine-scale structural variation in animal sounds and unlock new dimensions in bioacoustic research.</p>
-<section id="objetive" class="level3 unnumbered unlisted alert alert-info">
-<h3 class="unnumbered unlisted anchored" data-anchor-id="objetive">Objetive</h3>
+<section id="objective" class="level3 unnumbered unlisted alert alert-info">
+<h3 class="unnumbered unlisted anchored" data-anchor-id="objective">Objective</h3>
 <p>Training biological science students and researchers in the detection and analysis of animal sounds in R. Specifically, it seeks to familiarize participants with computational tools in the R environment aiming at curating, detecting and analyzing animal acoustic signals, with an especial focus on quantifying fine-scale structural variation. The course will introduce the most relevant acoustics concepts to allow a detailed understanding of the metrics used for characterize acoustic signals. It will also guide participants through a variety of R packages for bioacoustics analysis, including seewave, tuneR, warbleR and baRulho.</p>
 </section>
 
@@ -330,11 +330,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
           // target, if specified
           link.setAttribute("target", "_blank");
           if (link.getAttribute("rel") === null) {
@@ -376,11 +371,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');

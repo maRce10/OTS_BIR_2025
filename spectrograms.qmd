@@ -5,7 +5,7 @@ title: <font size="7"><b>Building spectrograms</b></font>
  
 
 ::: {.alert .alert-info}
-## **Objetives** {.unnumbered .unlisted}
+## **Objectives** {.unnumbered .unlisted}
 
 -   Understand how spectrograms are created
 

@@ -5,7 +5,7 @@ title: <font size="6"><b>Comparing methods for measuring acoustic structure</b><
  
 
 ::: {.alert .alert-info}
-## **Objetives** {.unnumbered .unlisted}
+## **Objectives** {.unnumbered .unlisted}
 
 -   Learn how to compare methods to measure acoustic structure
 

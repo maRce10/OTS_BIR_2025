@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-05-12">
+<meta name="dcterms.date" content="2025-05-17">
 
 <title>Bioacoustic analysis in R 2025 - Sound</title>
 <style>
@@ -302,7 +302,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 12, 2025</p>
+      <p class="date">May 17, 2025</p>
     </div>
   </div>
   
@@ -315,8 +315,8 @@ window.Quarto = {
 
 
 <p>&nbsp;</p>
-<section id="objetives" class="level2 unnumbered unlisted alert alert-info">
-<h2 class="unnumbered unlisted anchored" data-anchor-id="objetives"><strong>Objetives</strong></h2>
+<section id="objectives" class="level2 unnumbered unlisted alert alert-info">
+<h2 class="unnumbered unlisted anchored" data-anchor-id="objectives"><strong>Objectives</strong></h2>
 <ul>
 <li><p>Learn the basic aspects of sound as a physical phenomenom</p></li>
 <li><p>Get familiar with how sound is represented as a digital object in R</p></li>
@@ -592,7 +592,7 @@ window.Quarto = {
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(s4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code> Time-Series [1:4001] from 0 to 0.5: -0.845 0.9206 -0.3318 -0.8565 -0.0473 ...</code></pre>
+<pre><code> Time-Series [1:4001] from 0 to 0.5: 0.2701 -0.6701 0.1459 -0.0569 0.7732 ...</code></pre>
 </div>
 </div>
 <p>&nbsp;</p>
@@ -1095,21 +1095,21 @@ attr(,"package")
 <p><font size="4">Session information</font></p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.5.0 (2025-04-11)
-Platform: x86_64-pc-linux-gnu
-Running under: Ubuntu 22.04.5 LTS
+<pre><code>R version 4.3.2 (2023-10-31)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 22.04.2 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
 
 locale:
  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
- [3] LC_TIME=es_CR.UTF-8        LC_COLLATE=en_US.UTF-8    
- [5] LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=en_US.UTF-8   
- [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                 
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-[11] LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
 time zone: America/Costa_Rica
 tzcode source: system (glibc)
@@ -1118,29 +1118,24 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] audio_0.1-11       phonTools_0.2-2.2  warbleR_1.1.35     NatureSounds_1.0.5
+[1] audio_0.1-11       phonTools_0.2-2.2  warbleR_1.1.34     NatureSounds_1.0.5
 [5] tuneR_1.4.7        knitr_1.50         seewave_2.2.3     
 
 loaded via a namespace (and not attached):
- [1] viridis_0.6.5           generics_0.1.3          bitops_1.0-9           
- [4] stringi_1.8.7           digest_0.6.37           magrittr_2.0.3         
- [7] evaluate_1.0.3          grid_4.5.0              RColorBrewer_1.1-3     
-[10] fastmap_1.2.0           jsonlite_2.0.0          brio_1.1.5             
-[13] formatR_1.14            gridExtra_2.3           httr_1.4.7             
-[16] viridisLite_0.4.2       scales_1.4.0            pbapply_1.7-2          
-[19] cli_3.6.5               rlang_1.1.6             fftw_1.0-9             
-[22] withr_3.0.2             yaml_2.3.10             tools_4.5.0            
-[25] parallel_4.5.0          dplyr_1.1.4             ggplot2_3.5.2          
-[28] bioacoustics_0.2.8.9000 curl_6.2.2              vctrs_0.6.5            
-[31] R6_2.6.1                proxy_0.4-27            lifecycle_1.0.4        
-[34] dtw_1.23-1              stringr_1.5.1           htmlwidgets_1.5.4      
-[37] MASS_7.3-65             pkgconfig_2.0.3         pillar_1.10.2          
-[40] gtable_0.3.6            glue_1.8.0              moments_0.14.1         
-[43] Rcpp_1.0.14             xfun_0.52               tibble_3.2.1           
-[46] tidyselect_1.2.1        rstudioapi_0.17.1       farver_2.1.2           
-[49] rjson_0.2.23            htmltools_0.5.8.1       rmarkdown_2.29         
-[52] testthat_3.2.3          signal_1.8-1            compiler_4.5.0         
-[55] RCurl_1.98-1.17        </code></pre>
+ [1] viridis_0.6.5      generics_0.1.3     bitops_1.0-9       stringi_1.8.7     
+ [5] digest_0.6.37      magrittr_2.0.3     evaluate_1.0.3     grid_4.3.2        
+ [9] fastmap_1.2.0      jsonlite_2.0.0     brio_1.1.5         formatR_1.14      
+[13] gridExtra_2.3      httr_1.4.7         viridisLite_0.4.2  scales_1.3.0      
+[17] pbapply_1.7-2      cli_3.6.4          rlang_1.1.5        fftw_1.0-9        
+[21] munsell_0.5.1      withr_3.0.2        yaml_2.3.10        tools_4.3.2       
+[25] parallel_4.3.2     dplyr_1.1.4        colorspace_2.1-1   ggplot2_3.5.1     
+[29] bioacoustics_0.2.8 curl_6.2.2         vctrs_0.6.5        R6_2.6.1          
+[33] proxy_0.4-27       lifecycle_1.0.4    dtw_1.23-1         stringr_1.5.1     
+[37] htmlwidgets_1.6.4  MASS_7.3-55        pkgconfig_2.0.3    pillar_1.10.1     
+[41] gtable_0.3.6       moments_0.14.1     glue_1.8.0         Rcpp_1.0.14       
+[45] xfun_0.51          tibble_3.2.1       tidyselect_1.2.1   rstudioapi_0.16.0 
+[49] rjson_0.2.23       htmltools_0.5.8.1  rmarkdown_2.28     testthat_3.2.3    
+[53] signal_1.8-1       compiler_4.3.2     RCurl_1.98-1.17   </code></pre>
 </div>
 </div>
 
@@ -1239,11 +1234,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
           // target, if specified
           link.setAttribute("target", "_blank");
           if (link.getAttribute("rel") === null) {
@@ -1285,11 +1275,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');

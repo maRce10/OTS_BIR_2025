@@ -5,7 +5,7 @@ title: <font size="7"><b>Quantifying acoustic spaces</b></font>
  
 
 ::: {.alert .alert-info}
-## **Objetives** {.unnumbered .unlisted}
+## **Objectives** {.unnumbered .unlisted}
 
 -   Understand how multivariate feature (acoustic) space can be projected in 2D space
 
