@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-05-17">
+<meta name="dcterms.date" content="2025-05-19">
 
 <title>Bioacoustic analysis in R 2025 - Import annotations into R</title>
 <style>
@@ -271,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 17, 2025</p>
+      <p class="date">May 19, 2025</p>
     </div>
   </div>
   
@@ -297,6 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>An annotation table (or selection table in Raven’s terminology and <strong>warbleR</strong>) is a spreadsheet that contains information about the location (and frequency) of the sounds of interest in one or more sound files. Therefore, the basic annotation table should contain at least 3 columns:</p>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <table class="table table-striped table-sm small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
@@ -308,23 +309,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">sound_file_1.wav</td>
-<td style="text-align: center;">2.92</td>
-<td style="text-align: center;">3.09</td>
+<td style="text-align: center;">2.84</td>
+<td style="text-align: center;">4.08</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">sound_file_1.wav</td>
-<td style="text-align: center;">3.17</td>
-<td style="text-align: center;">3.81</td>
+<td style="text-align: center;">3.51</td>
+<td style="text-align: center;">6.48</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">sound_file_2.wav</td>
-<td style="text-align: center;">1.86</td>
-<td style="text-align: center;">2.38</td>
+<td style="text-align: center;">2.63</td>
+<td style="text-align: center;">4.31</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">sound_file_2.wav</td>
-<td style="text-align: center;">2.28</td>
-<td style="text-align: center;">4.36</td>
+<td style="text-align: center;">3.40</td>
+<td style="text-align: center;">4.09</td>
 </tr>
 </tbody>
 </table>
@@ -332,10 +333,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
+</div>
 <p>&nbsp;</p>
 <p>Ideally we should also include the frequency range of the annotations:</p>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <table class="table table-striped table-sm small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
@@ -349,31 +352,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">sound_file_1.wav</td>
-<td style="text-align: center;">2.92</td>
-<td style="text-align: center;">3.09</td>
-<td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">6.88</td>
-<td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">9.31</td>
+<td style="text-align: center;">2.84</td>
+<td style="text-align: center;">4.08</td>
+<td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">3.72</td>
+<td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">8.47</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">sound_file_1.wav</td>
-<td style="text-align: center;">3.17</td>
-<td style="text-align: center;">3.81</td>
-<td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">4.75</td>
-<td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">8.18</td>
+<td style="text-align: center;">3.51</td>
+<td style="text-align: center;">6.48</td>
+<td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">4.78</td>
+<td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">8.48</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">sound_file_2.wav</td>
-<td style="text-align: center;">1.86</td>
-<td style="text-align: center;">2.38</td>
-<td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">5.64</td>
-<td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">8.12</td>
+<td style="text-align: center;">2.63</td>
+<td style="text-align: center;">4.31</td>
+<td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">5.05</td>
+<td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">7.95</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">sound_file_2.wav</td>
-<td style="text-align: center;">2.28</td>
-<td style="text-align: center;">4.36</td>
-<td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">5.84</td>
-<td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">9.38</td>
+<td style="text-align: center;">3.40</td>
+<td style="text-align: center;">4.09</td>
+<td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">5.59</td>
+<td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">8.23</td>
 </tr>
 </tbody>
 </table>
@@ -381,10 +384,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
+</div>
 <p>&nbsp;</p>
 <p>.. and a unique identifier (at least within each sound file) for each annotation:</p>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <table class="table table-striped table-sm small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
@@ -400,34 +405,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td style="text-align: center;">sound_file_1.wav</td>
 <td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">1</td>
-<td style="text-align: center;">2.92</td>
-<td style="text-align: center;">3.09</td>
-<td style="text-align: center;">6.88</td>
-<td style="text-align: center;">9.31</td>
+<td style="text-align: center;">2.84</td>
+<td style="text-align: center;">4.08</td>
+<td style="text-align: center;">3.72</td>
+<td style="text-align: center;">8.47</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">sound_file_1.wav</td>
 <td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">2</td>
-<td style="text-align: center;">3.17</td>
-<td style="text-align: center;">3.81</td>
-<td style="text-align: center;">4.75</td>
-<td style="text-align: center;">8.18</td>
+<td style="text-align: center;">3.51</td>
+<td style="text-align: center;">6.48</td>
+<td style="text-align: center;">4.78</td>
+<td style="text-align: center;">8.48</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">sound_file_2.wav</td>
 <td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">1</td>
-<td style="text-align: center;">1.86</td>
-<td style="text-align: center;">2.38</td>
-<td style="text-align: center;">5.64</td>
-<td style="text-align: center;">8.12</td>
+<td style="text-align: center;">2.63</td>
+<td style="text-align: center;">4.31</td>
+<td style="text-align: center;">5.05</td>
+<td style="text-align: center;">7.95</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">sound_file_2.wav</td>
 <td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">2</td>
-<td style="text-align: center;">2.28</td>
-<td style="text-align: center;">4.36</td>
-<td style="text-align: center;">5.84</td>
-<td style="text-align: center;">9.38</td>
+<td style="text-align: center;">3.40</td>
+<td style="text-align: center;">4.09</td>
+<td style="text-align: center;">5.59</td>
+<td style="text-align: center;">8.23</td>
 </tr>
 </tbody>
 </table>
@@ -435,9 +440,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
+</div>
 <p>Finally, for sound files with multiple channels, the annotation table should indicate in which channel the sound of interest is located:</p>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <table class="table table-striped table-sm small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
@@ -455,42 +462,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: center;">sound_file_1.wav</td>
 <td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">1</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">2.92</td>
-<td style="text-align: center;">3.09</td>
-<td style="text-align: center;">6.88</td>
-<td style="text-align: center;">9.31</td>
+<td style="text-align: center;">2.84</td>
+<td style="text-align: center;">4.08</td>
+<td style="text-align: center;">3.72</td>
+<td style="text-align: center;">8.47</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">sound_file_1.wav</td>
 <td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">1</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">3.17</td>
-<td style="text-align: center;">3.81</td>
-<td style="text-align: center;">4.75</td>
-<td style="text-align: center;">8.18</td>
+<td style="text-align: center;">3.51</td>
+<td style="text-align: center;">6.48</td>
+<td style="text-align: center;">4.78</td>
+<td style="text-align: center;">8.48</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">sound_file_2.wav</td>
 <td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">1</td>
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">1.86</td>
-<td style="text-align: center;">2.38</td>
-<td style="text-align: center;">5.64</td>
-<td style="text-align: center;">8.12</td>
+<td style="text-align: center;">2.63</td>
+<td style="text-align: center;">4.31</td>
+<td style="text-align: center;">5.05</td>
+<td style="text-align: center;">7.95</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">sound_file_2.wav</td>
 <td style="text-align: center; background-color: rgba(204, 235, 255, 255) !important;">1</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">2.28</td>
-<td style="text-align: center;">4.36</td>
-<td style="text-align: center;">5.84</td>
-<td style="text-align: center;">9.38</td>
+<td style="text-align: center;">3.40</td>
+<td style="text-align: center;">4.09</td>
+<td style="text-align: center;">5.59</td>
+<td style="text-align: center;">8.23</td>
 </tr>
 </tbody>
 </table>
 
 
+</div>
 </div>
 </div>
 <p>&nbsp;</p>
@@ -547,7 +555,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  [9] "Phae.long4.wav.txt"                                 
 [10] "Phaethornis 1.txt"                                  
 [11] "Phaethornis multiple sound files.txt"               
-[12] "Phaethornis-squalidus-555876.Table.1.selections.txt"</code></pre>
+[12] "Phaethornis-eurynome-15607.Table.1.selections.txt"  
+[13] "Phaethornis-squalidus-555876.Table.1.selections.txt"</code></pre>
 </div>
 </div>
 <p>&nbsp;</p>
@@ -566,6 +575,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ones)</code></pre>
 </div>
 <div class="cell-output-display">
+<div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:808px; ">
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
@@ -584,6 +594,8 @@ ones)</code></pre>
 <th style="text-align: center;" data-quarto-table-cell-role="th">File Offset (s)</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">File Offset</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">old.selec</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">song</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">elm</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">selec.file</th>
 </tr>
 </thead>
@@ -602,6 +614,8 @@ ones)</code></pre>
 <td style="text-align: center;">1.169</td>
 <td style="text-align: center;">NA</td>
 <td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
 <td style="text-align: center;">LBH 1 selection table example.txt</td>
 </tr>
 <tr class="even">
@@ -616,6 +630,8 @@ ones)</code></pre>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">/tmp/RtmpWpOeaR/Phae.long1.wav</td>
 <td style="text-align: center;">2.158</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
 <td style="text-align: center;">NA</td>
 <td style="text-align: center;">NA</td>
 <td style="text-align: center;">LBH 1 selection table example.txt</td>
@@ -634,6 +650,8 @@ ones)</code></pre>
 <td style="text-align: center;">0.343</td>
 <td style="text-align: center;">NA</td>
 <td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
 <td style="text-align: center;">LBH 1 selection table example.txt</td>
 </tr>
 <tr class="even">
@@ -648,6 +666,8 @@ ones)</code></pre>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">/tmp/RtmpWpOeaR/Phae.long2.wav</td>
 <td style="text-align: center;">0.160</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
 <td style="text-align: center;">NA</td>
 <td style="text-align: center;">NA</td>
 <td style="text-align: center;">LBH 2 selection table example.txt</td>
@@ -666,6 +686,8 @@ ones)</code></pre>
 <td style="text-align: center;">1.457</td>
 <td style="text-align: center;">NA</td>
 <td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
 <td style="text-align: center;">LBH 2 selection table example.txt</td>
 </tr>
 <tr class="even">
@@ -682,6 +704,8 @@ ones)</code></pre>
 <td style="text-align: center;">NA</td>
 <td style="text-align: center;">0.627</td>
 <td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
+<td style="text-align: center;">NA</td>
 <td style="text-align: center;">LBH 3 selection table example.txt</td>
 </tr>
 </tbody>
@@ -689,6 +713,7 @@ ones)</code></pre>
 </div>
 </div>
 
+</div>
 </div>
 </div>
 <p>&nbsp;</p>
@@ -715,6 +740,7 @@ ones)</code></pre>
 ones)</code></pre>
 </div>
 <div class="cell-output-display">
+<div>
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
 <thead>
@@ -804,8 +830,13 @@ ones)</code></pre>
 
 </div>
 </div>
+</div>
 <p>&nbsp;</p>
 <p>The output data frame contains the following columns: “sound.files”, “channel”, “selec”, “start”, “end” and “selec.file.” You can also import the frequency range parameters in ‘selection.table’ by setting ‘freq.cols’ tp <code>TRUE</code>. The data frame returned by <code>imp_raven()</code> (when in the <strong>warbleR</strong> format) can be entered into several functions of <strong>warbleR</strong> for a more detailed analysis.</p>
+<section id="handling-missing-sound-file-name-columns" class="level4 alert alert-warning unnumbered" data-number="4.1.1">
+<h4 data-number="4.1.1" class="anchored" data-anchor-id="handling-missing-sound-file-name-columns"><span class="header-section-number">4.1.1</span> Handling missing sound file name columns</h4>
+<p>Raven-generated .txt annotation tables sometimes lack a column specifying the associated sound file names, particularly when exported from Raven Lite. To address this, the <code>name.from.file</code> argument allows users to extract sound file names directly from the .txt filename, assuming the file follows Raven’s default naming convention (e.g., SOUND_FILE_NAME.Table.1.selections.txt). When enabling this feature (<code>name.from.file = TRUE</code>), users must also specify <code>ext.case</code> to indicate the case of the sound file extension (e.g., “lower” for .wav or “upper” for .WAV), ensuring correct file matching.</p>
+</section>
 </section>
 <section id="relabel_colms" class="level3" data-number="4.2">
 <h3 data-number="4.2" class="anchored" data-anchor-id="relabel_colms"><span class="header-section-number">4.2</span> <em>relabel_colms</em></h3>
@@ -836,6 +867,7 @@ ones)</code></pre>
 </div>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
 <thead>
@@ -1173,6 +1205,420 @@ ones)</code></pre>
 <td style="text-align: center;">2.57971</td>
 <td style="text-align: center;">9.74228</td>
 <td style="text-align: center;">Phae.long4.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.773606</td>
+<td style="text-align: center;">0.951588</td>
+<td style="text-align: center;">4.07925</td>
+<td style="text-align: center;">8.48925</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.976418</td>
+<td style="text-align: center;">1.151724</td>
+<td style="text-align: center;">2.97675</td>
+<td style="text-align: center;">9.15075</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2.807666</td>
+<td style="text-align: center;">2.983857</td>
+<td style="text-align: center;">4.29975</td>
+<td style="text-align: center;">6.94575</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">3.008642</td>
+<td style="text-align: center;">3.184560</td>
+<td style="text-align: center;">2.97675</td>
+<td style="text-align: center;">10.00000</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4.200887</td>
+<td style="text-align: center;">4.381885</td>
+<td style="text-align: center;">4.07925</td>
+<td style="text-align: center;">6.94575</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4.400661</td>
+<td style="text-align: center;">4.571976</td>
+<td style="text-align: center;">3.19725</td>
+<td style="text-align: center;">10.00000</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">4.966239</td>
+<td style="text-align: center;">5.141273</td>
+<td style="text-align: center;">4.74075</td>
+<td style="text-align: center;">8.70975</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5.153790</td>
+<td style="text-align: center;">5.344562</td>
+<td style="text-align: center;">3.19725</td>
+<td style="text-align: center;">9.81225</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">5.956716</td>
+<td style="text-align: center;">6.111455</td>
+<td style="text-align: center;">4.07925</td>
+<td style="text-align: center;">8.93025</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">6.155038</td>
+<td style="text-align: center;">6.323474</td>
+<td style="text-align: center;">2.97675</td>
+<td style="text-align: center;">10.00000</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">7.424245</td>
+<td style="text-align: center;">7.572114</td>
+<td style="text-align: center;">4.07925</td>
+<td style="text-align: center;">8.93025</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">7.625674</td>
+<td style="text-align: center;">7.796151</td>
+<td style="text-align: center;">3.41775</td>
+<td style="text-align: center;">8.70975</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">8.851344</td>
+<td style="text-align: center;">8.992909</td>
+<td style="text-align: center;">4.07925</td>
+<td style="text-align: center;">8.93025</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">9.051639</td>
+<td style="text-align: center;">9.218011</td>
+<td style="text-align: center;">3.41775</td>
+<td style="text-align: center;">9.37125</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">10.932547</td>
+<td style="text-align: center;">11.099282</td>
+<td style="text-align: center;">4.52025</td>
+<td style="text-align: center;">8.70975</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">11.129509</td>
+<td style="text-align: center;">11.307672</td>
+<td style="text-align: center;">3.41775</td>
+<td style="text-align: center;">8.70975</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">17</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">12.159691</td>
+<td style="text-align: center;">12.332049</td>
+<td style="text-align: center;">4.29975</td>
+<td style="text-align: center;">8.70975</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">12.353954</td>
+<td style="text-align: center;">12.539737</td>
+<td style="text-align: center;">3.41775</td>
+<td style="text-align: center;">8.93025</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">13.774885</td>
+<td style="text-align: center;">13.946450</td>
+<td style="text-align: center;">4.52025</td>
+<td style="text-align: center;">6.72525</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">13.967039</td>
+<td style="text-align: center;">14.146835</td>
+<td style="text-align: center;">3.19725</td>
+<td style="text-align: center;">10.00000</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">14.978332</td>
+<td style="text-align: center;">15.148582</td>
+<td style="text-align: center;">4.52025</td>
+<td style="text-align: center;">6.72525</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">15.175566</td>
+<td style="text-align: center;">15.359875</td>
+<td style="text-align: center;">3.41775</td>
+<td style="text-align: center;">8.93025</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">23</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">15.859127</td>
+<td style="text-align: center;">16.028469</td>
+<td style="text-align: center;">4.07925</td>
+<td style="text-align: center;">8.93025</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">16.057607</td>
+<td style="text-align: center;">16.232619</td>
+<td style="text-align: center;">2.97675</td>
+<td style="text-align: center;">10.00000</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">17.045817</td>
+<td style="text-align: center;">17.220261</td>
+<td style="text-align: center;">4.52025</td>
+<td style="text-align: center;">6.72525</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">17.248334</td>
+<td style="text-align: center;">17.417064</td>
+<td style="text-align: center;">3.19725</td>
+<td style="text-align: center;">9.81225</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">27</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">18.784820</td>
+<td style="text-align: center;">18.956907</td>
+<td style="text-align: center;">4.52025</td>
+<td style="text-align: center;">8.26875</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">28</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">18.984027</td>
+<td style="text-align: center;">19.154707</td>
+<td style="text-align: center;">3.19725</td>
+<td style="text-align: center;">9.81225</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">29</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">20.220490</td>
+<td style="text-align: center;">20.387497</td>
+<td style="text-align: center;">4.07925</td>
+<td style="text-align: center;">8.93025</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">20.417724</td>
+<td style="text-align: center;">20.600150</td>
+<td style="text-align: center;">3.19725</td>
+<td style="text-align: center;">10.00000</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">31</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">21.377770</td>
+<td style="text-align: center;">21.545298</td>
+<td style="text-align: center;">4.29975</td>
+<td style="text-align: center;">6.72525</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">21.573915</td>
+<td style="text-align: center;">21.735208</td>
+<td style="text-align: center;">2.97675</td>
+<td style="text-align: center;">9.81225</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">33</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">22.802896</td>
+<td style="text-align: center;">22.958633</td>
+<td style="text-align: center;">4.29975</td>
+<td style="text-align: center;">8.70975</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">34</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">22.997363</td>
+<td style="text-align: center;">23.179812</td>
+<td style="text-align: center;">3.19725</td>
+<td style="text-align: center;">9.81225</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">35</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">24.340901</td>
+<td style="text-align: center;">24.512489</td>
+<td style="text-align: center;">4.52025</td>
+<td style="text-align: center;">8.48925</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">36</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">24.539563</td>
+<td style="text-align: center;">24.713350</td>
+<td style="text-align: center;">2.97675</td>
+<td style="text-align: center;">10.00000</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">37</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">26.115211</td>
+<td style="text-align: center;">26.285574</td>
+<td style="text-align: center;">4.07925</td>
+<td style="text-align: center;">8.48925</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">38</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">26.311832</td>
+<td style="text-align: center;">26.485528</td>
+<td style="text-align: center;">2.97675</td>
+<td style="text-align: center;">9.59175</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">39</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">27.680246</td>
+<td style="text-align: center;">27.847343</td>
+<td style="text-align: center;">4.52025</td>
+<td style="text-align: center;">8.70975</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">40</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">27.882128</td>
+<td style="text-align: center;">28.049589</td>
+<td style="text-align: center;">3.41775</td>
+<td style="text-align: center;">9.15075</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">41</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">29.366846</td>
+<td style="text-align: center;">29.544510</td>
+<td style="text-align: center;">4.52025</td>
+<td style="text-align: center;">6.94575</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">42</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">29.562923</td>
+<td style="text-align: center;">29.743218</td>
+<td style="text-align: center;">3.19725</td>
+<td style="text-align: center;">10.00000</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">43</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">30.531858</td>
+<td style="text-align: center;">30.711110</td>
+<td style="text-align: center;">4.29975</td>
+<td style="text-align: center;">6.94575</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">44</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">30.727141</td>
+<td style="text-align: center;">30.896325</td>
+<td style="text-align: center;">3.19725</td>
+<td style="text-align: center;">9.15075</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">45</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">31.653401</td>
+<td style="text-align: center;">31.836757</td>
+<td style="text-align: center;">4.29975</td>
+<td style="text-align: center;">8.93025</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">46</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">31.849296</td>
+<td style="text-align: center;">32.016417</td>
+<td style="text-align: center;">2.97675</td>
+<td style="text-align: center;">9.37125</td>
+<td style="text-align: center;">Phaethornis-eurynome-15607.wav</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">1</td>
@@ -1215,6 +1661,7 @@ ones)</code></pre>
 </div>
 
 
+</div>
 </div>
 </div>
 <p>&nbsp;</p>
@@ -1304,6 +1751,7 @@ ones)</code></pre>
 </div>
 <div class="cell">
 <div class="cell-output-display">
+<div>
 <div style="border: 1px solid #ddd; padding: 1px; overflow-x: scroll; width:740px; ">
 <table class="table table-striped table-sm small" data-quarto-postprocess="true">
 <thead>
@@ -1423,6 +1871,7 @@ ones)</code></pre>
 
 </div>
 </div>
+</div>
 <p>&nbsp;</p>
 <p>… and can be converted to the <em>selection_table</em> format like this:</p>
 <div class="cell">
@@ -1441,6 +1890,7 @@ ones)</code></pre>
 <pre><code>all selections are OK </code></pre>
 </div>
 <div class="cell-output-display">
+<div>
 <div style="border: 1px solid #ddd; padding: 1px; overflow-x: scroll; width:740px; ">
 <table class="table table-striped table-sm small" data-quarto-postprocess="true">
 <thead>
@@ -1558,6 +2008,7 @@ ones)</code></pre>
 </table>
 </div>
 
+</div>
 </div>
 </div>
 <p>Note that the path to the sound files has been provided. This is necessary in order to verify that the data provided conforms to the characteristics of the audio files.</p>
@@ -1693,19 +2144,19 @@ Wave Object
 <p><font size="4">Session information</font></p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.2 (2023-10-31)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 22.04.2 LTS
+<pre><code>R version 4.5.0 (2025-04-11)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 22.04.5 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
 
 locale:
- [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8       
- [4] LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
- [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C              
-[10] LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=es_CR.UTF-8       
+ [4] LC_COLLATE=en_US.UTF-8     LC_MONETARY=es_CR.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=es_CR.UTF-8       LC_NAME=C                  LC_ADDRESS=C              
+[10] LC_TELEPHONE=C             LC_MEASUREMENT=es_CR.UTF-8 LC_IDENTIFICATION=C       
 
 time zone: America/Costa_Rica
 tzcode source: system (glibc)
@@ -1714,21 +2165,21 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] kableExtra_1.4.0   warbleR_1.1.34     NatureSounds_1.0.5 knitr_1.50         seewave_2.2.3     
+[1] kableExtra_1.4.0   warbleR_1.1.35     NatureSounds_1.0.5 knitr_1.50         seewave_2.2.3     
 [6] tuneR_1.4.7       
 
 loaded via a namespace (and not attached):
- [1] viridis_0.6.5     generics_0.1.3    bitops_1.0-9      xml2_1.3.6        stringi_1.8.7    
- [6] digest_0.6.37     magrittr_2.0.3    evaluate_1.0.3    grid_4.3.2        fastmap_1.2.0    
-[11] jsonlite_2.0.0    brio_1.1.5        gridExtra_2.3     httr_1.4.7        viridisLite_0.4.2
-[16] scales_1.3.0      pbapply_1.7-2     cli_3.6.4         rlang_1.1.5       fftw_1.0-9       
-[21] munsell_0.5.1     yaml_2.3.10       tools_4.3.2       parallel_4.3.2    dplyr_1.1.4      
-[26] colorspace_2.1-1  Rraven_1.0.14     ggplot2_3.5.1     curl_6.2.2        vctrs_0.6.5      
-[31] R6_2.6.1          proxy_0.4-27      lifecycle_1.0.4   dtw_1.23-1        stringr_1.5.1    
-[36] htmlwidgets_1.6.4 MASS_7.3-55       pkgconfig_2.0.3   pillar_1.10.1     gtable_0.3.6     
-[41] glue_1.8.0        Rcpp_1.0.14       systemfonts_1.1.0 tidyselect_1.2.1  tibble_3.2.1     
-[46] xfun_0.51         rstudioapi_0.16.0 rjson_0.2.23      htmltools_0.5.8.1 rmarkdown_2.28   
-[51] svglite_2.1.3     testthat_3.2.3    signal_1.8-1      compiler_4.3.2    RCurl_1.98-1.17  </code></pre>
+ [1] viridis_0.6.5      generics_0.1.3     bitops_1.0-9       xml2_1.3.8         stringi_1.8.7     
+ [6] digest_0.6.37      magrittr_2.0.3     evaluate_1.0.3     grid_4.5.0         RColorBrewer_1.1-3
+[11] fastmap_1.2.0      jsonlite_2.0.0     brio_1.1.5         gridExtra_2.3      httr_1.4.7        
+[16] viridisLite_0.4.2  scales_1.4.0       pbapply_1.7-2      cli_3.6.5          rlang_1.1.6       
+[21] fftw_1.0-9         yaml_2.3.10        tools_4.5.0        parallel_4.5.0     dplyr_1.1.4       
+[26] Rraven_1.0.14      ggplot2_3.5.2      curl_6.2.2         vctrs_0.6.5        R6_2.6.1          
+[31] proxy_0.4-27       lifecycle_1.0.4    dtw_1.23-1         stringr_1.5.1      htmlwidgets_1.5.4 
+[36] MASS_7.3-65        pkgconfig_2.0.3    pillar_1.10.2      gtable_0.3.6       glue_1.8.0        
+[41] Rcpp_1.0.14        systemfonts_1.2.3  tidyselect_1.2.1   xfun_0.52          tibble_3.2.1      
+[46] rstudioapi_0.17.1  farver_2.1.2       rjson_0.2.23       htmltools_0.5.8.1  rmarkdown_2.29    
+[51] svglite_2.1.3      testthat_3.2.3     signal_1.8-1       compiler_4.5.0     RCurl_1.98-1.17   </code></pre>
 </div>
 </div>
 
@@ -1826,6 +2277,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
           // target, if specified
           link.setAttribute("target", "_blank");
           if (link.getAttribute("rel") === null) {
@@ -1867,7 +2323,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');

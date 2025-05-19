@@ -223,6 +223,14 @@ kableExtra::kable_styling(kbl, bootstrap_options = c("striped", "hover", "conden
 
 The output data frame contains the following columns: "sound.files", "channel", "selec", "start", "end" and "selec.file." You can also import the frequency range parameters in 'selection.table' by setting 'freq.cols' tp `TRUE`. The data frame returned by `imp_raven()` (when in the **warbleR** format) can be entered into several functions of **warbleR** for a more detailed analysis.
 
+::: {.alert .alert-warning .unnumbered}
+
+#### Handling missing sound file name columns
+
+Raven-generated .txt annotation tables sometimes lack a column specifying the associated sound file names, particularly when exported from Raven Lite. To address this, the `name.from.file` argument allows users to extract sound file names directly from the .txt filename, assuming the file follows Raven's default naming convention (e.g., SOUND_FILE_NAME.Table.1.selections.txt). When enabling this feature (`name.from.file = TRUE`), users must also specify `ext.case` to indicate the case of the sound file extension (e.g., "lower" for .wav or "upper" for .WAV), ensuring correct file matching. 
+
+:::
+
 ### *relabel_colms*
 
 This is a simple function to re-label the columns to match the format of the selection table used in **warbleR**:
