@@ -872,7 +872,7 @@
     "href": "program.html#day-5-video",
     "title": "Bioacoustic analysis in R 2025",
     "section": "5 Day 5 (Video)",
-    "text": "5 Day 5 (Video)\n\n\n5.1 Additional resources\n\n5.1.1 Readings\n\nBlog post: Potential issues of the ‘spectral parameters/PCA’ approach\nBlog post: Choosing the right method for measuring acoustic signal structure\n\n\n\n \nChoosing the right method for quantifying structure Comparing methods\n\nCompare different methods for quantifying structure (compare_methods())\n\nQuantifying acoustic spaces Acoustic space\n\nIntro to PhenotypeSpace\nQuanitfying space size\nComparing sub-spaces"
+    "text": "5 Day 5 (Video)\n\n\n5.1 Additional resources\n\n5.1.1 Readings\n\nBlog post: Potential issues of the ‘spectral parameters/PCA’ approach\nBlog post: Choosing the right method for measuring acoustic signal structure\n\n\n\n \nChoosing the right method for quantifying structure Comparing methods\n\nCompare different methods for quantifying structure (compare_methods())\n\nQuantifying acoustic spaces\n\nIntro to PhenotypeSpace\nQuanitfying space size\nComparing sub-spaces"
   },
   {
     "objectID": "sound.html#objectives",

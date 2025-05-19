@@ -250,7 +250,7 @@ date: "`r Sys.Date()`"
 
 -   Compare different methods for quantifying structure (`compare_methods()`)
 
-**Quantifying acoustic spaces** <a href="acoustic_space.qmd" class="btn btn-warning btn-xs" role="button">Acoustic space</a>
+**Quantifying acoustic spaces**
 
 -   Intro to PhenotypeSpace
 -   Quanitfying space size
